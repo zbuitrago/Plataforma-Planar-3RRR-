@@ -21,7 +21,7 @@ global fig
 global CC k
 global InVS
 % global Rec_Movie
-
+%un cambio
 % global Rec_Movie
 % RRRPROJECT3 Application M-file for RRRproject3.fig
 %    FIG = RRRPROJECT3 launch RRRproject3 GUI.
