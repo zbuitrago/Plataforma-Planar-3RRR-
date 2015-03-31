@@ -21,7 +21,7 @@ global fig
 global CC k
 global InVS
 % global Rec_Movie
-
+%un cambio
 % global Rec_Movie
 % RRRPROJECT3 Application M-file for RRRproject3.fig
 %    FIG = RRRPROJECT3 launch RRRproject3 GUI.
@@ -110,14 +110,14 @@ end
 % --------------------------------------------------------------------
 function varargout = sliderbase1x_Callback(h, eventdata, handles, varargin)
 
-global  Xp Yp
+global  CoordenadaXMotor1 CoordenadaYMotor1
 global S1 S2 S3
-global Ypb Ypc Xpb Xpc 
-global Xg Yg fai
-global H a1 b1
+global CoordenadaYMotor2 CoordenadaYMotor3 CoordenadaXMotor2 CoordenadaXMotor3
+global CoordenadaXCentro CoordenadaYCentro Phi
+global LongitudLadoTriangulo LongitudEslabon1 LongitudEslabon2
 
 set(handles.editbase1x,'String',num2str(get(handles.sliderbase1x,'Value')));
-Xp = get(handles.sliderbase1x,'Value');
+CoordenadaXMotor1 = get(handles.sliderbase1x,'Value');
 
 
 if emptycheck
@@ -128,14 +128,14 @@ else
 end
 
 % --------------------------------------------------------------------
-function varargout = sliderbase1y_Callback(h, eventdata, handles, varargin)
+function varargout = sliderbase1y_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global  Xp Yp k12                                                        % coordinates of each point of the limb1
+global  CoordenadaXMotor1 CoordenadaYMotor1 k12     % coordinates of each point of the limb1
 global  S1 S2 S3
-global  AD
+global  MostrarAngulo
 
 set(handles.editbase1y,'String',num2str(get(handles.sliderbase1y,'Value')));
-Yp = get(handles.sliderbase1y,'Value');
+CoordenadaYMotor1 = get(handles.sliderbase1y,'Value');
 
 
 if emptycheck
@@ -148,11 +148,11 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = sliderbase2x_Callback(h, eventdata, handles, varargin)
-global  Xpb Ypb k21
+function varargout = sliderbase2x_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
+global  CoordenadaXMotor2 CoordenadaYMotor2 k21
 global  S1 S2 S3
 set(handles.editbase2x,'String',num2str(get(handles.sliderbase2x,'Value')));
-Xpb = get(handles.sliderbase2x,'Value');
+CoordenadaXMotor2 = get(handles.sliderbase2x,'Value');
 
 if emptycheck
     varmakeup;
@@ -163,11 +163,11 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = slider4_Callback(h, eventdata, handles, varargin)
-global  Xpb Ypb k22
+function varargout = slider4_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
+global  CoordenadaXMotor2 CoordenadaYMotor2 k22
 global  S1 S2 S3
 set(handles.editbase2y,'String',num2str(get(handles.sliderbase2y,'Value')));
-Ypb = get(handles.sliderbase2y,'Value');
+CoordenadaYMotor2 = get(handles.sliderbase2y,'Value');
 
 if emptycheck
     varmakeup;
@@ -177,11 +177,11 @@ else
 end
 k22 =1;
 % --------------------------------------------------------------------
-function varargout = slider5_Callback(h, eventdata, handles, varargin)
-global  Xpc Ypc k31
+function varargout = slider5_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
+global  CoordenadaXMotor3 CoordenadaYMotor3 k31
 global  S1 S2 S3
 set(handles.editbase3x,'String',num2str(get(handles.sliderbase3x,'Value')));
-Xpc = get(handles.sliderbase3x,'Value');
+CoordenadaXMotor3 = get(handles.sliderbase3x,'Value');
 
 if emptycheck
     varmakeup;
@@ -191,11 +191,11 @@ else
 end
 k31 = 1;
 % --------------------------------------------------------------------
-function varargout = slider6_Callback(h, eventdata, handles, varargin)
-global  Xpc Ypc k32
+function varargout = slider6_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
+global  CoordenadaXMotor3 CoordenadaYMotor3 k32
 global  S1 S2 S3
 set(handles.editbase3y,'String',num2str(get(handles.sliderbase3y,'Value')));
-Ypc = get(handles.sliderbase3y,'Value');
+CoordenadaYMotor3 = get(handles.sliderbase3y,'Value');
 
 if emptycheck
     varmakeup;
@@ -207,8 +207,8 @@ end
 k32 = 1;
 
 % --------------------------------------------------------------------
-function varargout = editbase1x_Callback(h, eventdata, handles, varargin)
-global  Xp Yp Xa Ya Xd Yd k11                                             % coordinates of each point of the limb1
+function varargout = editbase1x_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
+global  CoordenadaXMotor1 CoordenadaYMotor1 Xa Ya Xd Yd k11                                             % coordinates of each point of the limb1
 global  S1 S2 S3
 k11 = 1;
 val = str2double(get(handles.editbase1x,'String'));
@@ -216,7 +216,7 @@ val = str2double(get(handles.editbase1x,'String'));
 if isnumeric(val) & length(val)==1 & val >= get(handles.sliderbase1x,'Min') & val <= get(handles.sliderbase1x,'Max')
     
     set(handles.sliderbase1x,'Value',val);
-    Xp = val;
+    CoordenadaXMotor1 = val;
     
     if emptycheck
     varmakeup;
@@ -234,8 +234,8 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = editbase1y_Callback(h, eventdata, handles, varargin)
-global  Xp Yp Xa Ya Xd Yd k12                                             % coordinates of each point of the limb1
+function varargout = editbase1y_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
+global  CoordenadaXMotor1 CoordenadaYMotor1 Xa Ya Xd Yd k12                                             % coordinates of each point of the limb1
 global  S1 S2 S3
 k12 = 1;
 val = str2double(get(handles.editbase1y,'String'));
@@ -243,7 +243,7 @@ val = str2double(get(handles.editbase1y,'String'));
 if isnumeric(val) & length(val)==1 & val >= get(handles.sliderbase1y,'Min') & val <= get(handles.sliderbase1y,'Max')
     
     set(handles.sliderbase1y,'Value',val);
-    Yp = val;
+    CoordenadaYMotor1 = val;
     if emptycheck
     varmakeup;
     RRRdrawing(S1,S2,S3)
@@ -259,9 +259,9 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = edit3_Callback(h, eventdata, handles, varargin)
+function varargout = edit3_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global  Xpb Ypb k21
+global  CoordenadaXMotor2 CoordenadaYMotor2 k21
 global  S1 S2 S3
 k21 = 1;
 
@@ -270,7 +270,7 @@ val = str2double(get(handles.editbase2x,'String'));
 if isnumeric(val) & length(val)==1 & val >= get(handles.sliderbase2x,'Min') & val <= get(handles.sliderbase2x,'Max')
     
     set(handles.sliderbase2x,'Value',val);
-    Xpb = val;
+    CoordenadaXMotor2 = val;
     if emptycheck
     varmakeup;
     RRRdrawing(S1,S2,S3)
@@ -286,9 +286,9 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = edit4_Callback(h, eventdata, handles, varargin)
+function varargout = edit4_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global  Xpb Ypb k22
+global  CoordenadaXMotor2 CoordenadaYMotor2 k22
 global  S1 S2 S3
 k22 = 1;
 
@@ -297,7 +297,7 @@ val = str2double(get(handles.editbase2y,'String'));
 if isnumeric(val) & length(val)==1 & val >= get(handles.sliderbase2y,'Min') & val <= get(handles.sliderbase2y,'Max')
     
     set(handles.sliderbase2y,'Value',val);
-    Ypb = val;
+    CoordenadaYMotor2 = val;
     if emptycheck
     varmakeup;
     RRRdrawing(S1,S2,S3)
@@ -313,9 +313,9 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = edit5_Callback(h, eventdata, handles, varargin)
+function varargout = edit5_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global  Xpc Ypc k31
+global  CoordenadaXMotor3 CoordenadaYMotor3 k31
 global  S1 S2 S3
 k31 = 1;
 
@@ -324,7 +324,7 @@ val = str2double(get(handles.editbase3x,'String'));
 if isnumeric(val) & length(val)==1 & val >= get(handles.sliderbase3x,'Min') & val <= get(handles.sliderbase3x,'Max')
     
     set(handles.sliderbase3x,'Value',val);
-    Xpc = val;
+    CoordenadaXMotor3 = val;
     if emptycheck
     varmakeup;
     RRRdrawing(S1,S2,S3)
@@ -340,9 +340,9 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = edit6_Callback(h, eventdata, handles, varargin)
+function varargout = edit6_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global  Xpc Ypc k32
+global  CoordenadaXMotor3 CoordenadaYMotor3 k32
 global  S1 S2 S3
 k32 = 1;
 
@@ -351,7 +351,7 @@ val = str2double(get(handles.editbase3y,'String'));
 if isnumeric(val) & length(val)==1 & val >= get(handles.sliderbase3y,'Min') & val <= get(handles.sliderbase3y,'Max')
     
     set(handles.sliderbase3y,'Value',val);
-    Ypc = val;
+    CoordenadaYMotor3 = val;
     if emptycheck
     varmakeup;
     RRRdrawing(S1,S2,S3)
@@ -367,15 +367,15 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = slideranglefai_Callback(h, eventdata, handles, varargin)
+function varargout = slideranglefai_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global fai S1 S2 S3
+global Phi S1 S2 S3
 
 set(handles.editanglefai,'String',num2str(get(handles.slideranglefai,'Value')));
 
 faidegree = get(handles.slideranglefai,'Value');
 
-fai = (faidegree*pi)/180;
+Phi = (faidegree*pi)/180;
     if emptycheck
        varmakeup;
        RRRdrawing(S1,S2,S3)
@@ -385,20 +385,20 @@ fai = (faidegree*pi)/180;
 
 
 
-set(handles.editanglefai,'Value', fai);
+set(handles.editanglefai,'Value', Phi);
 
 
 % --------------------------------------------------------------------
-function varargout = editanglefai_Callback(h, eventdata, handles, varargin)
+function varargout = editanglefai_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global fai S1 S2 S3 
+global Phi S1 S2 S3 
 
 val = str2double(get(handles.editanglefai,'String'));
 
 if isnumeric(val) & length(val)==1 & val >= get(handles.slideranglefai,'Min') & val <= get(handles.slideranglefai,'Max')
     
     set(handles.slideranglefai,'Value',val);
-    fai = (val*pi)/180;
+    Phi = (val*pi)/180;
 
     if emptycheck
        varmakeup;
@@ -417,7 +417,7 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = initialposition_pushbution_Callback(h, eventdata, handles, varargin)
+function varargout = initialposition_pushbution_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 global InVS
 
 InVS = 0;
@@ -447,10 +447,10 @@ visibleoff(off);
 
 
 % --------------------------------------------------------------------
-function varargout = InverseKinematics_pushbutton_Callback(h, eventdata, handles, varargin)
-global fai S1 S2 S3
-global Xg Yg
-global AD
+function varargout = InverseKinematics_pushbutton_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
+global Phi S1 S2 S3
+global CoordenadaXCentro CoordenadaYCentro
+global MostrarAngulo
 global InVS
 
 if emptycheck;
@@ -486,11 +486,11 @@ end
 
 
 % --------------------------------------------------------------------
-function varargout = radiobuttonsolution1forleg1_Callback(h, eventdata, handles, varargin)
+function varargout = radiobuttonsolution1forleg1_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global  fai S1 S2 S3
-global  Xp Yp Xa Ya Xd Yd 
-global  Xg Yg
+global  Phi S1 S2 S3
+global  CoordenadaXMotor1 CoordenadaYMotor1 Xa Ya Xd Yd 
+global  CoordenadaXCentro CoordenadaYCentro
 
 off = [handles.radiobuttonsolution2forleg1];
 mutual_exclude(off)
@@ -500,11 +500,11 @@ S1 = get(handles.radiobuttonsolution1forleg1,'Value');
 RRRdrawing(S1,S2,S3);
 
 % --------------------------------------------------------------------
-function varargout = radiobuttonsolution2forleg1_Callback(h, eventdata, handles, varargin)
+function varargout = radiobuttonsolution2forleg1_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global fai S1 S2 S3
-global  Xp Yp Xa Ya Xd Yd 
-global  Xg Yg
+global Phi S1 S2 S3
+global  CoordenadaXMotor1 CoordenadaYMotor1 Xa Ya Xd Yd 
+global  CoordenadaXCentro CoordenadaYCentro
 
 
 off = [handles.radiobuttonsolution1forleg1];
@@ -517,9 +517,9 @@ S1 = s1+1;
 RRRdrawing(S1,S2,S3);
 
 % --------------------------------------------------------------------
-function varargout = radiobuttonsolution1forleg2_Callback(h, eventdata, handles, varargin)
+function varargout = radiobuttonsolution1forleg2_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global fai S1 S2 S3
+global Phi S1 S2 S3
 off = [handles.radiobuttonsolution2forleg2];
 mutual_exclude(off)
 set(handles.radiobuttonsolution1forleg2,'Value',1);
@@ -528,9 +528,9 @@ S2 = get(handles.radiobuttonsolution1forleg2,'Value');
 RRRdrawing(S1,S2,S3)
 
 % --------------------------------------------------------------------
-function varargout = radiobuttonsolution2forleg2_Callback(h, eventdata, handles, varargin)
+function varargout = radiobuttonsolution2forleg2_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global fai S1 S2 S3
+global Phi S1 S2 S3
 off = [handles.radiobuttonsolution1forleg2];
 mutual_exclude(off)
 set(handles.radiobuttonsolution2forleg2,'Value',1);
@@ -540,9 +540,9 @@ S2 = s2+1;
 RRRdrawing(S1,S2,S3)
 
 % --------------------------------------------------------------------
-function varargout = radiobuttonsolution1forleg3_Callback(h, eventdata, handles, varargin)
+function varargout = radiobuttonsolution1forleg3_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
 
-global fai S1 S2 S3
+global Phi S1 S2 S3
 
 off = [handles.radiobuttonsolution2forleg3];
 mutual_exclude(off)
@@ -552,8 +552,8 @@ S3 = get(handles.radiobuttonsolution1forleg3,'Value');
 RRRdrawing(S1,S2,S3)
 
 % --------------------------------------------------------------------
-function varargout = radiobuttonsolution2forleg3_Callback(h, eventdata, handles, varargin)
-global fai S1 S2 S3
+function varargout = radiobuttonsolution2forleg3_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
+global Phi S1 S2 S3
 
 off = [handles.radiobuttonsolution1forleg3];
 mutual_exclude(off)
@@ -602,17 +602,17 @@ function  sliderXg_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-global Xg S1 S2 S3
+global CoordenadaXCentro S1 S2 S3
 
 set(handles.editXg,'String',num2str(get(handles.sliderXg,'Value')));
 
-Xg = get(handles.sliderXg,'Value');
+CoordenadaXCentro = get(handles.sliderXg,'Value');
 
 
 RRRdrawing(S1,S2,S3);
 
 
-set(handles.editXg,'Value', Xg);
+set(handles.editXg,'Value', CoordenadaXCentro);
 
 
 
@@ -642,19 +642,19 @@ function sliderYg_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
-global Yg S1 S2 S3
+global CoordenadaYCentro S1 S2 S3
 global theta11 theta12 theta21 theta22 theta31 theta32
-global txAD txRD
+global TextoMostrarAngulo txRD
 
 
 set(handles.editYg,'String',num2str(get(handles.sliderYg,'Value')));
 
-Yg = get(handles.sliderYg,'Value');
+CoordenadaYCentro = get(handles.sliderYg,'Value');
 
 
 RRRdrawing(S1,S2,S3);
 
-set(handles.editYg,'Value', Yg);
+set(handles.editYg,'Value', CoordenadaYCentro);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -680,14 +680,14 @@ function editXg_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of editXg as text
 %        str2double(get(hObject,'String')) returns contents of editXg as a double
-global Xg S1 S2 S3
+global CoordenadaXCentro S1 S2 S3
 
 val = str2double(get(handles.editXg,'String'));
 
 if isnumeric(val) & length(val)==1 & val >= get(handles.sliderXg,'Min') & val <= get(handles.sliderXg,'Max')
     
     set(handles.sliderXg,'Value',val);
-    Xg = val;
+    CoordenadaXCentro = val;
 
     RRRdrawing(S1,S2,S3);
     
@@ -722,14 +722,14 @@ function editYg_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of editYg as text
 %        str2double(get(hObject,'String')) returns contents of editYg as a double
-global Yg S1 S2 S3
+global CoordenadaYCentro S1 S2 S3
 
 val = str2double(get(handles.editYg,'String'));
 
 if isnumeric(val) & length(val)==1 & val >= get(handles.sliderYg,'Min') & val <= get(handles.sliderYg,'Max')
     
     set(handles.sliderYg,'Value',val);
-    Yg = val;
+    CoordenadaYCentro = val;
     
 %     set(handles.textangle12,'Visible','on','String',num2str(val));
     RRRdrawing(S1,S2,S3);
@@ -787,49 +787,32 @@ function popupmenuangledisplay_Callback(hObject, eventdata, handles)
 global S1 S2 S3
 global theta11 theta12 theta21 theta22 theta31 theta32
 global diaota1 diaota2 diaota3
-global txAD txRD AD
+global TextoMostrarAngulo txRD MostrarAngulo
 % global frameAD
 val = get(hObject,'Value');
 % [x,y]=get(hObject,'Currentpoint')
 switch val
 case 1
 % The user selected the first item
-    if AD==2
-    AD = 1;
+    if MostrarAngulo==2
+    MostrarAngulo = 1;
 
-    set(txAD,'Visible','off')
-    elseif AD==3
-    AD =1;
-    set(txRD,'Visible','off')
-    elseif AD==1
-        AD=1;
+    set(TextoMostrarAngulo,'Visible','off')
+
+    elseif MostrarAngulo==1
+        MostrarAngulo=1;
     end
 case 2
-    if AD==1
-    AD = 2;
-    set(txAD,'Visible','on')
-    elseif AD==3
-    AD=2;
-    set(txAD,'Visible','on')
-    set(txRD,'Visible','off')
-    elseif AD==2
-        AD=2;
+    if MostrarAngulo==1
+    MostrarAngulo = 2;
+    set(TextoMostrarAngulo,'Visible','on')
+    elseif MostrarAngulo==2
+        MostrarAngulo=2;
     end
 
-    angledisplay(AD)
+    angledisplay(MostrarAngulo)
 
-case 3
-    if AD==2
-    AD = 3;
-    angledisplay(AD)
-    set(txAD,'Visible','off')
-    set(txRD,'Visible','on')
-    elseif AD==1
-    AD=3;
-    set(txRD,'Visible','on')
-    elseif AD==3
-        AD=3;
-    end
+
 end
 
 
@@ -856,12 +839,12 @@ function edith_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of edith as text
 %        str2double(get(hObject,'String')) returns contents of edith as a double
-global H 
+global LongitudLadoTriangulo 
 global S1 S2 S3
 val = str2double(get(handles.edith,'String'));
 
 if isnumeric(val) & length(val)==1 & val >= -30 & val <= 30
-      H = val;
+      LongitudLadoTriangulo = val;
       RRRdrawing(S1,S2,S3)
 else
     
@@ -893,12 +876,12 @@ function edita1_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of edita1 as text
 %        str2double(get(hObject,'String')) returns contents of edita1 as a double
-global a1 
+global LongitudEslabon1 
 global S1 S2 S3
 val = str2double(get(handles.edita1,'String'));
 
 if isnumeric(val) & length(val)==1 & val >= -15 & val <= 15
-      a1 = val;
+      LongitudEslabon1 = val;
       RRRdrawing(S1,S2,S3)
 else
     
@@ -930,12 +913,12 @@ function editb1_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of editb1 as text
 %        str2double(get(hObject,'String')) returns contents of editb1 as a double
-global b1 
+global LongitudEslabon2 
 global S1 S2 S3
 val = str2double(get(handles.editb1,'String'));
 
 if isnumeric(val) & length(val)==1 & val >= -15 & val <= 15
-      b1 = val;
+      LongitudEslabon2 = val;
       RRRdrawing(S1,S2,S3)
 else
     
@@ -953,22 +936,22 @@ function pushbuttoninitialized_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbuttoninitialized (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global H a1 b1 
-global Yp Xp Ypb Xpb Ypc Xpc
-global Xg Yg fai
+global LongitudLadoTriangulo LongitudEslabon1 LongitudEslabon2 
+global CoordenadaYMotor1 CoordenadaXMotor1 CoordenadaYMotor2 CoordenadaXMotor2 CoordenadaYMotor3 CoordenadaXMotor3
+global CoordenadaXCentro CoordenadaYCentro Phi
 global S1 S2 S3
-H=[];
-a1=[];
-b1=[];
-Yp=[];
-Xp=[];
-Ypb=[];
-Xpb=[];
-Ypc=[];
-Xpc=[];
-Xg =[];
-Yg =[];
-fai=[];
+LongitudLadoTriangulo=[];
+LongitudEslabon1=[];
+LongitudEslabon2=[];
+CoordenadaYMotor1=[];
+CoordenadaXMotor1=[];
+CoordenadaYMotor2=[];
+CoordenadaXMotor2=[];
+CoordenadaYMotor3=[];
+CoordenadaXMotor3=[];
+CoordenadaXCentro =[];
+CoordenadaYCentro =[];
+Phi=[];
 S1 =[];
 S2 =[];
 S3 =[];
@@ -980,10 +963,10 @@ text(-14,11,'Made by Gan Tao.',                                  'FontSize',8,'c
 text(-14,9, 'Graduate Student of University at Buffalo',         'FontSize',8,'color','b');
 text(-14,7, 'Any Problem Please Contact: taogan@eng.buffalo.edu','FontSize',8,'color','b');
 text(-14,-7,'Factory Data:',                                     'FontSize',12,'color','r');
-text(-14,-9,'H=3',                                               'FontSize',8,'color','r');
+text(-14,-9,'LongitudLadoTriangulo=3',                                               'FontSize',8,'color','r');
 text(-14,-11,'\phi=pi/4,  Link1=5,   Link2=4',                   'FontSize',8,'color','r');
 text(-14,-13,'Coordinate for Base1,2,3 =[-1.5 -8.4] [6.9 -1.2] [-6.6 2.1]','FontSize',8,'color','r');
-text(0,   1.5, 'H',                                              'FontSize',10,'color','b');
+text(0,   1.5, 'LongitudLadoTriangulo',                                              'FontSize',10,'color','b');
 text(0,  -7, 'Link1',                                            'FontSize',10,'color','b');
 text(1,  -3, 'Link2',                                            'FontSize',10,'color','b');
 hold off

@@ -9,14 +9,14 @@
 
 function emck=emptycheck()
 
-global H a1 b1 
-global Yp Xp Ypb Xpb Ypc Xpc
-global Xg Yg fai
-global S1 S2 S3 AD
+global LongitudLadoTriangulo LongitudEslabon1 LongitudEslabon2 
+global CoordenadaYMotor1 CoordenadaXMotor1 CoordenadaYMotor2 CoordenadaXMotor2 CoordenadaYMotor3 CoordenadaXMotor3
+global CoordenadaXCentro  CoordenadaYCentro  Phi
+global S1 S2 S3 MostrarAngulo
 
 
-if isempty(Xg) | isempty(Yg) | isempty(fai) | isempty(H) | isempty(a1) | isempty(b1) | isempty(Yp) | isempty(Xp) | isempty(Xpb) | isempty(Ypb) | isempty(Ypc) | isempty(Xpc)...
-        isempty(S1)|isempty(S2)|isempty(S3)|isempty(AD)
+if isempty(CoordenadaXCentro ) | isempty(CoordenadaYCentro ) | isempty(Phi) | isempty(LongitudLadoTriangulo) | isempty(LongitudEslabon1) | isempty(LongitudEslabon2) | isempty(CoordenadaYMotor1) | isempty(CoordenadaXMotor1) | isempty(CoordenadaXMotor2) | isempty(CoordenadaYMotor2) | isempty(CoordenadaYMotor3) | isempty(CoordenadaXMotor3)...
+        isempty(S1)|isempty(S2)|isempty(S3)|isempty(MostrarAngulo)
     
 
     emck = 1;

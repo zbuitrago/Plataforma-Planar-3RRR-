@@ -10,7 +10,7 @@ function stoppathtrack(obj,eventdata)
 global CC k
 global X Y
 global fig
-global Xg Yg
+global CoordenadaXCentro  CoordenadaYCentro 
 global S1 S2 S3
 global InVS
 global Rec_Movie
@@ -33,8 +33,8 @@ if (x > -15) &  (x < 15) & (y > -15) & (y < 15)
               mov = avifile('3RRRrobot_track_path.avi')
        end
           for i=1:1:(k-1)
-              Xg = X(i);
-              Yg = Y(i);
+              CoordenadaXCentro  = X(i);
+              CoordenadaYCentro  = Y(i);
               RRRdrawing(S1,S2,S3)
               pause(0.0000000001)
               if Rec_Movie == 1

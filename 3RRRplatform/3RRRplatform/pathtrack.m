@@ -5,35 +5,21 @@
 function pathtrack(obj,eventdata)
 global CC k
 global X Y
-global Xg Yg
+global CoordenadaXCentro  CoordenadaYCentro 
 global S1 S2 S3
 global InVS
 
 if CC==1 & InVS ==1
 
     cp=get(gca,'CurrentPoint');
+    disp(cp);
     if (cp(1,1) > -15)&(cp(1,2) > -15)&(cp(1,1) < 15)&(cp(1,2) < 15)
      X(k)=cp(1,1);
      Y(k)=cp(1,2);
-     plot(X(k),Y(k),'m','Marker','.')
+     plot(X(k),Y(k),'m','Marker','+')
      axis([-15 15 -15 15])
      hold on
      k = k+1;
     end
 
 end
-
-
-
-    
-    
-    
-    
-
-    
-   
-    
-    
-
-
-    

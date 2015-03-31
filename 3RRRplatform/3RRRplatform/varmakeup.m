@@ -7,60 +7,60 @@
 
 function k=varmakeup()
 
-global H a1 b1 
-global Yp Xp Ypb Xpb Ypc Xpc
-global Xg Yg fai
+global LongitudLadoTriangulo LongitudEslabon1 LongitudEslabon2 
+global CoordenadaYMotor1 CoordenadaXMotor1 CoordenadaYMotor2 CoordenadaXMotor2 CoordenadaYMotor3 CoordenadaXMotor3
+global CoordenadaXCentro  CoordenadaYCentro  Phi
 global S1 S2 S3 
-global AD
+global MostrarAngulo
 global CInverCK
 global Rec_Movie
-if isempty(Xg)
-    Xg = 0;
+if isempty(CoordenadaXCentro )
+    CoordenadaXCentro  = 0;
     k = 1;
 end
 
-    if isempty(Yg)
-        Yg = 0;
+    if isempty(CoordenadaYCentro )
+        CoordenadaYCentro  = 0;
         k = k+1;
     end
-        if isempty(fai)
-            fai = pi/4;
+        if isempty(Phi)
+            Phi = pi/4;
             k = k+1;
         end
-            if isempty(Yp)
-                Yp = -8.4;
+            if isempty(CoordenadaYMotor1)
+                CoordenadaYMotor1 = -8.4;
                 k = k+1;
             end
-                if isempty(Xp)
-                    Xp = -1.5;
+                if isempty(CoordenadaXMotor1)
+                    CoordenadaXMotor1 = -1.5;
                     k = k+1;
                 end
-                    if isempty(Ypb)
-                        Ypb = -1.2;
+                    if isempty(CoordenadaYMotor2)
+                        CoordenadaYMotor2 = -1.2;
                         k = k+1;
                     end
-                        if isempty(Xpb)
-                            Xpb = 6.9;
+                        if isempty(CoordenadaXMotor2)
+                            CoordenadaXMotor2 = 6.9;
                             k = k+1;
                         end
-                            if isempty(Xpc)
-                                Xpc = -6.6;
+                            if isempty(CoordenadaXMotor3)
+                                CoordenadaXMotor3 = -6.6;
                                 k = k+1;
                             end
-                                if isempty(Ypc)
-                                    Ypc = 2.1;
+                                if isempty(CoordenadaYMotor3)
+                                    CoordenadaYMotor3 = 2.1;
                                     k = k+1;
                                 end
-                                    if isempty(H)
-                                        H = 3;
+                                    if isempty(LongitudLadoTriangulo)
+                                        LongitudLadoTriangulo = 3;
                                         k = k+1;
                                     end
-                                        if isempty(a1)
-                                            a1 = 5;
+                                        if isempty(LongitudEslabon1)
+                                            LongitudEslabon1 = 5;
                                             k = k+1;
                                         end
-                                            if isempty(b1)
-                                                b1 = 4;
+                                            if isempty(LongitudEslabon2)
+                                                LongitudEslabon2 = 4;
                                                 k = k+1;
                                             end
                                                if isempty(S1)
@@ -75,8 +75,8 @@ end
                                                          S3=1;
                                                          k=k+1;
                                                      end
-                                                       if isempty(AD)
-                                                           AD = 1;
+                                                       if isempty(MostrarAngulo)
+                                                           MostrarAngulo = 1;
                                                            k=k+1;
                                                        end
                                                      
@@ -86,5 +86,3 @@ end
                                                              if isempty(Rec_Movie)
                                                                  Rec_Movie = 0;
                                                              end
-                                                                
-                                                             
