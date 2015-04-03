@@ -27,7 +27,7 @@ global InVS
 %    FIG = RRRPROJECT3 launch RRRproject3 GUI.
 %    RRRPROJECT3('callback_name', ...) invoke the named callback.
 
-% Last Modified by GUIDE v2.5 02-Apr-2015 21:01:34
+% Last Modified by GUIDE v2.5 02-Apr-2015 21:41:38
 
 % global frameAD
 CC = 0;
@@ -366,55 +366,6 @@ else
 end
 
 
-% --------------------------------------------------------------------
-function varargout = slideranglefai_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
-
-global Phi S1 S2 S3
-
-set(handles.editanglefai,'String',num2str(get(handles.slideranglefai,'Value')));
-
-faidegree = get(handles.slideranglefai,'Value');
-
-Phi = (faidegree*pi)/180;
-    if emptycheck
-       varmakeup;
-       RRRdrawing(S1,S2,S3)
-       else
-         RRRdrawing(S1,S2,S3)
-       end
-
-
-
-set(handles.editanglefai,'Value', Phi);
-
-
-% --------------------------------------------------------------------
-function varargout = editanglefai_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
-
-global Phi S1 S2 S3 
-
-val = str2double(get(handles.editanglefai,'String'));
-
-if isnumeric(val) & length(val)==1 & val >= get(handles.slideranglefai,'Min') & val <= get(handles.slideranglefai,'Max')
-    
-    set(handles.slideranglefai,'Value',val);
-    Phi = (val*pi)/180;
-
-    if emptycheck
-       varmakeup;
-       RRRdrawing(S1,S2,S3)
-       else
-         RRRdrawing(S1,S2,S3)
-       end
-    
-else
-    
-    Warnd = text(-10,10,'\fontsize{16} The input is out of range. Try again!','color','r');
-    set(Warnd,'visible','on') 
-   
-end
-
-
 
 % --------------------------------------------------------------------
 function varargout = initialposition_pushbution_Callback(LongitudLadoTriangulo, eventdata, handles, varargin)
@@ -434,12 +385,10 @@ visibleon(on);
 
 
 
-off = [handles.slideranglefai,handles.editanglefai,handles.textanglefai,handles.framesolutionleg1,...
-       handles.radiobuttonsolution1forleg1,handles.radiobuttonsolution2forleg1,handles.textsetsolutionforleg1,...
+off = [handles.framesolutionleg1,handles.radiobuttonsolution1forleg1,handles.radiobuttonsolution2forleg1,handles.textsetsolutionforleg1,...
        handles.framesolutionleg2,handles.radiobuttonsolution1forleg2,handles.radiobuttonsolution2forleg2,...
        handles.textsetsolutionforleg2,handles.framesolutionleg3,handles.radiobuttonsolution1forleg3,...
-       handles.radiobuttonsolution2forleg3,handles.textsetsolutionforleg3,handles.sliderXg,handles.sliderYg,handles.editXg,handles.editYg, ...
-       handles.textXg,handles.textYg,handles.togglebuttonclickinverse,handles.popupmenu_record];
+       handles.radiobuttonsolution2forleg3,handles.textsetsolutionforleg3,handles.togglebuttonclickinverse,handles.popupmenu_record];
 
 visibleoff(off);
 
@@ -458,12 +407,10 @@ if emptycheck;
 else
 
 InVS = 1;
-on = [handles.slideranglefai,handles.editanglefai,handles.textanglefai,handles.framesolutionleg1,...
-       handles.radiobuttonsolution1forleg1,handles.radiobuttonsolution2forleg1,handles.textsetsolutionforleg1,...
+on = [handles.framesolutionleg1,handles.radiobuttonsolution1forleg1,handles.radiobuttonsolution2forleg1,handles.textsetsolutionforleg1,...
        handles.framesolutionleg2,handles.radiobuttonsolution1forleg2,handles.radiobuttonsolution2forleg2,...
        handles.textsetsolutionforleg2,handles.framesolutionleg3,handles.radiobuttonsolution1forleg3,...
-       handles.radiobuttonsolution2forleg3,handles.textsetsolutionforleg3,handles.sliderXg,handles.sliderYg,handles.editXg,handles.editYg,...
-       handles.textXg,handles.textYg,handles.togglebuttonclickinverse,handles.popupmenu_record];
+       handles.radiobuttonsolution2forleg3,handles.textsetsolutionforleg3,handles.togglebuttonclickinverse,handles.popupmenu_record];
 
 visibleon(on);
 
@@ -577,45 +524,6 @@ set(on,'Visible','on');
 
 
 % --- Executes during object creation, after setting all properties.
-function sliderXg_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to sliderXg (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background, change
-%       'usewhitebg' to 0 to use default.  See ISPC and COMPUTER.
-usewhitebg = 1;
-if usewhitebg
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-else
-    set(hObject,'BackgroundColor',get(0,'defaultUicontrolBackgroundColor'));
-end
-
-
-% --- Executes on slider movement.
-function  sliderXg_Callback(hObject, eventdata, handles)
-% hObject    handle to sliderXg (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-global CoordenadaXCentro S1 S2 S3
-
-set(handles.editXg,'String',num2str(get(handles.sliderXg,'Value')));
-
-CoordenadaXCentro = get(handles.sliderXg,'Value');
-
-
-RRRdrawing(S1,S2,S3);
-
-
-set(handles.editXg,'Value', CoordenadaXCentro);
-
-
-
-
-% --- Executes during object creation, after setting all properties.
 function sliderYg_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to sliderYg (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -671,30 +579,6 @@ end
 
 
 
-function editXg_Callback(hObject, eventdata, handles)
-% hObject    handle to editXg (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of editXg as text
-%        str2double(get(hObject,'String')) returns contents of editXg as a double
-global CoordenadaXCentro S1 S2 S3
-
-val = str2double(get(handles.editXg,'String'));
-
-if isnumeric(val) & length(val)==1 & val >= get(handles.sliderXg,'Min') & val <= get(handles.sliderXg,'Max')
-    
-    set(handles.sliderXg,'Value',val);
-    CoordenadaXCentro = val;
-
-    RRRdrawing(S1,S2,S3);
-    
-else
-    
-    Warnd = text(-10,10,'\fontsize{16} The input is out of range. Try again!','color','r');
-    set(Warnd,'visible','on') 
-   
-end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -904,6 +788,12 @@ case 2
 
    Rec_Movie = 1;
 end
+
+
+
+
+
+
 
 
 
