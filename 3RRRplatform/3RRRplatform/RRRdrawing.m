@@ -126,23 +126,23 @@ elseif (CoordenadaXMotor3<Xc)&(S3==2)
 
 end
     L11 = plot([CoordenadaXMotor1 Xd(S1)],[CoordenadaYMotor1 Yd(S1)],'Linewidth',2,'Marker','O');
-    text(CoordenadaXMotor1-1,CoordenadaYMotor1-1,'Base1','color','g');
+    text(CoordenadaXMotor1-1,CoordenadaYMotor1-1,'Motor A','color','k');
     hold on
     L12 = plot([Xd(S1),Xa],[Yd(S1) Ya],'Linewidth',2,'Marker','O');
 
     hold on
     L21 = plot([CoordenadaXMotor2 Xdb(S2)],[CoordenadaYMotor2 Ydb(S2)],'Linewidth',2,'Marker','O');
-    text(CoordenadaXMotor2-1,CoordenadaYMotor2-1,'Base2','color','r');
+    text(CoordenadaXMotor2-1,CoordenadaYMotor2-1,'Motor B','color','k');
 
     hold on
     L22 = plot([Xdb(S2),Xb],[Ydb(S2) Yb],'Linewidth',2,'Marker','O');
 
     hold on
     L31 = plot([CoordenadaXMotor3 Xdc(S3)],[CoordenadaYMotor3 Ydc(S3)],'Linewidth',2,'Marker','O');
-    text(CoordenadaXMotor3-1,CoordenadaYMotor3+1,'Base3','color',[0.9 0.7 0]);
+    text(CoordenadaXMotor3-1,CoordenadaYMotor3+1,'Motor C','color','k');
 
     hold on 
-    L32 = plot([Xdc(S3),Xc],[Ydc(S3) Yc],'Linewidth',2,'color','c','Marker','d');
+    L32 = plot([Xdc(S3),Xc],[Ydc(S3) Yc],'Linewidth',2,'color','b','Marker','d');
 
     hold on
 
@@ -151,10 +151,10 @@ Horz= plot([Xa abs(Xb)+abs(LongitudLadoTriangulo*sin(Phi))],[Ya Ya],'color','b',
       text(Xa+0.7,Ya+0.5*sign(sin(Phi)),'\phi','color',[0.5 0.25 0])
 
 hold on
-L42 = plot([Xb Xc],[Yb Yc],'color','y','Linewidth',3);
+L42 = plot([Xb Xc],[Yb Yc],'color','r','Linewidth',3);
 
 hold on
-L43 = plot([Xc Xa],[Yc Ya],'color','g','Linewidth',3);
+L43 = plot([Xc Xa],[Yc Ya],'color','r','Linewidth',3);
 Center = plot(CoordenadaXCentro ,CoordenadaYCentro ,'o','color',[0.5 0 0.25]);
 
 

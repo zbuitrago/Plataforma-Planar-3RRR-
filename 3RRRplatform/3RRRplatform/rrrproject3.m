@@ -726,8 +726,8 @@ varmakeup;
 RRRdrawing(S1,S2,S3)
 hold on
 text(-14,13,'This Software is Created for the 3-RRR Robot.',     'FontSize',8,'color','b');
-text(-14,-11,'\phi=pi/4',                   'FontSize',8,'color','r');
-text(-14,-13,'Coordinate for Base1,2,3 =[-1.5 -8.4] [6.9 -1.2] [-6.6 2.1]','FontSize',8,'color','r');
+text(-14,-11,'\phi=pi/4',                   'FontSize',8,'color','k');
+text(-14,-13,'Coordinate for Base1,2,3 =[-1.5 -8.4] [6.9 -1.2] [-6.6 2.1]','FontSize',8,'color','k');
 hold off
 
 
