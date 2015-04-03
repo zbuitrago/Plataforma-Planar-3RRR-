@@ -27,7 +27,7 @@ global InVS
 %    FIG = RRRPROJECT3 launch RRRproject3 GUI.
 %    RRRPROJECT3('callback_name', ...) invoke the named callback.
 
-% Last Modified by GUIDE v2.5 13-Feb-2004 13:15:30
+% Last Modified by GUIDE v2.5 02-Apr-2015 21:01:34
 
 % global frameAD
 CC = 0;
@@ -426,8 +426,7 @@ on = [handles.sliderbase1x,handles.sliderbase1y,handles.sliderbase2x,handles.sli
         handles.sliderbase3x,handles.sliderbase3y,handles.editbase1x,handles.editbase1y,...
         handles.editbase2x,handles.editbase2y,handles.editbase3x,handles.editbase3y,...
         handles.textbase1x,handles.textbase1y,handles.textbase2x,handles.textbase2y,...
-        handles.textbase3x,handles.textbase3y,handles.range,handles.pushbuttoninitialized,handles.edith,...
-        handles.edita1,handles.editb1,handles.texth,handles.texta1,handles.textb1];
+        handles.textbase3x,handles.textbase3y,handles.range,handles.pushbuttoninitialized];
 
 visibleon(on);
         
@@ -475,8 +474,7 @@ off = [handles.sliderbase1x,handles.sliderbase1y,handles.sliderbase2x,handles.sl
         handles.sliderbase3x,handles.sliderbase3y,handles.editbase1x,handles.editbase1y,...
         handles.editbase2x,handles.editbase2y,handles.editbase3x,handles.editbase3y,...
         handles.textbase1x,handles.textbase1y,handles.textbase2x,handles.textbase2y,...
-        handles.textbase3x,handles.textbase3y,handles.range,handles.pushbuttoninitialized,handles.edith,...
-        handles.edita1,handles.editb1,handles.texth,handles.texta1,handles.textb1];
+        handles.textbase3x,handles.textbase3y,handles.range,handles.pushbuttoninitialized];
 
 visibleoff(off);
 
@@ -816,121 +814,6 @@ case 2
 end
 
 
-% --- Executes during object creation, after setting all properties.
-function edith_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edith (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc
-    set(hObject,'BackgroundColor','white');
-else
-    set(hObject,'BackgroundColor',get(0,'defaultUicontrolBackgroundColor'));
-end
-
-
-
-function edith_Callback(hObject, eventdata, handles)
-% hObject    handle to edith (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edith as text
-%        str2double(get(hObject,'String')) returns contents of edith as a double
-global LongitudLadoTriangulo 
-global S1 S2 S3
-val = str2double(get(handles.edith,'String'));
-
-if isnumeric(val) & length(val)==1 & val >= -30 & val <= 30
-      LongitudLadoTriangulo = val;
-      RRRdrawing(S1,S2,S3)
-else
-    
-    Warnd = text(-10,10,'\fontsize{16} The input is out of range. Try again!','color','r');
-    set(Warnd,'visible','on') 
-   
-end
-
-% --- Executes during object creation, after setting all properties.
-function edita1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edita1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc
-    set(hObject,'BackgroundColor','white');
-else
-    set(hObject,'BackgroundColor',get(0,'defaultUicontrolBackgroundColor'));
-end
-
-
-
-function edita1_Callback(hObject, eventdata, handles)
-% hObject    handle to edita1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edita1 as text
-%        str2double(get(hObject,'String')) returns contents of edita1 as a double
-global LongitudEslabon1 
-global S1 S2 S3
-val = str2double(get(handles.edita1,'String'));
-
-if isnumeric(val) & length(val)==1 & val >= -15 & val <= 15
-      LongitudEslabon1 = val;
-      RRRdrawing(S1,S2,S3)
-else
-    
-    Warnd = text(-10,10,'\fontsize{16} The input is out of range. Try again!','color','r');
-    set(Warnd,'visible','on') 
-   
-end
-
-% --- Executes during object creation, after setting all properties.
-function editb1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to editb1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc
-    set(hObject,'BackgroundColor','white');
-else
-    set(hObject,'BackgroundColor',get(0,'defaultUicontrolBackgroundColor'));
-end
-
-
-
-function editb1_Callback(hObject, eventdata, handles)
-% hObject    handle to editb1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of editb1 as text
-%        str2double(get(hObject,'String')) returns contents of editb1 as a double
-global LongitudEslabon2 
-global S1 S2 S3
-val = str2double(get(handles.editb1,'String'));
-
-if isnumeric(val) & length(val)==1 & val >= -15 & val <= 15
-      LongitudEslabon2 = val;
-      RRRdrawing(S1,S2,S3)
-else
-    
-    Warnd = text(-10,10,'\fontsize{16} The input is out of range. Try again!','color','r');
-    set(Warnd,'visible','on') 
-   
-end
-
-
-    
-
-
 % --- Executes on button press in pushbuttoninitialized.
 function pushbuttoninitialized_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbuttoninitialized (see GCBO)
@@ -959,16 +842,8 @@ varmakeup;
 RRRdrawing(S1,S2,S3)
 hold on
 text(-14,13,'This Software is Created for the 3-RRR Robot.',     'FontSize',8,'color','b');
-text(-14,11,'Made by Gan Tao.',                                  'FontSize',8,'color','b');
-text(-14,9, 'Graduate Student of University at Buffalo',         'FontSize',8,'color','b');
-text(-14,7, 'Any Problem Please Contact: taogan@eng.buffalo.edu','FontSize',8,'color','b');
-text(-14,-7,'Factory Data:',                                     'FontSize',12,'color','r');
-text(-14,-9,'LongitudLadoTriangulo=3',                                               'FontSize',8,'color','r');
-text(-14,-11,'\phi=pi/4,  Link1=5,   Link2=4',                   'FontSize',8,'color','r');
+text(-14,-11,'\phi=pi/4',                   'FontSize',8,'color','r');
 text(-14,-13,'Coordinate for Base1,2,3 =[-1.5 -8.4] [6.9 -1.2] [-6.6 2.1]','FontSize',8,'color','r');
-text(0,   1.5, 'LongitudLadoTriangulo',                                              'FontSize',10,'color','b');
-text(0,  -7, 'Link1',                                            'FontSize',10,'color','b');
-text(1,  -3, 'Link2',                                            'FontSize',10,'color','b');
 hold off
 
 
@@ -1029,4 +904,9 @@ case 2
 
    Rec_Movie = 1;
 end
+
+
+
+
+
 
