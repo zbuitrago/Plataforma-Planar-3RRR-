@@ -27,7 +27,7 @@ global InVS
 %    FIG = RRRPROJECT3 launch RRRproject3 GUI.
 %    RRRPROJECT3('callback_name', ...) invoke the named callback.
 
-% Last Modified by GUIDE v2.5 02-Apr-2015 21:41:38
+% Last Modified by GUIDE v2.5 03-Apr-2015 13:12:34
 
 % global frameAD
 CC = 0;
@@ -706,7 +706,7 @@ function pushbuttoninitialized_Callback(hObject, eventdata, handles)
 global LongitudLadoTriangulo LongitudEslabon1 LongitudEslabon2 
 global CoordenadaYMotor1 CoordenadaXMotor1 CoordenadaYMotor2 CoordenadaXMotor2 CoordenadaYMotor3 CoordenadaXMotor3
 global CoordenadaXCentro CoordenadaYCentro Phi
-global S1 S2 S3
+global S1 S2 S3 fig
 LongitudLadoTriangulo=[];
 LongitudEslabon1=[];
 LongitudEslabon2=[];
@@ -729,6 +729,27 @@ text(-14,13,'This Software is Created for the 3-RRR Robot.',     'FontSize',8,'c
 text(-14,-11,'\phi=pi/4',                   'FontSize',8,'color','k');
 text(-14,-13,'Coordinate for Base1,2,3 =[-1.5 -8.4] [6.9 -1.2] [-6.6 2.1]','FontSize',8,'color','k');
 hold off
+
+CrearMundo3D(handles);
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function CrearMundo3D(handles)
+Mundo3D = vrworld('final.wrl', 'new');
+open(Mundo3D);
+CargarRobotModelo3D(handles, Mundo3D);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function CargarRobotModelo3D(handles, Mundo3D)
+FactorDeEscala=60;
+PosicionXDentroDelPanel=10;
+PosicionYDentroDelPanel=0.7;
+LongitudX=9.35;
+LongitudY=8.5;
+
+Canvas3D = vr.canvas(Mundo3D,gcf,get(handles.RobotPlanarPanel,'Position')+ FactorDeEscala*[PosicionXDentroDelPanel PosicionYDentroDelPanel LongitudX LongitudY]);
+set(Canvas3D,'ZoomFactor',10);
+
 
 
 
@@ -790,13 +811,9 @@ case 2
 end
 
 
-
-
-
-
-
-
-
-
-
+% --- Executes during object creation, after setting all properties.
+function figure1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns calledworld = vrworld('final.wrl', 'new');
 
