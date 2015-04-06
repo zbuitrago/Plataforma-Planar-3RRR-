@@ -735,20 +735,25 @@ CrearMundo3D(handles);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function CrearMundo3D(handles)
-Mundo3D = vrworld('final.wrl', 'new');
+global Mundo3D;
+Mundo3D = vrworld('ensamble.wrl', 'new');
 open(Mundo3D);
-CargarRobotModelo3D(handles, Mundo3D)
+CargarRobotModelo3D(handles, Mundo3D);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function CargarRobotModelo3D(handles, Mundo3D)
+global Mundo3D;
 FactorDeEscala=60;
 PosicionXDentroDelPanel=10;
 PosicionYDentroDelPanel=0.7;
 LongitudX=9.35;
 LongitudY=8.5;
 
-c1 = vr.canvas(Mundo3D,gcf,get(handles.RobotPlanarPanel,'Position')+ FactorDeEscala*[PosicionXDentroDelPanel PosicionYDentroDelPanel LongitudX LongitudY]);
-set(c1,'ZoomFactor',10);
+Canvas3D = vr.canvas(Mundo3D,gcf,get(handles.RobotPlanarPanel,'Position')+ FactorDeEscala*[PosicionXDentroDelPanel PosicionYDentroDelPanel LongitudX LongitudY]);
+set(Canvas3D,'ZoomFactor',10);
+set(Canvas3D,'Triad','bottomright');
+
+Espacio=vrnode(Mundo3D,'Espacio');
 
 
 

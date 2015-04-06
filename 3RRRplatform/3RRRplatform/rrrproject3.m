@@ -735,7 +735,7 @@ CrearMundo3D(handles);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function CrearMundo3D(handles)
-Mundo3D = vrworld('final.wrl', 'new');
+Mundo3D = vrworld('ensamble.wrl', 'new');
 open(Mundo3D);
 CargarRobotModelo3D(handles, Mundo3D);
 
@@ -748,9 +748,15 @@ LongitudX=9.35;
 LongitudY=8.5;
 
 Canvas3D = vr.canvas(Mundo3D,gcf,get(handles.RobotPlanarPanel,'Position')+ FactorDeEscala*[PosicionXDentroDelPanel PosicionYDentroDelPanel LongitudX LongitudY]);
-set(Canvas3D,'ZoomFactor',10);
+set(Canvas3D,'ZoomFactor',0.7);
+set(Canvas3D,'Triad','bottomright');
+ConfigurarVistaInicial(Mundo3D);
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function ConfigurarVistaInicial(Mundo3D)
+Espacio=vrnode(Mundo3D,'Espacio');
+Espacio.rotation=[1 0 0 (90*(pi/2)/90)];
+vrdrawnow;
 
 
 % --- Executes on button press in togglebuttonclickinverse.

@@ -5,6 +5,9 @@
 #www.ids-net.com
 
 
+Viewpoint {
+	position	0.00139499 0.024876 0.858932
+}
 DEF Espacio Transform {
 	children [ 
 	    NavigationInfo {
@@ -13334,7 +13337,7 @@ DEF Espacio Transform {
 
 							    }
 
-							    DEF Piñon_A Transform {
+							    DEF Pinon_A Transform {
 								    translation	0 0 0
 								    center	0 0 -0.188
 								    children [ 
@@ -28215,7 +28218,7 @@ DEF Espacio Transform {
 
 							    }
 
-							    DEF Piñon_B Transform {
+							    DEF Pinon_B Transform {
 								    translation	0 0 0
 								    center	-0.199 0 0.1262
 								    children [ 
@@ -43079,7 +43082,7 @@ DEF Espacio Transform {
 
 							    }
 
-							    DEF Piñon_C Transform {
+							    DEF Pinon_C Transform {
 								    center	0.1999 0 0.1268
 								    children [ 
 									Shape {
