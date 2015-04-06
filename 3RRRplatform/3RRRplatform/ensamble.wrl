@@ -43079,6 +43079,8 @@ DEF Espacio Transform {
 							    }
 
 							    DEF Piñon_C Transform {
+								    rotation	0 1 0  2.70177
+								    center	0.1999 0 0.1268
 								    children [ 
 									Shape {
 										appearance	Appearance {
