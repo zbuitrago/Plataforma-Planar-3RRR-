@@ -15,6 +15,9 @@ global theta11 theta12 theta21 theta22 theta31 theta32
 global diaota1 diaota2 diaota3
 global MostrarAngulo 
 global k X Y
+global Mundo3D
+
+
 
 
 UbicacionCentroBase  = ((3^0.5)/3)*LongitudLadoTriangulo;
@@ -125,7 +128,8 @@ elseif (CoordenadaXMotor3<Xc)&(S3==2)
     S3=1;
 
 end
-    L11 = plot([CoordenadaXMotor1 Xd(S1)],[CoordenadaYMotor1 Yd(S1)],'Linewidth',2,'Marker','O');
+
+  L11 = plot([CoordenadaXMotor1 Xd(S1)],[CoordenadaYMotor1 Yd(S1)],'Linewidth',2,'Marker','O');
     text(CoordenadaXMotor1-1,CoordenadaYMotor1-1,'Motor A','color','k');
     hold on
     L12 = plot([Xd(S1),Xa],[Yd(S1) Ya],'Linewidth',2,'Marker','O');
@@ -158,6 +162,7 @@ L43 = plot([Xc Xa],[Yc Ya],'color','r','Linewidth',3);
 Center = plot(CoordenadaXCentro ,CoordenadaYCentro ,'o','color',[0.5 0 0.25]);
 
 
+
 if (isempty(X)==0) & (isempty(Y)==0)
    for i=1:1:k-1
        hold on
@@ -172,8 +177,14 @@ hold off
 
 if Yd(S1)>=CoordenadaYMotor1
 theta11 = acos((Xd(S1)-CoordenadaXMotor1)/LongitudEslabon1);
+pinona=vrnode(Mundo3D,'Pinon_A');
+pinona.rotation=[0 1 0 theta11];
+vrdrawnow;
 elseif Yd(S1)<CoordenadaYMotor1
     theta11 = 2*pi-acos((Xd(S1)-CoordenadaXMotor1)/LongitudEslabon1);
+    pinona=vrnode(Mundo3D,'Pinon_A');
+pinona.rotation=[0 1 0 theta11];
+vrdrawnow;
 end
 
 if Ya>=Yd(S1)
