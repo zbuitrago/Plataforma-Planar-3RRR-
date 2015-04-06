@@ -31266,7 +31266,6 @@ DEF Espacio Transform {
 										    }
 
 										    DEF Antebrazo_B Transform {
-											    rotation	0 -1 0  3.14159
 											    center	-0.164 0 0.0168
 											    children Shape {
 												    appearance	Appearance {
@@ -46130,6 +46129,7 @@ DEF Espacio Transform {
 										    }
 
 										    DEF Antebrazo_C Transform {
+											    center	0.158 0 0.0195
 											    children Shape {
 												    appearance	Appearance {
 													    material	DEF _mat3 Material {
