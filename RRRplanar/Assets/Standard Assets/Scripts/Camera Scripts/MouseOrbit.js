@@ -27,24 +27,35 @@ function Start () {
 }
 
 function LateUpdate () {
-    if (target && Input.GetMouseButton(1)==true) {
-       	calculateCoordinates();
-       	var rotation=CalculateRotation();
- 		var position=CalculatePosition(rotation);     
-        MakeCameraMovement(rotation,position);
-    }
-    
+  	CameraMovement();
     PCMouseWheelZoom();
-
+    
     #if UNITY_ANDROID || UNITY_IOS	
     AndroidPinchZoom();
     #endif
+}
+
+function CameraMovement(){
+	  if (target && Input.GetMouseButton(1)==true) {
+	   	calculateCoordinates();
+	   	var rotation=CalculateRotation();
+		var position=CalculatePosition(rotation);     
+	    MakeCameraMovement(rotation,position);
+	}
 }
 
 function calculateCoordinates(){
 	 x += Input.GetAxis("Mouse X") * xSpeed * 0.02;
      y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02;
  	 y = ClampAngle(y, yMinLimit, yMaxLimit);
+}
+
+static function ClampAngle (angle : float, min : float, max : float) {
+	if (angle < -360)
+		angle += 360;
+	if (angle > 360)
+		angle -= 360;
+	return Mathf.Clamp (angle, min, max);
 }
 
 function CalculateRotation(){
@@ -70,33 +81,43 @@ function AndroidPinchZoom(){
 	if (Input.touchCount == 2)
     {
         // Store both touches.
-        var touchZero = Input.GetTouch(0);
-        var touchOne = Input.GetTouch(1);
-
-        // Find the position in the previous frame of each touch.
-        var touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-        var touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
-
+       	var touches=GetTouches();
+       	// Find the position in the previous frame of each touch.
+       	var touchesPreviousPositions=TouchesDeltaPositions(touches);
         // Find the magnitude of the vector (the distance) between the touches in each frame.
-        var prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-        var touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
-
-        // Find the difference in the distances between each frame.
-        var deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
-   
-        // Otherwise change the field of view based on the change in distance between the touches.
-        camera.fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
-
-        // Clamp the field of view to make sure it's between 0 and 180.
-        camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 0.1f, 179.9f);
-        
+       	var deltaMagnitudeDiff=DistanceBetweenTouches(touchesPreviousPositions,touches);
+   		MakeCameraAndroidZoom(deltaMagnitudeDiff);
     }
 }
 
-static function ClampAngle (angle : float, min : float, max : float) {
-	if (angle < -360)
-		angle += 360;
-	if (angle > 360)
-		angle -= 360;
-	return Mathf.Clamp (angle, min, max);
+function GetTouches(){
+	var touchZero = Input.GetTouch(0);
+	var touchOne = Input.GetTouch(1);
+	var touches=[touchZero, touchOne];
+	return touches;
+}
+
+function TouchesDeltaPositions(touches: Touch[]){
+    var touchZeroPrevPos = touches[0].position - touches[0].deltaPosition;
+    var touchOnePrevPos = touches[1].position - touches[1].deltaPosition;
+    var touchesPreviousPositions=[touchZeroPrevPos, touchOnePrevPos];
+    return touchesPreviousPositions;
+}
+
+function DistanceBetweenTouches(touchesPreviousPositions: Vector2[], touches: Touch[]){
+ 	var prevTouchDeltaMag = (touchesPreviousPositions[0] - touchesPreviousPositions[1]).magnitude;
+    var touchDeltaMag = (touches[0].position - touches[1].position).magnitude;
+    
+    // Find the difference in the distances between each frame.
+    var deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+    return deltaMagnitudeDiff;
+}
+
+function MakeCameraAndroidZoom(deltaMagnitudeDiff:float){
+	//change the field of view based on the change in distance between the touches.
+    camera.fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
+    
+    // Clamp the field of view to make sure it's between 0 and 180.
+    camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 0.1f, 179.9f);
+        
 }
