@@ -7,12 +7,11 @@ var ySpeed = 120.0;
 var yMinLimit = -20;
 var yMaxLimit = 80;
 
-private var x = 0.0;
-private var y = 0.0;
+private static var x = 0.0;
+private static var y = 0.0;
 private var zoomStep=3;
 
-public var perspectiveZoomSpeed : float = 0.5f;        // The rate of change of the field of view in perspective mode.
-public var orthoZoomSpeed : float = 0.5f;        // The rate of change of the orthographic size in orthographic mode.
+private var perspectiveZoomSpeed : float = 0.5f;            
 
 
 @script AddComponentMenu("Camera-Control/Mouse Orbit")
@@ -29,29 +28,43 @@ function Start () {
 
 function LateUpdate () {
     if (target && Input.GetMouseButton(1)==true) {
-        x += Input.GetAxis("Mouse X") * xSpeed * 0.02;
-        y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02;
- 		
- 		y = ClampAngle(y, yMinLimit, yMaxLimit);
- 		       
-        var rotation = Quaternion.Euler(y, x, 0);
-        var position = rotation * Vector3(0.0, 0.0, -distance) + target.position;
-        
-        transform.rotation = rotation;
-        transform.position = position;
+       	calculateCoordinates();
+       	var rotation=CalculateRotation();
+ 		var position=CalculatePosition(rotation);     
+        MakeCameraMovement(rotation,position);
     }
     
-    transform.Translate(Vector3.forward * (Input.GetAxis("Mouse ScrollWheel"))*zoomStep);
-    
+    PCMouseWheelZoom();
+
     #if UNITY_ANDROID || UNITY_IOS	
     AndroidPinchZoom();
     #endif
-    
-    
-    
-    
 }
 
+function calculateCoordinates(){
+	 x += Input.GetAxis("Mouse X") * xSpeed * 0.02;
+     y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02;
+ 	 y = ClampAngle(y, yMinLimit, yMaxLimit);
+}
+
+function CalculateRotation(){
+	var rotation = Quaternion.Euler(y, x, 0);
+	return rotation;
+}
+
+function CalculatePosition(rotation: Quaternion){
+    var position = rotation * Vector3(0.0, 0.0, -distance) + target.position;
+    return position;
+}
+
+function  MakeCameraMovement(rotation: Quaternion, position: Vector3){
+	 transform.rotation = rotation;
+     transform.position = position;
+}
+
+function  PCMouseWheelZoom(){
+	transform.Translate(Vector3.forward * (Input.GetAxis("Mouse ScrollWheel"))*zoomStep);
+}
 
 function AndroidPinchZoom(){
 	if (Input.touchCount == 2)
@@ -70,24 +83,13 @@ function AndroidPinchZoom(){
 
         // Find the difference in the distances between each frame.
         var deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+   
+        // Otherwise change the field of view based on the change in distance between the touches.
+        camera.fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
 
-        // If the camera is orthographic...
-        if (camera.isOrthoGraphic)
-        {
-            // ... change the orthographic size based on the change in distance between the touches.
-            camera.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
-
-            // Make sure the orthographic size never drops below zero.
-            camera.orthographicSize = Mathf.Max(camera.orthographicSize, 0.1f);
-        }
-        else
-        {
-            // Otherwise change the field of view based on the change in distance between the touches.
-            camera.fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
-
-            // Clamp the field of view to make sure it's between 0 and 180.
-            camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 0.1f, 179.9f);
-        }
+        // Clamp the field of view to make sure it's between 0 and 180.
+        camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 0.1f, 179.9f);
+        
     }
 }
 
