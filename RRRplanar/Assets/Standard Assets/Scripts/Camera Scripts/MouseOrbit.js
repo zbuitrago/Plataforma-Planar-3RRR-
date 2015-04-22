@@ -9,6 +9,7 @@ var yMaxLimit = 80;
 
 private var x = 0.0;
 private var y = 0.0;
+private var zoomStep=3;
 
 @script AddComponentMenu("Camera-Control/Mouse Orbit")
 
@@ -35,6 +36,8 @@ function LateUpdate () {
         transform.rotation = rotation;
         transform.position = position;
     }
+    
+    transform.Translate(Vector3.forward * (Input.GetAxis("Mouse ScrollWheel"))*zoomStep);
 }
 
 static function ClampAngle (angle : float, min : float, max : float) {
