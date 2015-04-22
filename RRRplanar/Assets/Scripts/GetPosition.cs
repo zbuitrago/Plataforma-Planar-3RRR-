@@ -6,6 +6,7 @@ public class GetPosition : MonoBehaviour {
 
 	public float distance=4.5f;
 	public Text position;
+	public Texture sphereTexture;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +15,7 @@ public class GetPosition : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButton (0) == true) {
+		if (Input.GetMouseButton (0) == true && Input.touchCount<2) {
 			Vector3 point=CastRayToWorld();
 			setPointToTextField(point);
 			CreateSphere(point);
@@ -39,8 +40,13 @@ public class GetPosition : MonoBehaviour {
 	private void CreateSphere(Vector3 point){
 		if(point!=Vector3.zero){
 			GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			sphere.transform.position = new Vector3 (point.x,0.0f,point.z);
-			sphere.transform.localScale = new Vector3 (0.5f,0.5f,0.5f);
+			sphere.transform.position = new Vector3 (point.x,0.2f,point.z);
+			SphereAppeareance(sphere);
 		}
+	}
+
+	private void SphereAppeareance(GameObject sphere){
+		sphere.transform.localScale = new Vector3 (0.1f,0.1f,0.1f);
+		sphere.renderer.material.mainTexture = sphereTexture;
 	}
 }
