@@ -89,11 +89,29 @@ public class Move : MonoBehaviour {
 		float prueba=((2*Mathf.Cos((phi*Mathf.PI/2)/90))*(Pxbx+Pyby-bx1ox1-by1oy1));
 		Debug.Log("Prueba"+prueba.ToString());
 
-		float C1 = -1 * (-2 * Pyboy - (2 * Pxox) + SumAllFactorsPow2+((2*Mathf.Cos((phi*Mathf.PI/2)/90))*(Pxbx+Pyby-bx1ox1-by1oy1))); //
+		float Pybx = Pyb * bx1;
+		Debug.Log ("Pybx=" + Pybx.ToString ());
+
+		float Pxbby = Pxb * by1;
+		Debug.Log ("Pxbby=" + Pxbby.ToString ());
+
+		float bxoy = bx1 * oy1;
+		Debug.Log ("bxoy=" + bxoy.ToString ());
+
+		float byox = by1 * ox1;
+		Debug.Log ("byox=" + byox.ToString ());
+
+		float C1 = -1 * (-2 * Pyboy - (2 * Pxox) + SumAllFactorsPow2+((2*Mathf.Cos((phi*Mathf.PI/2)/90))*(Pxbx+Pyby-bx1ox1-by1oy1))+
+		                 ((2*Mathf.Cos((phi*Mathf.PI/2)/90))*(Pybx-Pxbby-bxoy+byox))); //
 		Debug.Log ("C1=" + C1.ToString ());
 
-		float theta1 = (Mathf.Atan2 (A1, B1) + Mathf.Atan2 (Mathf.Sqrt((Mathf.Pow(A1,2)+Mathf.Pow(B1,2)-Mathf.Pow(C1,2))),C1))*90/1/2;
-		Debug.Log (theta1.ToString());
+		float sqrtABC2 = Mathf.Sqrt (Mathf.Pow(A1,2)+Mathf.Pow(B1,2)-Mathf.Pow(C1,2));
+		Debug.Log ("raiz ABC2=: "+sqrtABC2.ToString());
+
+		float theta1 = Mathf.Atan2 (A1,B1)+Mathf.Atan2(sqrtABC2,C1);
+		Debug.Log ("heta 1 sin convt"+theta1.ToString());
+		theta1=((theta1*Mathf.PI/2)/90);
+		Debug.Log ("Theta1 convertido: "+theta1.ToString());
 
 	}
 }
