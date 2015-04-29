@@ -15,10 +15,10 @@ public class Move : MonoBehaviour {
 	private bool isStarted;
 	private float Xincrement=1.0f;
 	private float Zincrement=1.0f;
-	private float l=5.0f; 				//Largo del brazo
-	private float oy1=-8.4f; 			//posicion en y base 1
-	private float ox1=-1.5f; 			//posicion en x base 1
-	private float ni=1.73f;					//Distancia del punto M al punto P
+	private float l=136.40f; 				//Largo del brazo
+	private float oy1=2.388299f; 			//posicion en y base 1
+	private float ox1=-3.492431f; 			//posicion en x base 1
+	private float ni=80f;					//Distancia del punto M al punto P
 	private float phi=30.0f;
 
 
@@ -57,8 +57,8 @@ public class Move : MonoBehaviour {
 		float gamma3=90f;
 
 		float[] Angles1=CalculateThethaAndAlpha (gamma1);
-		//float[] Angles2=CalculateThethaAndAlpha (gamma2);
-		//float[] Angles3=CalculateThethaAndAlpha (gamma3);
+		float[] Angles2=CalculateThethaAndAlpha (gamma2);
+		float[] Angles3=CalculateThethaAndAlpha (gamma3);
 
 	}
 
@@ -69,8 +69,8 @@ public class Move : MonoBehaviour {
 		 float by1 = ni * Mathf.Sin ((gamma1*Mathf.PI/2)/90);	//ni*sin(gammai)
 		//Debug.Log ("by1=" + by1.ToString ());
 
-		float Pyb = 0.0f;//spherePosition.z;
-		float Pxb = 0.0f;//spherePosition.x;
+		float Pyb = spherePosition.z;
+		float Pxb = spherePosition.x;
 
 		float A1=2*l*(oy1-(bx1*Mathf.Sin((phi*Mathf.PI/2)/90))-(by1*Mathf.Cos((phi*Mathf.PI/2)/90))-Pyb);
 		//Debug.Log ("A1=" + A1.ToString ());
@@ -100,11 +100,11 @@ public class Move : MonoBehaviour {
 
 
 		float D1 = -Mathf.Sin(theta1*((Mathf.PI/2)/90));
-		Debug.Log ("D1: "+D1.ToString());
+		//Debug.Log ("D1: "+D1.ToString());
 		float E1= Mathf.Cos(theta1*((Mathf.PI/2)/90));
-		Debug.Log ("E1: "+E1.ToString());
+		//Debug.Log ("E1: "+E1.ToString());
 		float G1=(Pxb+(bx1*Mathf.Cos (phi*(Mathf.PI/2)/90))-(by1*Mathf.Sin (phi*(Mathf.PI/2)/90))-(ox1)-(l*(Mathf.Cos (theta1*(Mathf.PI/2)/90))))/l;
-		Debug.Log ("G1 "+G1.ToString());
+		//Debug.Log ("G1 "+G1.ToString());
 		float Alpha1= (Mathf.Atan2 ((D1),(E1)))+(Mathf.Atan2((Mathf.Sqrt (Mathf.Pow(D1,2)+Mathf.Pow(E1,2)-Mathf.Pow(G1,2))),G1));
 		Alpha1=((Alpha1*90)/(Mathf.PI/2));
 		Debug.Log ("Alpha convertido: "+Alpha1.ToString());
