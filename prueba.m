@@ -1,0 +1,60 @@
+L2=5;
+OY=-8.4;
+OX=-1.5;
+NI=1.73;
+GAMA1=210;%%(150*pi)/180;
+GAMA2=-30;
+GAMA3=90;
+BX=NI*cosd(GAMA1)
+BY=NI*sind(GAMA1)
+BX2=NI*cosd(GAMA2);
+BY2=NI*sind(GAMA2);
+BX3=NI*cosd(GAMA3);
+BY3=NI*sind(GAMA3);
+PHI=30;%%(45*pi)/180;
+PY=0;
+PX=0;
+
+A1=2*L2*(OY-(BX*(sind(PHI)))-(BY*cosd(PHI))-PY)
+B1= 2*L2*(OX+(BY*(sind(PHI)))-(BX*cosd(PHI))-PX)
+C1=-[L2^2-(2*PY*OY)+(2*PX*OX)+(BX^2)+(BY^2)+(OX^2)+(OY^2)+(PX^2)+(PY^2)-(L2^2)+ ((2*cosd(PHI))*((PX*BX)+(PY*BY)-(BX*OX)-(BY*OY)))+((2*sind(PHI))*((PY*BX)-(PX*BY)-(BX*OY)+(BY*OX)))]
+TETHA=atan2d(A1,B1)+(atan2d((sqrt((A1^2)+(B1^2)-(C1^2))),C1))
+TETHA1=atan2d(A1,B1)-(atan2d((sqrt((A1^2)+(B1^2)-(C1^2))),C1))
+D1=-sind (TETHA)
+E1= cosd (TETHA)
+G1=(PX+(BX*cosd(PHI))-(BY*sind(PHI))-OX-(L2*cosd(TETHA)))/L2
+D2=-sind (TETHA1)
+E2= cosd (TETHA1)
+G2=(PX+(BX*cosd(PHI))-(BY*sind(PHI))-OX-(L2*cosd(TETHA1)))/L2
+ALPHA=atan2d(D1,E1)+(atan2d((sqrt((D1^2)+(E1^2)-(G1^2))),G1))
+ALPHA1=atan2d(D2,E2)-(atan2d((sqrt((D2^2)+(E2^2)-(G2^2))),G2))
+%%%%%%%%%%%%%%%GAMA2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A2=2*L2*(OY-(BX2*(sind(PHI)))-(BY2*cosd(PHI))-PY);
+B2= 2*L2*(OX+(BY2*(sind(PHI)))-(BX2*cosd(PHI))-PX);
+C2=-[L2^2-(2*PY*OY)+(2*PX*OX)+(BX2^2)+(BY2^2)+(OX^2)+(OY^2)+(PX^2)+(PY^2)-(L2^2)+ ((2*cosd(PHI))*((PX*BX2)+(PY*BY2)-(BX2*OX)-(BY2*OY)))+((2*sind(PHI))*((PY*BX2)-(PX*BY2)-(BX2*OY)+(BY2*OX)))];
+TETHA21=atan2d(A2,B2)+(atan2d((sqrt((A2^2)+(B2^2)-(C2^2))),C2))
+TETHA22=atan2d(A2,B2)-(atan2d((sqrt((A2^2)+(B2^2)-(C2^2))),C2))
+D21=-sind (TETHA21);
+E21= cosd (TETHA21);
+G21=(PX+(BX2*cosd(PHI))-(BY2*sind(PHI))-OX-(L2*cosd(TETHA21)))/L2;
+D22=-sind (TETHA22);
+E22= cosd (TETHA22);
+G22=(PX+(BX2*cosd(PHI))-(BY2*sind(PHI))-OX-(L2*cosd(TETHA22)))/L2;
+ALPHA21=atan2d(D21,E21)+(atan2d((sqrt((D21^2)+(E21^2)-(G21^2))),G21))
+ALPHA22=atan2d(D22,E22)-(atan2d((sqrt((D22^2)+(E22^2)-(G22^2))),G22))
+%%%%%%%%%%%%%%%%GAMA3%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A3=2*L2*(OY-(BX3*(sind(PHI)))-(BY3*cosd(PHI))-PY);
+B3= 2*L2*(OX+(BY3*(sind(PHI)))-(BX3*cosd(PHI))-PX);
+C3=-[L2^2-(2*PY*OY)+(2*PX*OX)+(BX3^2)+(BY3^2)+(OX^2)+(OY^2)+(PX^2)+(PY^2)-(L2^2)+ ((2*cosd(PHI))*((PX*BX3)+(PY*BY3)-(BX3*OX)-(BY3*OY)))+((2*sind(PHI))*((PY*BX3)-(PX*BY3)-(BX3*OY)+(BY3*OX)))];
+TETHA31=atan2d(A3,B3)+(atan2d((sqrt((A3^2)+(B3^2)-(C3^2))),C3))
+TETHA32=atan2d(A3,B3)-(atan2d((sqrt((A3^2)+(B3^2)-(C3^2))),C3))
+D31=-sind (TETHA31);
+E31= cosd (TETHA31);
+G31=(PX+(BX3*cosd(PHI))-(BY3*sind(PHI))-OX-(L2*cosd(TETHA31)))/L2;
+D32=-sind (TETHA32);
+E32= cosd (TETHA32);
+G32=(PX+(BX3*cosd(PHI))-(BY3*sind(PHI))-OX-(L2*cosd(TETHA32)))/L2;
+ALPHA31=atan2d(D31,E31)+(atan2d((sqrt((D31^2)+(E31^2)-(G31^2))),G31))
+ALPHA32=atan2d(D32,E32)-(atan2d((sqrt((D32^2)+(E32^2)-(G32^2))),G32))
