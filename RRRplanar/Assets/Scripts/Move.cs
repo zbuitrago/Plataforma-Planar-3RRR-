@@ -15,14 +15,14 @@ public class Move : MonoBehaviour {
 	private bool isStarted;
 	private float Xincrement=1.0f;
 	private float Zincrement=1.0f;
-	private float l=136.4f; 				//Largo del brazo
-	private float oy1=2.388299f; 			//posicion en y base 1
-	private float ox1=-3.492431f; 			//posicion en x base 1
-	private float ni=80f;					//Distancia del punto M al punto P
+	private float l=5f; 				//Largo del brazo
+	private float oy1=-8.4f; 			//posicion en y base 1
+	private float ox1=-1.5f; 			//posicion en x base 1
+	private float ni=1.73f;					//Distancia del punto M al punto P
 	private float gamma1=210f;				//gammai Angulos entre horizontal y linea ni
 	private float gamma2=-30f;
 	private float gamma3=90f;
-	private float phi=0.0f;
+	private float phi=30.0f;
 
 
 	// Use this for initialization
@@ -62,10 +62,10 @@ public class Move : MonoBehaviour {
 		float by1 = ni * Mathf.Sin ((gamma1*Mathf.PI/2)/90);	//ni*sin(gammai)
 		Debug.Log ("by1=" + by1.ToString ());
 
-		float Pyb = 3.4f; //spherePosition.z;
-		float Pxb = -4.6f; //spherePosition.x;
+		float Pyb = 0.0f; //spherePosition.z;
+		float Pxb = 0.0f; //spherePosition.x;
 
-		float A1=2*l*(oy1-bx1*Mathf.Sin((phi*Mathf.PI/2)/90)-by1*Mathf.Cos((phi*Mathf.PI/2)/90)-Pyb);
+		float A1=2*l*(oy1-(bx1*Mathf.Sin((phi*Mathf.PI/2)/90))-(by1*Mathf.Cos((phi*Mathf.PI/2)/90))-Pyb);
 		Debug.Log ("A1=" + A1.ToString ());
 		float B1=2*l*(ox1+by1*Mathf.Sin((phi*Mathf.PI/2)/90)-bx1*Mathf.Cos((phi*Mathf.PI/2)/90)-Pxb);
 		Debug.Log ("B1=" + B1.ToString ());
@@ -101,16 +101,13 @@ public class Move : MonoBehaviour {
 		float byox = by1 * ox1;
 		Debug.Log ("byox=" + byox.ToString ());
 
-		float C1 = -1 * (-2 * Pyboy - (2 * Pxox) + SumAllFactorsPow2+((2*Mathf.Cos((phi*Mathf.PI/2)/90))*(Pxbx+Pyby-bx1ox1-by1oy1))+
-		                 ((2*Mathf.Cos((phi*Mathf.PI/2)/90))*(Pybx-Pxbby-bxoy+byox))); //
+		float C1 = -((Mathf.Pow (l, 2)) - (2 * Pyb * oy1) - (2 * Pxb * ox1) + (Mathf.Pow (bx1, 2) + Mathf.Pow (by1, 2) + Mathf.Pow (ox1, 2) + Mathf.Pow (oy1, 2) + Mathf.Pow (Pxb, 2) + Mathf.Pow (Pyb, 2) - Mathf.Pow (l, 2)) +
+			((2 * Mathf.Cos ((phi * Mathf.PI / 2) / 90)) * ((Pxb * bx1) + (Pyb * by1) - (bx1 * ox1) - (by1 * oy1))) + ((2 * Mathf.Sin ((phi * Mathf.PI / 2) / 90)) * ((Pyb * bx1) - (Pxb * by1) - (bx1 * oy1) + (by1 * ox1)))); //
 		Debug.Log ("C1=" + C1.ToString ());
 
-		float sqrtABC2 = Mathf.Sqrt (Mathf.Pow(A1,2)+Mathf.Pow(B1,2)-Mathf.Pow(C1,2));
-		Debug.Log ("raiz ABC2=: "+sqrtABC2.ToString());
-
-		float theta1 = Mathf.Atan2 (A1,B1)+Mathf.Atan2(sqrtABC2,C1);
+		float theta1 = (Mathf.Atan2 ((A1),(B1)))+(Mathf.Atan2((Mathf.Sqrt (Mathf.Pow(A1,2)+Mathf.Pow(B1,2)-Mathf.Pow(C1,2))),C1));
 		Debug.Log ("heta 1 sin convt"+theta1.ToString());
-		theta1=((theta1*Mathf.PI/2)/90);
+		theta1=((theta1*90)/(Mathf.PI/2));
 		Debug.Log ("Theta1 convertido: "+theta1.ToString());
 
 	}
