@@ -259,3 +259,68 @@ else
     set(Warnd,'visible','on')
     clc
 end
+
+
+
+
+
+		display('el bx1')
+bx1 = ni * cos ((gamma1*pi/2)/90)
+		
+		display('el by1')
+		by1 = ni * sin ((gamma1*pi/2)/90)
+		
+
+	
+		display('el A1')
+		 A1=2*l*(oy1-bx1*sin((phi*pi/2)/90)-by1*cos((phi*pi/2)/90)-Pyb)
+		
+			display('el B1')
+		 B1=2*l*(ox1+by1*sin((phi*pi/2)/90)-bx1*cos((phi*pi/2)/90)-Pxb)
+		
+
+		 Pyboy = Pyb * oy1
+		 Pxox = Pxb * ox1
+		 SumAllFactorsPow2 =bx1^2+by1^2+ox1^2+oy1^2+Pxb^2+Pyb^2
+		
+		 bx1ox1 = bx1 * ox1
+		
+
+		 Pxbx = Pxb * bx1
+		
+
+		 Pyby = Pyb * by1
+	
+
+		 by1oy1 = by1 * oy1
+		
+
+		 prueba=((2*cos((phi*pi/2)/90))*(Pxbx+Pyby-bx1ox1-by1oy1))
+	
+
+		 Pybx = Pyb * bx1
+		
+
+		 Pxbby = Pxb * by1
+		
+
+		 bxoy = bx1 * oy1
+		
+
+		 byox = by1 * ox1
+		
+
+		 C1 = -1 * (-2 * Pyboy - (2 * Pxox) + SumAllFactorsPow2+((2*cos((phi*pi/2)/90))*(Pxbx+Pyby-bx1ox1-by1oy1))+  ((2*cos((phi*pi/2)/90))*(Pybx-Pxbby-bxoy+byox)))
+		               
+	
+
+		 sqrtABC2 = sqrt (A1^2+B1^2-C1^2)
+		
+
+		 theta1 = atan2 (A1,B1)+atan2(sqrtABC2,C1)
+		display('el theta')
+		theta1=((theta1*pi/2)/90)
+
+
+		bx1=
+		A1=
