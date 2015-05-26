@@ -1,21 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MoveMatlab : MonoBehaviour {
 
 	private float LongitudLadoTriangulo=3.0f;
 	private float Phi = Mathf.PI / 4;
-	private float LongitudEslabon1=5.0f;
-	private float LongitudEslabon2=4.0f;
+	private float LongitudEslabon1=1.15f;	//5.0f; Matlab
+	private float LongitudEslabon2=1.0f;//4.0f; Matlab
+	
 
-	private float CoordenadaXMotor1 = -1.5f;
+	/////MATLAB///////
+	/*private float CoordenadaXMotor1 = -1.5f;
 	private float CoordenadaYMotor1 = -8.4f;
 
 	private float CoordenadaXMotor2 = 6.9f;
 	private float CoordenadaYMotor2 = -1.2f;
 
 	private float CoordenadaXMotor3 = -6.6f;
-	private float CoordenadaYMotor3 = 2.1f;	
+	private float CoordenadaYMotor3 = 2.1f;	*/
+
+	private float CoordenadaXMotor1 = -3.492431f;
+	private float CoordenadaYMotor1 = 2.388299f;
+	
+	private float CoordenadaXMotor2 = -1.4949f;
+	private float CoordenadaYMotor2 = 5.539518f;
+	
+	private float CoordenadaXMotor3 = -5.498871f;
+	private float CoordenadaYMotor3 = 5.544016f;
+
 	
 	private float Thetha1;
 	private float Alpha1;
@@ -26,20 +39,83 @@ public class MoveMatlab : MonoBehaviour {
 	private float Thetha3;
 	private float Alpha3;
 
+	private float initialtheta1=32.38f;
+	private float initialalpha1=154.82f;
+	private float initialtheta2=174.51f;
+	private float initialalpha2=260.53f;
+	private float initialtheta3=286.09f;
+	private float initialalpha3=8.68f;
+
+	private bool isStarted;
+
+	private float angle;
+	private float DynamicTheta1;
+	private float DynamicAlpha1;
+	private float DynamicTheta2;
+	private float DynamicAlpha2;
+	private float DynamicTheta3;
+	private float DynamicAlpha3;
+
+
+	private GameObject sphere;
+	private Vector3 spherePosition;
+
+	public GameObject brazo1;		
+	public GameObject Antebrazo1;
+
+	public Text Texto;
+
 	// Use this for initialization
 	void Start () {
-		SolveEquations ();
+		DynamicTheta1 = initialtheta1;
+		DynamicAlpha1 = initialalpha1;
+		isStarted = false;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(isStarted){
+			angle+=10*Time.deltaTime;
+
+			if((DynamicTheta1>=Thetha1) ){
+				brazo1.transform.eulerAngles=new Vector3(0,angle,0);
+				float localAngle=brazo1.transform.eulerAngles.y;
+				DynamicTheta1=initialtheta1-localAngle;
+				Debug.Log("Theta1 dinamico: "+DynamicTheta1.ToString());
+			}
+
+			if(DynamicTheta1<Thetha1 ){
+				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
+				brazo1.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicTheta1=brazo1.transform.eulerAngles.y;
+				DynamicTheta1=((-1*(DynamicTheta1-360))+initialtheta1);
+				//initialtheta1=+y;
+				//y=y/Mathf.PI*180;
+				Debug.Log("Angulo theta1: "+DynamicTheta1.ToString());
+			}
+
+
+		}
+	}
+
+	public void GetSpherePosition(){
+		
+		sphere=GameObject.Find ("sphere1");
+		spherePosition = sphere.transform.position;
+		spherePosition.y = 0;
+		Texto.text = spherePosition.ToString ();
+		SolveEquations ();
+
+		isStarted = true;
+		
+		
 	}
 
 	public void SolveEquations(){
 
-		float CoordenadaXCentro=0.0f;
-		float CoordenadaYCentro=0.0f;
+		float CoordenadaXCentro=spherePosition.x;
+		float CoordenadaYCentro=spherePosition.z;
 
 		float UbicacionCentroBase  = (Mathf.Sqrt(3)/3)*LongitudLadoTriangulo;
 		float Xa = CoordenadaXCentro -UbicacionCentroBase* Mathf.Cos(Phi+(Mathf.PI/6));   
@@ -724,6 +800,7 @@ public class MoveMatlab : MonoBehaviour {
 
 		CalculateTheta3 (Xdc, Ydc);
 		CalculateAlpha3 (Xc, Yc, Xdc, Ydc);
+
 	}
 
 	private void CalculateTheta1 (float[] Xd, float[] Yd){
