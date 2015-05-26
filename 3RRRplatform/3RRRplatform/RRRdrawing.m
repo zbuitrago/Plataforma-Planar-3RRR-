@@ -261,8 +261,8 @@ else
 end
 
 
-
-
+disp('theta');
+disp(theta11)
 
 		display('el bx1')
 bx1 = ni * cos ((gamma1*pi/2)/90)
@@ -322,5 +322,4 @@ bx1 = ni * cos ((gamma1*pi/2)/90)
 		theta1=((theta1*pi/2)/90)
 
 
-		bx1=
-		A1=
+		
