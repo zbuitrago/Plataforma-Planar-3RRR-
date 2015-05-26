@@ -710,10 +710,10 @@ public class MoveMatlab : MonoBehaviour {
 			                                                                             Mathf.Pow(LongitudEslabon1,2.0f))));
 
 
-		Debug.Log ("Xdc[0]: "+Xdc[0].ToString());
+		/*Debug.Log ("Xdc[0]: "+Xdc[0].ToString());
 		Debug.Log ("Xdc[1]: "+Xdc[1].ToString());
 		Debug.Log ("Ydc[0]: "+Ydc[0].ToString());
-		Debug.Log ("Ydc[1]: "+Ydc[1].ToString());
+		Debug.Log ("Ydc[1]: "+Ydc[1].ToString());*/
 
 
 		CalculateTheta1 (Xd, Yd);
@@ -722,6 +722,8 @@ public class MoveMatlab : MonoBehaviour {
 		CalculateTheta2 (Xdb, Ydb);
 		CalculateAlpha2 (Xb, Yb, Xdb, Ydb);
 
+		CalculateTheta3 (Xdc, Ydc);
+		CalculateAlpha3 (Xc, Yc, Xdc, Ydc);
 	}
 
 	private void CalculateTheta1 (float[] Xd, float[] Yd){
@@ -766,5 +768,29 @@ public class MoveMatlab : MonoBehaviour {
 				Alpha2 = (2 * Mathf.PI - Mathf.Acos ((Xb - Xdb [0]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 			}
 		Debug.Log ("Alpha2= " + Alpha2.ToString ());
+	}
+
+	void CalculateTheta3 (float[] Xdc, float[] Ydc)
+	{
+		if (Ydc [1] >= CoordenadaYMotor3) {
+			Thetha3 = (Mathf.Acos ((Xdc [1] - CoordenadaXMotor3) / LongitudEslabon1)) * 180 / (Mathf.PI);
+		}
+		else
+			if (Ydc [1] < CoordenadaYMotor3) {
+				Thetha3 = (2 * Mathf.PI - Mathf.Acos ((Xdc [1] - CoordenadaXMotor3) / LongitudEslabon1)) * 180 / (Mathf.PI);
+			}
+		Debug.Log ("Thetha3= " + Thetha3.ToString ());
+	}
+
+	void CalculateAlpha3 (float Xc, float Yc, float[] Xdc, float[] Ydc)
+	{
+		if (Yc >= Ydc [1]) {
+			Alpha3 = (Mathf.Acos ((Xc - Xdc [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+		}
+		else
+			if (Yc < Ydc [1]) {
+				Alpha3 = (2 * Mathf.PI - Mathf.Acos ((Xc - Xdc [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+			}
+		Debug.Log ("Alpha3= " + Alpha3.ToString ());
 	}
 }
