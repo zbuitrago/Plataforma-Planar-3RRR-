@@ -49,7 +49,6 @@
      <Compile Include="Assets\Scripts\GetPosition.cs" />
      <Compile Include="Assets\Scripts\Move.cs" />
      <Compile Include="Assets\Scripts\MoveMatlab.cs" />
-     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\Rotation.cs" />
      <Compile Include="Assets\Scripts\rotationrespectto.cs" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />

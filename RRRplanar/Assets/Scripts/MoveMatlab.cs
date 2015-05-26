@@ -641,8 +641,79 @@ public class MoveMatlab : MonoBehaviour {
 		                   Mathf.Pow(Xc,2.0f)-Mathf.Pow(Yc,2.0f)+Mathf.Pow(LongitudEslabon2,2.0f)+Mathf.Pow(CoordenadaXMotor3,2.0f)+Mathf.Pow(CoordenadaYMotor3,2.0f)-Mathf.Pow(LongitudEslabon1,2.0f))
 			/(Xc-CoordenadaXMotor3);
 
+
+		Ydc[0]=1.0f/2.0f/(-8.0f*Yc*CoordenadaYMotor3-8.0f*CoordenadaXMotor3*Xc+4.0f*Mathf.Pow(Yc,2.0f)+4.0f*Mathf.Pow(CoordenadaYMotor3,2.0f)+4.0f*Mathf.Pow(Xc,2.0f)+4.0f*Mathf.Pow(CoordenadaXMotor3,2.0f))*
+			(-4.0f*Yc*Mathf.Pow(CoordenadaYMotor3,2.0f)+4.0f*Mathf.Pow(Yc,3.0f)-8.0f*CoordenadaXMotor3*Xc*CoordenadaYMotor3+4.0f*Mathf.Pow(CoordenadaYMotor3,3.0f)-4.0f*CoordenadaYMotor3*Mathf.Pow(LongitudEslabon1,2.0f)-
+			 8.0f*CoordenadaXMotor3*Xc*Yc+4.0f*Yc*Mathf.Pow(CoordenadaXMotor3,2.0f)+4.0f*Yc*Mathf.Pow(LongitudEslabon1,2.0f)+4.0f*Mathf.Pow(Xc,2.0f)*Yc-4.0f*Yc*Mathf.Pow(LongitudEslabon2,2.0f)-
+			 4.0f*Mathf.Pow(Yc,2.0f)*CoordenadaYMotor3+4.0f*Mathf.Pow(LongitudEslabon2,2.0f)*CoordenadaYMotor3+4.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*CoordenadaYMotor3+4.0f*Mathf.Pow(Xc,2.0f)*
+			 CoordenadaYMotor3+4.0f*(Mathf.Sqrt(-6.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(Xc,2.0f)+2.0f*Mathf.Pow(LongitudEslabon2,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)+
+			                                   2.0f*Mathf.Pow(LongitudEslabon2,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(Xc,2.0f)+4.0f*Yc*Mathf.Pow(CoordenadaXMotor3,4.0f)*CoordenadaYMotor3+2.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)*
+			                                   Mathf.Pow(Xc,2.0f)+2.0f*Mathf.Pow(Xc,2.0f)*Mathf.Pow(Yc,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)+4.0f*Mathf.Pow(Xc,4.0f)*Yc*CoordenadaYMotor3-4.0f*CoordenadaYMotor3*Mathf.Pow(LongitudEslabon1,2.0f)*
+			                                   Mathf.Pow(Xc,2.0f)*Yc-4.0f*CoordenadaXMotor3*Xc*Mathf.Pow(Yc,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-4.0f*CoordenadaXMotor3*Xc*Mathf.Pow(Yc,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)-
+			                                   4.0f*Yc*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)*CoordenadaYMotor3-4.0f*Mathf.Pow(Xc,2.0f)*Yc*Mathf.Pow(LongitudEslabon2,2.0f)*CoordenadaYMotor3+8.0f*CoordenadaXMotor3*
+			                                   Xc*CoordenadaYMotor3*Yc*Mathf.Pow(LongitudEslabon1,2.0f)+8.0f*CoordenadaXMotor3*Xc*CoordenadaYMotor3*Yc*Mathf.Pow(LongitudEslabon2,2.0f)+2.0f*Mathf.Pow(CoordenadaYMotor3,2.0f)*
+			                                   Mathf.Pow(LongitudEslabon1,2.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)+2.0f*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)*Mathf.Pow(Xc,2.0f)-12.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*
+			                                   Mathf.Pow(Xc,2.0f)*Mathf.Pow(Yc,2.0f)+8.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*Xc*Mathf.Pow(Yc,2.0f)+8.0f*CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*Mathf.Pow(Yc,2.0f)+2.0f*Mathf.Pow(Yc,2.0f)*
+			                                   Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)+2.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)+24.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*
+			                                   Mathf.Pow(Xc,2.0f)*CoordenadaYMotor3*Yc-16.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*Xc*CoordenadaYMotor3*Yc-16.0f*CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*CoordenadaYMotor3*Yc-4.0f*CoordenadaXMotor3*
+			                                   Xc*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)-4.0f*CoordenadaYMotor3*Mathf.Pow(LongitudEslabon1,2.0f)*Yc*Mathf.Pow(CoordenadaXMotor3,2.0f)-8.0f*Yc*Mathf.Pow(CoordenadaYMotor3,3.0f)*
+			                                   CoordenadaXMotor3*Xc+12.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)*CoordenadaXMotor3*Xc-8.0f*Mathf.Pow(Yc,3.0f)*CoordenadaXMotor3*Xc*CoordenadaYMotor3-4.0f*CoordenadaXMotor3*
+			                                   Xc*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-6.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)+4.0f*Yc*Mathf.Pow(CoordenadaYMotor3,3.0f)*
+			                                   Mathf.Pow(CoordenadaXMotor3,2.0f)+4.0f*Yc*Mathf.Pow(CoordenadaYMotor3,3.0f)*Mathf.Pow(Xc,2.0f)+2.0f*Mathf.Pow(Yc,4.0f)*CoordenadaXMotor3*Xc-Mathf.Pow(Xc,6.0f)-Mathf.Pow(CoordenadaXMotor3,6.0f)-
+			                                   Mathf.Pow(Yc,4.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)-Mathf.Pow(Yc,4.0f)*Mathf.Pow(Xc,2.0f)-Mathf.Pow(CoordenadaYMotor3,4.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)-Mathf.Pow(CoordenadaYMotor3,4.0f)
+			                                   *Mathf.Pow(Xc,2.0f)-2.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaXMotor3,4.0f)-2.0f*Mathf.Pow(Xc,4.0f)*Mathf.Pow(Yc,2.0f)-2.0f*Mathf.Pow(CoordenadaXMotor3,4.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)-
+			                                   2.0f*Mathf.Pow(Xc,4.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)+6.0f*CoordenadaXMotor3*Mathf.Pow(Xc,5.0f)+6.0f*Mathf.Pow(CoordenadaXMotor3,5.0f)*Xc+20.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*
+			                                   Mathf.Pow(Xc,3.0f)-15.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(Xc,4.0f)-15.0f*Mathf.Pow(CoordenadaXMotor3,4.0f)*Mathf.Pow(Xc,2.0f)-Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon2,4.0f)-
+			                                   Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon1,4.0f)+2.0f*Mathf.Pow(Xc,4.0f)*Mathf.Pow(LongitudEslabon2,2.0f)+2.0f*Mathf.Pow(Xc,4.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-Mathf.Pow(CoordenadaXMotor3,2.0f)*
+			                                   Mathf.Pow(LongitudEslabon2,4.0f)-Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(LongitudEslabon1,4.0f)+2.0f*Mathf.Pow(CoordenadaXMotor3,4.0f)*Mathf.Pow(LongitudEslabon2,2.0f)+2.0f*
+			                                   Mathf.Pow(CoordenadaXMotor3,4.0f)*Mathf.Pow(LongitudEslabon1,2.0f)+4.0f*Mathf.Pow(Yc,3.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)*CoordenadaYMotor3+4.0f*Mathf.Pow(Yc,3.0f)*Mathf.Pow(Xc,2.0f)*
+			                                   CoordenadaYMotor3-12.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(Xc,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)+2.0f*CoordenadaXMotor3*Xc*Mathf.Pow(CoordenadaYMotor3,4.0f)+8.0f*
+			                                   Mathf.Pow(CoordenadaXMotor3,3.0f)*Xc*Mathf.Pow(CoordenadaYMotor3,2.0f)+8.0f*CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)+2.0f*CoordenadaXMotor3*Xc*
+			                                   Mathf.Pow(LongitudEslabon2,4.0f)+2.0f*CoordenadaXMotor3*Xc*Mathf.Pow(LongitudEslabon1,4.0f)+12.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)+
+			                                   12.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-8.0f*CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*Mathf.Pow(LongitudEslabon2,2.0f)-8.0f*
+			                                   CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-8.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*Xc*Mathf.Pow(LongitudEslabon2,2.0f)-8.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*
+			                                   Xc*Mathf.Pow(LongitudEslabon1,2.0f)-4.0f*CoordenadaXMotor3*Xc*Mathf.Pow(LongitudEslabon2,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)+2.0f*Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)*
+			                                   Mathf.Pow(LongitudEslabon1,2.0f)+2.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f))));
+
+		Ydc[1]=1.0f/2.0f/(-8.0f*Yc*CoordenadaYMotor3-8.0f*CoordenadaXMotor3*Xc+4.0f*Mathf.Pow(Yc,2.0f)+4.0f*Mathf.Pow(CoordenadaYMotor3,2.0f)+4.0f*Mathf.Pow(Xc,2.0f)+4.0f*Mathf.Pow(CoordenadaXMotor3,2.0f))*
+			(-4.0f*Yc*Mathf.Pow(CoordenadaYMotor3,2.0f)+4.0f*Mathf.Pow(Yc,3.0f)-8.0f*CoordenadaXMotor3*Xc*CoordenadaYMotor3+4.0f*Mathf.Pow(CoordenadaYMotor3,3.0f)-4.0f*CoordenadaYMotor3*
+			 Mathf.Pow(LongitudEslabon1,2.0f)-8.0f*CoordenadaXMotor3*Xc*Yc+4.0f*Yc*Mathf.Pow(CoordenadaXMotor3,2.0f)+4.0f*Yc*Mathf.Pow(LongitudEslabon1,2.0f)+4.0f*Mathf.Pow(Xc,2.0f)*Yc-
+			 4.0f*Yc*Mathf.Pow(LongitudEslabon2,2.0f)-4.0f*Mathf.Pow(Yc,2.0f)*CoordenadaYMotor3+4.0f*Mathf.Pow(LongitudEslabon2,2.0f)*CoordenadaYMotor3+4.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*
+			 CoordenadaYMotor3+4.0f*Mathf.Pow(Xc,2.0f)*CoordenadaYMotor3-4.0f*(Mathf.Sqrt(-6.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(Xc,2.0f)+2.0f*Mathf.Pow(LongitudEslabon2,2.0f)*
+			                                                                             Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)+2.0f*Mathf.Pow(LongitudEslabon2,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(Xc,2.0f)+4.0f*Yc*
+			                                                                             Mathf.Pow(CoordenadaXMotor3,4.0f)*CoordenadaYMotor3+2.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)*Mathf.Pow(Xc,2.0f)+2.0f*Mathf.Pow(Xc,2.0f)*Mathf.Pow(Yc,2.0f)*
+			                                                                             Mathf.Pow(LongitudEslabon2,2.0f)+4.0f*Mathf.Pow(Xc,4.0f)*Yc*CoordenadaYMotor3-4.0f*CoordenadaYMotor3*Mathf.Pow(LongitudEslabon1,2.0f)*Mathf.Pow(Xc,2.0f)*Yc-4.0f*CoordenadaXMotor3*
+			                                                                             Xc*Mathf.Pow(Yc,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-4.0f*CoordenadaXMotor3*Xc*Mathf.Pow(Yc,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)-4.0f*Yc*Mathf.Pow(CoordenadaXMotor3,2.0f)*
+			                                                                             Mathf.Pow(LongitudEslabon2,2.0f)*CoordenadaYMotor3-4.0f*Mathf.Pow(Xc,2.0f)*Yc*Mathf.Pow(LongitudEslabon2,2.0f)*CoordenadaYMotor3+8.0f*CoordenadaXMotor3*Xc*CoordenadaYMotor3*Yc*
+			                                                                             Mathf.Pow(LongitudEslabon1,2.0f)+8.0f*CoordenadaXMotor3*Xc*CoordenadaYMotor3*Yc*Mathf.Pow(LongitudEslabon2,2.0f)+2.0f*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)*
+			                                                                             Mathf.Pow(CoordenadaXMotor3,2.0f)+2.0f*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)*Mathf.Pow(Xc,2.0f)-12.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(Xc,2.0f)*
+			                                                                             Mathf.Pow(Yc,2.0f)+8.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*Xc*Mathf.Pow(Yc,2.0f)+8.0f*CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*Mathf.Pow(Yc,2.0f)+2.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)*
+			                                                                             Mathf.Pow(LongitudEslabon1,2.0f)+2.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)+24.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(Xc,2.0f)*
+			                                                                             CoordenadaYMotor3*Yc-16.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*Xc*CoordenadaYMotor3*Yc-16.0f*CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*CoordenadaYMotor3*Yc-4.0f*CoordenadaXMotor3*Xc*
+			                                                                             Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)-4.0f*CoordenadaYMotor3*Mathf.Pow(LongitudEslabon1,2.0f)*Yc*Mathf.Pow(CoordenadaXMotor3,2.0f)-8.0f*Yc*Mathf.Pow(CoordenadaYMotor3,3.0f)*
+			                                                                             CoordenadaXMotor3*Xc+12.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)*CoordenadaXMotor3*Xc-8.0f*Mathf.Pow(Yc,3.0f)*CoordenadaXMotor3*Xc*CoordenadaYMotor3-4.0f*CoordenadaXMotor3*
+			                                                                             Xc*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-6.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)+4.0f*Yc*Mathf.Pow(CoordenadaYMotor3,3.0f)*
+			                                                                             Mathf.Pow(CoordenadaXMotor3,2.0f)+4.0f*Yc*Mathf.Pow(CoordenadaYMotor3,3.0f)*Mathf.Pow(Xc,2.0f)+2.0f*Mathf.Pow(Yc,4.0f)*CoordenadaXMotor3*Xc-Mathf.Pow(Xc,6.0f)-Mathf.Pow(CoordenadaXMotor3,6.0f)-
+			                                                                             Mathf.Pow(Yc,4.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)-Mathf.Pow(Yc,4.0f)*Mathf.Pow(Xc,2.0f)-Mathf.Pow(CoordenadaYMotor3,4.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)-Mathf.Pow(CoordenadaYMotor3,4.0f)*
+			                                                                             Mathf.Pow(Xc,2.0f)-2.0f*Mathf.Pow(Yc,2.0f)*Mathf.Pow(CoordenadaXMotor3,4.0f)-2.0f*Mathf.Pow(Xc,4.0f)*Mathf.Pow(Yc,2.0f)-2.0f*Mathf.Pow(CoordenadaXMotor3,4.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)-
+			                                                                             2.0f*Mathf.Pow(Xc,4.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)+6.0f*CoordenadaXMotor3*Mathf.Pow(Xc,5.0f)+6.0f*Mathf.Pow(CoordenadaXMotor3,5.0f)*Xc+20.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*
+			                                                                             Mathf.Pow(Xc,3.0f)-15.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(Xc,4.0f)-15.0f*Mathf.Pow(CoordenadaXMotor3,4.0f)*Mathf.Pow(Xc,2.0f)-Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon2,4.0f)-
+			                                                                             Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon1,4.0f)+2.0f*Mathf.Pow(Xc,4.0f)*Mathf.Pow(LongitudEslabon2,2.0f)+2.0f*Mathf.Pow(Xc,4.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-Mathf.Pow(CoordenadaXMotor3,2.0f)*
+			                                                                             Mathf.Pow(LongitudEslabon2,4.0f)-Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(LongitudEslabon1,4.0f)+2.0f*Mathf.Pow(CoordenadaXMotor3,4.0f)*Mathf.Pow(LongitudEslabon2,2.0f)+2.0f*Mathf.Pow(CoordenadaXMotor3,4.0f)*
+			                                                                             Mathf.Pow(LongitudEslabon1,2.0f)+4.0f*Mathf.Pow(Yc,3.0f)*Mathf.Pow(CoordenadaXMotor3,2.0f)*CoordenadaYMotor3+4.0f*Mathf.Pow(Yc,3.0f)*Mathf.Pow(Xc,2.0f)*CoordenadaYMotor3-12.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*
+			                                                                             Mathf.Pow(Xc,2.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)+2.0f*CoordenadaXMotor3*Xc*Mathf.Pow(CoordenadaYMotor3,4.0f)+8.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*Xc*Mathf.Pow(CoordenadaYMotor3,2.0f)+
+			                                                                             8.0f*CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*Mathf.Pow(CoordenadaYMotor3,2.0f)+2.0f*CoordenadaXMotor3*Xc*Mathf.Pow(LongitudEslabon2,4.0f)+2.0f*CoordenadaXMotor3*Xc*Mathf.Pow(LongitudEslabon1,4.0f)+
+			                                                                             12.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)+12.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-8.0f*
+			                                                                             CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*Mathf.Pow(LongitudEslabon2,2.0f)-8.0f*CoordenadaXMotor3*Mathf.Pow(Xc,3.0f)*Mathf.Pow(LongitudEslabon1,2.0f)-8.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*
+			                                                                             Xc*Mathf.Pow(LongitudEslabon2,2.0f)-8.0f*Mathf.Pow(CoordenadaXMotor3,3.0f)*Xc*Mathf.Pow(LongitudEslabon1,2.0f)-4.0f*CoordenadaXMotor3*Xc*Mathf.Pow(LongitudEslabon2,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)+
+			                                                                             2.0f*Mathf.Pow(Xc,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)*Mathf.Pow(LongitudEslabon1,2.0f)+2.0f*Mathf.Pow(CoordenadaXMotor3,2.0f)*Mathf.Pow(LongitudEslabon2,2.0f)*
+			                                                                             Mathf.Pow(LongitudEslabon1,2.0f))));
+
+
 		Debug.Log ("Xdc[0]: "+Xdc[0].ToString());
 		Debug.Log ("Xdc[1]: "+Xdc[1].ToString());
+		Debug.Log ("Ydc[0]: "+Ydc[0].ToString());
+		Debug.Log ("Ydc[1]: "+Ydc[1].ToString());
 
 
 		CalculateTheta1 (Xd, Yd);
