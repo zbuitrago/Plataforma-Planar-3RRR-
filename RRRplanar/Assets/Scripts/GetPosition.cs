@@ -8,7 +8,7 @@ public class GetPosition : MonoBehaviour {
 	public Text position;
 	public Texture sphereTexture;
 	private GameObject sphere;
-	private int sphereCounter;
+	public int sphereCounter;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +17,7 @@ public class GetPosition : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButton (0) == true && Input.touchCount<2) {
+		if (Input.GetMouseButtonDown (0) == true && Input.touchCount<2) {
 			sphereCounter=sphereCounter+1;
 			Vector3 point=CastRayToWorld();
 			setPointToTextField(point);
@@ -56,5 +56,13 @@ public class GetPosition : MonoBehaviour {
 
 	public Vector3 getSpherePosition(){
 		return sphere.transform.position;
+	}
+
+	public void ClearSphereCounter(){
+		for(int x=1; x<=sphereCounter; x++){
+			GameObject deletedSphere=GameObject.Find ("sphere"+x.ToString());
+			Destroy(deletedSphere);
+		}
+		sphereCounter = 0;
 	}
 }

@@ -80,6 +80,15 @@ public class MoveMatlab : MonoBehaviour {
 	public GameObject Antebrazo3;
 
 	public Text Texto;
+	public Text ErrorText;
+
+	public Text Theta1Text;
+	public Text Theta2Text;
+	public Text Theta3Text;
+
+	public Text Alpha1Text;
+	public Text Alpha2Text;
+	public Text Alpha3Text;
 
 	// Use this for initialization
 	void Start () {
@@ -101,7 +110,6 @@ public class MoveMatlab : MonoBehaviour {
 		isAlpha2Reached = false;
 		isAlpha2Reached = false;
 		isAlpha3Reached = false;
-
 	}
 	
 	// Update is called once per frame
@@ -125,6 +133,9 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Theta1 dinamico: "+DynamicTheta1.ToString());
 				if(Mathf.Abs(DynamicTheta1-Thetha1)<=0.5){
 					isThetha1Reached=true;
+					initialtheta1=Thetha1;
+					DynamicTheta1 = initialtheta1;
+					//Debug.Log("Theta denamico final: "+DynamicTheta1.ToString());
 				}
 			}
 
@@ -138,6 +149,9 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Angulo theta1: "+DynamicTheta1.ToString());
 				if(Mathf.Abs(DynamicTheta1-Thetha1)<=0.5){
 					isThetha1Reached=true;
+					initialtheta1=Thetha1;
+					DynamicTheta1 = initialtheta1;
+					//Debug.Log("Theta denamico final: "+DynamicTheta1.ToString());
 				}
 			}
 
@@ -145,9 +159,11 @@ public class MoveMatlab : MonoBehaviour {
 				brazo2.transform.eulerAngles=new Vector3(0,angle,0);
 				float localThetha2Angle=brazo2.transform.eulerAngles.y;
 				DynamicTheta2=initialtheta2-localThetha2Angle;
-				Debug.Log("Theta2 dinamico: "+DynamicTheta2.ToString());
+				//Debug.Log("Theta2 dinamico: "+DynamicTheta2.ToString());
 				if(Mathf.Abs(DynamicTheta2-Thetha2)<=0.5){
 					isThetha2Reached=true;
+					initialtheta2=Thetha2;
+					DynamicTheta2 = initialtheta2;
 				}
 			}
 			
@@ -158,9 +174,11 @@ public class MoveMatlab : MonoBehaviour {
 				DynamicTheta2=((-1*(DynamicTheta2-360))+initialtheta2);
 				//initialtheta1=+y;
 				//y=y/Mathf.PI*180;
-				Debug.Log("Angulo theta2: "+DynamicTheta2.ToString());
+				//Debug.Log("Angulo theta2: "+DynamicTheta2.ToString());
 				if(Mathf.Abs(DynamicTheta2-Thetha2)<=0.5){
 					isThetha2Reached=true;
+					initialtheta2=Thetha2;
+					DynamicTheta2 = initialtheta2;
 				}
 			}
 
@@ -171,6 +189,8 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Theta3 dinamico: "+DynamicTheta3.ToString());
 				if(Mathf.Abs(DynamicTheta3-Thetha3)<=0.5){
 					isThetha3Reached=true;
+					initialtheta3=Thetha3;
+					DynamicTheta3 = initialtheta3;
 				}
 			}
 			
@@ -184,6 +204,8 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Angulo theta3: "+DynamicTheta3.ToString());
 				if(Mathf.Abs(DynamicTheta3-Thetha3)<=0.5){
 					isThetha3Reached=true;
+					initialtheta3=Thetha3;
+					DynamicTheta3 = initialtheta3;
 				}
 			}
 
@@ -197,6 +219,8 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Alpha1 dinamico: "+DynamicAlpha1.ToString());
 				if(Mathf.Abs(DynamicAlpha1-Alpha1)<=0.5){
 					isAlpha1Reached=true;
+					initialalpha1=Alpha1;
+					DynamicAlpha1 = initialalpha1;
 				}
 			}
 			
@@ -210,6 +234,8 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Angulo Alpha1: "+DynamicAlpha1.ToString());
 				if(Mathf.Abs(DynamicAlpha1-Alpha1)<=0.5){
 					isAlpha1Reached=true;
+					initialalpha1=Alpha1;
+					DynamicAlpha1 = initialalpha1;
 				}
 			}
 
@@ -220,6 +246,8 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Alpha2 dinamico: "+DynamicAlpha2.ToString());
 				if(Mathf.Abs(DynamicAlpha2-Alpha2)<=0.5){
 					isAlpha2Reached=true;
+					initialalpha2=Alpha2;
+					DynamicAlpha2 = initialalpha2;
 				}
 			}
 			
@@ -233,6 +261,8 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Angulo Alpha2: "+DynamicAlpha2.ToString());
 				if(Mathf.Abs(DynamicAlpha2-Alpha2)<=0.5){
 					isAlpha2Reached=true;
+					initialalpha2=Alpha2;
+					DynamicAlpha2 = initialalpha2;
 				}
 			}
 
@@ -243,6 +273,8 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Alpha3 dinamico: "+DynamicAlpha3.ToString());
 				if(Mathf.Abs(DynamicAlpha3-Alpha3)<=0.5){
 					isAlpha3Reached=true;
+					initialalpha3=Alpha3;
+					DynamicAlpha3 = initialalpha3;
 				}
 			}
 			
@@ -256,6 +288,8 @@ public class MoveMatlab : MonoBehaviour {
 				//Debug.Log("Angulo Alpha3: "+DynamicAlpha3.ToString());
 				if(Mathf.Abs(DynamicAlpha3-Alpha3)<=0.5){
 					isAlpha3Reached=true;
+					initialalpha3=Alpha3;
+					DynamicAlpha3 = initialalpha3;
 				}
 			}
 
@@ -268,23 +302,39 @@ public class MoveMatlab : MonoBehaviour {
 	}
 
 	public void GetSpherePosition(){
-		
+		ResetValues ();
+		ErrorText.text = "";
 		sphere=GameObject.Find ("sphere1");
 		spherePosition = sphere.transform.position;
 		spherePosition.y = 0;
 		Debug.Log (spherePosition.ToString());
 		Texto.text = spherePosition.ToString ();
-		SolveEquations ();
+		SolveEquations ();	
+	}
 
-		isStarted = true;
-		
-		
+	public void ResetValues ()
+	{
+		Debug.Log ("S1: " + S1.ToString () + "S2: " + S2.ToString () + "S3: " + S3.ToString ());
+		isStarted = false;
+		isAlpha1Reached = false;
+		isAlpha2Reached = false;
+		isAlpha3Reached = false;
+
+		isThetha1Reached = false;
+		isThetha2Reached = false;
+		isThetha3Reached = false;
+		angle = 0;
+
+		S1 = 0;
+		S2 = 1;
+		S3 = 0;
+
 	}
 
 	public void SolveEquations(){
 
-		float CoordenadaXCentro =   -3.6333f;//spherePosition.x; //-4.5f;//
-		float CoordenadaYCentro =   5.1618f;//spherePosition.z;//4.1f;//
+		float CoordenadaXCentro = spherePosition.x;  //-3.6333f;// //-4.5f;//
+		float CoordenadaYCentro =spherePosition.z;  //5.1618f;// //4.1f;//
 
 		float UbicacionCentroBase  = (Mathf.Sqrt(3)/3)*LongitudLadoTriangulo;
 		float Xa = CoordenadaXCentro -UbicacionCentroBase* Mathf.Cos(Phi+(Mathf.PI/6));   
@@ -960,44 +1010,87 @@ public class MoveMatlab : MonoBehaviour {
 		Debug.Log ("Ydc[0]: "+Ydc[0].ToString());
 		Debug.Log ("Ydc[1]: "+Ydc[1].ToString());*/
 
-		SolveElbowUpOrDown (Xa, Xd, Yd, Xb, Xdb, Ydb, Xc, Xdc, Ydc);
+		bool isSingularityReached=SolveElbowUpOrDown (Xa, Xd, Yd, Xb, Xdb, Ydb, Xc, Xdc, Ydc);
+		Debug.Log("XC es= "+Xc.ToString());
 
+		if(isSingularityReached==false){
+			CalculateTheta1 (Xd, Yd);
+			CalculatheAlpha1 (Xa, Ya, Xd, Yd);
+			
+			CalculateTheta2 (Xdb, Ydb);
+			CalculateAlpha2 (Xb, Yb, Xdb, Ydb);
+			
+			CalculateTheta3 (Xdc, Ydc);
+			CalculateAlpha3 (Xc, Yc, Xdc, Ydc);
+			isStarted = true;
+		}
 
-
-		CalculateTheta1 (Xd, Yd);
-		CalculatheAlpha1 (Xa, Ya, Xd, Yd);
-
-		CalculateTheta2 (Xdb, Ydb);
-		CalculateAlpha2 (Xb, Yb, Xdb, Ydb);
-
-		CalculateTheta3 (Xdc, Ydc);
-		CalculateAlpha3 (Xc, Yc, Xdc, Ydc);
 
 	}
 
-	void SolveElbowUpOrDown (float Xa, float[] Xd, float[] Yd, float Xb, float[] Xdb, float[] Ydb, float Xc, float[] Xdc, float[] Ydc)
+	private bool SolveElbowUpOrDown (float Xa, float[] Xd, float[] Yd, float Xb, float[] Xdb, float[] Ydb, float Xc, float[] Xdc, float[] Ydc)
 	{
-		if ((!(float.IsNaN (Xd[0]))) && (!(float.IsNaN (Yd[0]))) && (!(float.IsNaN (Xdb[0]))) && (!(float.IsNaN (Ydb[0]))) &&(!(float.IsNaN (Xdc[0]))) && (!(float.IsNaN (Ydc[0]))) && (!(float.IsNaN (Xd[1]))) && (!(float.IsNaN (Yd[1]))) && (!(float.IsNaN (Xdb[1]))) && (!(float.IsNaN (Ydb[1]))) &&(!(float.IsNaN (Xdc[1]))) && (!(float.IsNaN (Ydc[1]))) ) {
-			if (((CoordenadaXMotor1 < Xa) && (S1 == 0))) {
-				S1 = 1;
+		bool isSingularityReached;
+		if ((!(float.IsNaN (Xd [0]))) && (!(float.IsNaN (Yd [0]))) && (!(float.IsNaN (Xdb [0]))) && (!(float.IsNaN (Ydb [0]))) && (!(float.IsNaN (Xdc [0]))) && (!(float.IsNaN (Ydc [0]))) && (!(float.IsNaN (Xd [1]))) && (!(float.IsNaN (Yd [1]))) && (!(float.IsNaN (Xdb [1]))) && (!(float.IsNaN (Ydb [1]))) && (!(float.IsNaN (Xdc [1]))) && (!(float.IsNaN (Ydc [1])))) {
+
+			if((CoordenadaXMotor1 > Xa) && (S1 == 0)){
+				S1=0;
 			}
+
+			else if (((CoordenadaXMotor1 < Xa) && (S1 == 0))) {
+				S1 = 1;
+			} 
+
+			else if((CoordenadaXMotor1 > Xa) && (S1 == 1)){
+				S1=1;
+			}
+
 			else if (((CoordenadaXMotor1 < Xa) && (S1 == 1))) {
 				S1 = 0;
 			}
-			if (((CoordenadaXMotor2 < Xb) && (S2 == 1))) {
-				S2 = 0;
+
+
+
+			if((CoordenadaXMotor2 > Xb) && (S2 == 0)){
+				S2=0;
 			}
+			
 			else if (((CoordenadaXMotor2 < Xb) && (S2 == 0))) {
 				S2 = 1;
+			} 
+			
+			else if((CoordenadaXMotor2 > Xb) && (S2 == 1)){
+				S2=1;
 			}
-			if (((CoordenadaXMotor3 < Xc) && (S3 == 0))) {
+			
+			else if (((CoordenadaXMotor2 < Xb) && (S2 == 1))) {
+				S2 = 0;
+			}
+
+
+			if((CoordenadaXMotor3 > Xc) && (S3 == 0)){
+				S3=0;
+			}
+			
+			else if (((CoordenadaXMotor3 < Xc) && (S3 == 0))) {
 				S3 = 1;
+			} 
+			
+			else if((CoordenadaXMotor3 > Xc) && (S3 == 1)){
+				S3=1;
 			}
+			
 			else if (((CoordenadaXMotor3 < Xc) && (S3 == 1))) {
 				S3 = 0;
 			}
 
-			Debug.Log("S1: "+S1.ToString()+"S2: "+S2.ToString()+"S3: "+S3.ToString());
+
+
+			Debug.Log ("S1: " + S1.ToString () + "S2: " + S2.ToString () + "S3: " + S3.ToString ());
+			return isSingularityReached=false;
+		} else {
+			ErrorText.text="Ha alcanzado una singularidad. Por favor coloque otro punto.";
+			return isSingularityReached=true;
 		}
 	}
 
@@ -1009,9 +1102,8 @@ public class MoveMatlab : MonoBehaviour {
 			if (Yd [S1] < CoordenadaYMotor1) {
 				Thetha1 = (2 * Mathf.PI - Mathf.Acos ((Xd [S1] - CoordenadaXMotor1) / LongitudEslabon1)) * 180 / (Mathf.PI);
 			}
-		Debug.Log ("Thetha1= " + Thetha1.ToString ());
-
-
+		//Debug.Log ("Thetha1= " + Thetha1.ToString ());
+		Theta1Text.text = Thetha1.ToString ();
 	}
 
 	private void CalculatheAlpha1 (float Xa, float Ya, float[] Xd, float[] Yd){
@@ -1022,7 +1114,8 @@ public class MoveMatlab : MonoBehaviour {
 			if (Ya < Yd [S1]) {
 				Alpha1 = (2 * Mathf.PI - Mathf.Acos ((Xa - Xd [S1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 			}
-		Debug.Log ("Alpha1= " + Alpha1.ToString ());
+		//Debug.Log ("Alpha1= " + Alpha1.ToString ());
+		Alpha1Text.text = Alpha1.ToString ();
 	}
 
 	void CalculateTheta2 (float[] Xdb, float[] Ydb){
@@ -1033,7 +1126,8 @@ public class MoveMatlab : MonoBehaviour {
 			if (Ydb [S2] < CoordenadaYMotor2) {
 				Thetha2 = (2 * Mathf.PI - Mathf.Acos ((Xdb [S2] - CoordenadaXMotor2) / LongitudEslabon1))*180/(Mathf.PI);
 			}
-		Debug.Log ("Thetha2= " + Thetha2.ToString ());
+		//Debug.Log ("Thetha2= " + Thetha2.ToString ());
+		Theta2Text.text = Thetha2.ToString ();
 	}
 
 	void CalculateAlpha2 (float Xb, float Yb, float[] Xdb, float[] Ydb){	//// YDb[1] para que quede codo abajo como en el ensamble de solid; al contrario de como viene por defecto matlab
@@ -1044,7 +1138,8 @@ public class MoveMatlab : MonoBehaviour {
 			if (Yb < Ydb [S2]) {
 				Alpha2 = (2 * Mathf.PI - Mathf.Acos ((Xb - Xdb [S2]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 			}
-		Debug.Log ("Alpha2= " + Alpha2.ToString ());
+		//Debug.Log ("Alpha2= " + Alpha2.ToString ());
+		Alpha2Text.text = Alpha2.ToString ();
 	}
 
 	void CalculateTheta3 (float[] Xdc, float[] Ydc)
@@ -1056,7 +1151,8 @@ public class MoveMatlab : MonoBehaviour {
 			if (Ydc [S3] < CoordenadaYMotor3) {
 				Thetha3 = (2 * Mathf.PI - Mathf.Acos ((Xdc [S3] - CoordenadaXMotor3) / LongitudEslabon1)) * 180 / (Mathf.PI);
 			}
-		Debug.Log ("Thetha3= " + Thetha3.ToString ());
+		//Debug.Log ("Thetha3= " + Thetha3.ToString ());
+		Theta3Text.text = Thetha3.ToString ();
 	}
 
 	void CalculateAlpha3 (float Xc, float Yc, float[] Xdc, float[] Ydc)
@@ -1068,6 +1164,7 @@ public class MoveMatlab : MonoBehaviour {
 			if (Yc < Ydc [S3]) {
 				Alpha3 = (2 * Mathf.PI - Mathf.Acos ((Xc - Xdc [S3]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 			}
-		Debug.Log ("Alpha3= " + Alpha3.ToString ());
+		//Debug.Log ("Alpha3= " + Alpha3.ToString ());
+		Alpha3Text.text = Alpha3.ToString ();
 	}
 }
