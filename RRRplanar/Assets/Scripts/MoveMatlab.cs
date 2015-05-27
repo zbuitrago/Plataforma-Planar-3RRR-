@@ -84,7 +84,7 @@ public class MoveMatlab : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		S1 = 0;
-		S2 = 0;
+		S2 = 1;
 		S3 = 0;
 
 		DynamicTheta1 = initialtheta1;
@@ -283,8 +283,8 @@ public class MoveMatlab : MonoBehaviour {
 
 	public void SolveEquations(){
 
-		float CoordenadaXCentro =   -3.7000f;//spherePosition.x; //-4.5f;//
-		float CoordenadaYCentro =   5.0735f;//spherePosition.z;//4.1f;//
+		float CoordenadaXCentro =   -3.6333f;//spherePosition.x; //-4.5f;//
+		float CoordenadaYCentro =   5.1618f;//spherePosition.z;//4.1f;//
 
 		float UbicacionCentroBase  = (Mathf.Sqrt(3)/3)*LongitudLadoTriangulo;
 		float Xa = CoordenadaXCentro -UbicacionCentroBase* Mathf.Cos(Phi+(Mathf.PI/6));   
@@ -978,23 +978,22 @@ public class MoveMatlab : MonoBehaviour {
 	void SolveElbowUpOrDown (float Xa, float[] Xd, float[] Yd, float Xb, float[] Xdb, float[] Ydb, float Xc, float[] Xdc, float[] Ydc)
 	{
 		if ((!(float.IsNaN (Xd[0]))) && (!(float.IsNaN (Yd[0]))) && (!(float.IsNaN (Xdb[0]))) && (!(float.IsNaN (Ydb[0]))) &&(!(float.IsNaN (Xdc[0]))) && (!(float.IsNaN (Ydc[0]))) && (!(float.IsNaN (Xd[1]))) && (!(float.IsNaN (Yd[1]))) && (!(float.IsNaN (Xdb[1]))) && (!(float.IsNaN (Ydb[1]))) &&(!(float.IsNaN (Xdc[1]))) && (!(float.IsNaN (Ydc[1]))) ) {
-			Debug.Log("Entro a reales");
 			if (((CoordenadaXMotor1 < Xa) && (S1 == 0))) {
 				S1 = 1;
 			}
-			if ( ((CoordenadaXMotor1 < Xa) && (S1 == 1))) {
+			else if (((CoordenadaXMotor1 < Xa) && (S1 == 1))) {
 				S1 = 0;
-			}
-			if ( ((CoordenadaXMotor2 < Xb) && (S2 == 0))) {
-				S2 = 1;
 			}
 			if (((CoordenadaXMotor2 < Xb) && (S2 == 1))) {
 				S2 = 0;
 			}
+			else if (((CoordenadaXMotor2 < Xb) && (S2 == 0))) {
+				S2 = 1;
+			}
 			if (((CoordenadaXMotor3 < Xc) && (S3 == 0))) {
 				S3 = 1;
 			}
-			if ( ((CoordenadaXMotor3 < Xc) && (S3 == 1))) {
+			else if (((CoordenadaXMotor3 < Xc) && (S3 == 1))) {
 				S3 = 0;
 			}
 
