@@ -39,12 +39,17 @@ public class MoveMatlab : MonoBehaviour {
 	private float Thetha3;
 	private float Alpha3;
 
-	private float initialtheta1=32.38f;
-	private float initialalpha1=154.82f;
-	private float initialtheta2=264.51f;//174.51f;
-	private float initialalpha2=350.53f;//260.53f;
-	private float initialtheta3=286.09f;
-	private float initialalpha3=351.32f;//8.68f;
+	private float initialtheta1=38.1746f;
+	private float initialalpha1=144.9228f;
+	private float initialtheta2=249.9161f;//174.51f;
+	private float initialalpha2=153.1809f;//260.53f;
+	private float initialtheta3=290.4967f;
+	private float initialalpha3=21.4825f;//8.68f;
+
+	//Sx Codo Arriba o codo abajo; puede tomar valor de 1 o 0, por defecto empiezan en 0. Igual que matlab.//
+	private int S1;
+	private int S2;
+	private int S3;
 
 	private bool isStarted;
 
@@ -78,6 +83,10 @@ public class MoveMatlab : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		S1 = 0;
+		S2 = 0;
+		S3 = 0;
+
 		DynamicTheta1 = initialtheta1;
 		DynamicAlpha1 = initialalpha1;
 		DynamicTheta2 = initialtheta2;
@@ -274,8 +283,8 @@ public class MoveMatlab : MonoBehaviour {
 
 	public void SolveEquations(){
 
-		float CoordenadaXCentro =spherePosition.x; //-4.5f;//
-		float CoordenadaYCentro = spherePosition.z;//4.1f;//
+		float CoordenadaXCentro =   -3.7000f;//spherePosition.x; //-4.5f;//
+		float CoordenadaYCentro =   5.0735f;//spherePosition.z;//4.1f;//
 
 		float UbicacionCentroBase  = (Mathf.Sqrt(3)/3)*LongitudLadoTriangulo;
 		float Xa = CoordenadaXCentro -UbicacionCentroBase* Mathf.Cos(Phi+(Mathf.PI/6));   
@@ -951,6 +960,9 @@ public class MoveMatlab : MonoBehaviour {
 		Debug.Log ("Ydc[0]: "+Ydc[0].ToString());
 		Debug.Log ("Ydc[1]: "+Ydc[1].ToString());*/
 
+		SolveElbowUpOrDown (Xa, Xd, Yd, Xb, Xdb, Ydb, Xc, Xdc, Ydc);
+
+
 
 		CalculateTheta1 (Xd, Yd);
 		CalculatheAlpha1 (Xa, Ya, Xd, Yd);
@@ -963,70 +975,99 @@ public class MoveMatlab : MonoBehaviour {
 
 	}
 
+	void SolveElbowUpOrDown (float Xa, float[] Xd, float[] Yd, float Xb, float[] Xdb, float[] Ydb, float Xc, float[] Xdc, float[] Ydc)
+	{
+		if ((!(float.IsNaN (Xd[0]))) && (!(float.IsNaN (Yd[0]))) && (!(float.IsNaN (Xdb[0]))) && (!(float.IsNaN (Ydb[0]))) &&(!(float.IsNaN (Xdc[0]))) && (!(float.IsNaN (Ydc[0]))) && (!(float.IsNaN (Xd[1]))) && (!(float.IsNaN (Yd[1]))) && (!(float.IsNaN (Xdb[1]))) && (!(float.IsNaN (Ydb[1]))) &&(!(float.IsNaN (Xdc[1]))) && (!(float.IsNaN (Ydc[1]))) ) {
+			Debug.Log("Entro a reales");
+			if (((CoordenadaXMotor1 < Xa) && (S1 == 0))) {
+				S1 = 1;
+			}
+			if ( ((CoordenadaXMotor1 < Xa) && (S1 == 1))) {
+				S1 = 0;
+			}
+			if ( ((CoordenadaXMotor2 < Xb) && (S2 == 0))) {
+				S2 = 1;
+			}
+			if (((CoordenadaXMotor2 < Xb) && (S2 == 1))) {
+				S2 = 0;
+			}
+			if (((CoordenadaXMotor3 < Xc) && (S3 == 0))) {
+				S3 = 1;
+			}
+			if ( ((CoordenadaXMotor3 < Xc) && (S3 == 1))) {
+				S3 = 0;
+			}
+
+			Debug.Log("S1: "+S1.ToString()+"S2: "+S2.ToString()+"S3: "+S3.ToString());
+		}
+	}
+
 	private void CalculateTheta1 (float[] Xd, float[] Yd){
-		if (Yd [1] >= CoordenadaYMotor1) {
-			Thetha1 = (Mathf.Acos ((Xd [1] - CoordenadaXMotor1) / LongitudEslabon1)) * 180 / (Mathf.PI);
+		if (Yd [S1] >= CoordenadaYMotor1) {
+			Thetha1 = (Mathf.Acos ((Xd [S1] - CoordenadaXMotor1) / LongitudEslabon1)) * 180 / (Mathf.PI);
 		}
 		else
-			if (Yd [1] < CoordenadaYMotor1) {
-				Thetha1 = (2 * Mathf.PI - Mathf.Acos ((Xd [1] - CoordenadaXMotor1) / LongitudEslabon1)) * 180 / (Mathf.PI);
+			if (Yd [S1] < CoordenadaYMotor1) {
+				Thetha1 = (2 * Mathf.PI - Mathf.Acos ((Xd [S1] - CoordenadaXMotor1) / LongitudEslabon1)) * 180 / (Mathf.PI);
 			}
 		Debug.Log ("Thetha1= " + Thetha1.ToString ());
+
+
 	}
 
 	private void CalculatheAlpha1 (float Xa, float Ya, float[] Xd, float[] Yd){
-		if (Ya >= Yd [1]) {
-			Alpha1 = (Mathf.Acos ((Xa - Xd [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+		if (Ya >= Yd [S1]) {
+			Alpha1 = (Mathf.Acos ((Xa - Xd [S1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 		}
 		else
-			if (Ya < Yd [1]) {
-				Alpha1 = (2 * Mathf.PI - Mathf.Acos ((Xa - Xd [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+			if (Ya < Yd [S1]) {
+				Alpha1 = (2 * Mathf.PI - Mathf.Acos ((Xa - Xd [S1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 			}
 		Debug.Log ("Alpha1= " + Alpha1.ToString ());
 	}
 
 	void CalculateTheta2 (float[] Xdb, float[] Ydb){
-		if (Ydb [1] >= CoordenadaYMotor2) {
-			Thetha2 = (Mathf.Acos ((Xdb [1] - CoordenadaXMotor2) / LongitudEslabon1))*180/(Mathf.PI) ;
+		if (Ydb [S2] >= CoordenadaYMotor2) {
+			Thetha2 = (Mathf.Acos ((Xdb [S2] - CoordenadaXMotor2) / LongitudEslabon1))*180/(Mathf.PI) ;
 		}
 		else
-			if (Ydb [1] < CoordenadaYMotor2) {
-				Thetha2 = (2 * Mathf.PI - Mathf.Acos ((Xdb [1] - CoordenadaXMotor2) / LongitudEslabon1))*180/(Mathf.PI);
+			if (Ydb [S2] < CoordenadaYMotor2) {
+				Thetha2 = (2 * Mathf.PI - Mathf.Acos ((Xdb [S2] - CoordenadaXMotor2) / LongitudEslabon1))*180/(Mathf.PI);
 			}
 		Debug.Log ("Thetha2= " + Thetha2.ToString ());
 	}
 
 	void CalculateAlpha2 (float Xb, float Yb, float[] Xdb, float[] Ydb){	//// YDb[1] para que quede codo abajo como en el ensamble de solid; al contrario de como viene por defecto matlab
-		if (Yb >= Ydb [1]) {
-			Alpha2 = (Mathf.Acos ((Xb - Xdb [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+		if (Yb >= Ydb [S2]) {
+			Alpha2 = (Mathf.Acos ((Xb - Xdb [S2]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 		}
 		else
-			if (Yb < Ydb [1]) {
-				Alpha2 = (2 * Mathf.PI - Mathf.Acos ((Xb - Xdb [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+			if (Yb < Ydb [S2]) {
+				Alpha2 = (2 * Mathf.PI - Mathf.Acos ((Xb - Xdb [S2]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 			}
 		Debug.Log ("Alpha2= " + Alpha2.ToString ());
 	}
 
 	void CalculateTheta3 (float[] Xdc, float[] Ydc)
 	{
-		if (Ydc [1] >= CoordenadaYMotor3) {
-			Thetha3 = (Mathf.Acos ((Xdc [1] - CoordenadaXMotor3) / LongitudEslabon1)) * 180 / (Mathf.PI);
+		if (Ydc [S3] >= CoordenadaYMotor3) {
+			Thetha3 = (Mathf.Acos ((Xdc [S3] - CoordenadaXMotor3) / LongitudEslabon1)) * 180 / (Mathf.PI);
 		}
 		else
-			if (Ydc [1] < CoordenadaYMotor3) {
-				Thetha3 = (2 * Mathf.PI - Mathf.Acos ((Xdc [1] - CoordenadaXMotor3) / LongitudEslabon1)) * 180 / (Mathf.PI);
+			if (Ydc [S3] < CoordenadaYMotor3) {
+				Thetha3 = (2 * Mathf.PI - Mathf.Acos ((Xdc [S3] - CoordenadaXMotor3) / LongitudEslabon1)) * 180 / (Mathf.PI);
 			}
 		Debug.Log ("Thetha3= " + Thetha3.ToString ());
 	}
 
 	void CalculateAlpha3 (float Xc, float Yc, float[] Xdc, float[] Ydc)
 	{
-		if (Yc >= Ydc [1]) {
-			Alpha3 = (Mathf.Acos ((Xc - Xdc [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+		if (Yc >= Ydc [S3]) {
+			Alpha3 = (Mathf.Acos ((Xc - Xdc [S3]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 		}
 		else
-			if (Yc < Ydc [1]) {
-				Alpha3 = (2 * Mathf.PI - Mathf.Acos ((Xc - Xdc [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+			if (Yc < Ydc [S3]) {
+				Alpha3 = (2 * Mathf.PI - Mathf.Acos ((Xc - Xdc [S3]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 			}
 		Debug.Log ("Alpha3= " + Alpha3.ToString ());
 	}
