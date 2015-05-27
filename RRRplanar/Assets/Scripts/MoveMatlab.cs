@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class MoveMatlab : MonoBehaviour {
 
-	private float LongitudLadoTriangulo=3.0f;
-	private float Phi = Mathf.PI / 4;
+	private float LongitudLadoTriangulo=1.3856f;//3.0f; Matlab 
+	private float Phi = (63.21f*Mathf.PI)/180; //Mathf.PI / 4;
 	private float LongitudEslabon1=1.15f;	//5.0f; Matlab
 	private float LongitudEslabon2=1.0f;//4.0f; Matlab
 	
@@ -41,12 +41,19 @@ public class MoveMatlab : MonoBehaviour {
 
 	private float initialtheta1=32.38f;
 	private float initialalpha1=154.82f;
-	private float initialtheta2=174.51f;
-	private float initialalpha2=260.53f;
+	private float initialtheta2=264.51f;//174.51f;
+	private float initialalpha2=350.53f;//260.53f;
 	private float initialtheta3=286.09f;
-	private float initialalpha3=8.68f;
+	private float initialalpha3=351.32f;//8.68f;
 
 	private bool isStarted;
+
+	private bool isThetha1Reached;
+	private bool isThetha2Reached;
+	private bool isThetha3Reached;
+	private bool isAlpha1Reached;
+	private bool isAlpha2Reached;
+	private bool isAlpha3Reached;
 
 	private float angle;
 	private float DynamicTheta1;
@@ -62,6 +69,10 @@ public class MoveMatlab : MonoBehaviour {
 
 	public GameObject brazo1;		
 	public GameObject Antebrazo1;
+	public GameObject brazo2;		
+	public GameObject Antebrazo2;
+	public GameObject brazo3;		
+	public GameObject Antebrazo3;
 
 	public Text Texto;
 
@@ -69,7 +80,18 @@ public class MoveMatlab : MonoBehaviour {
 	void Start () {
 		DynamicTheta1 = initialtheta1;
 		DynamicAlpha1 = initialalpha1;
+		DynamicTheta2 = initialtheta2;
+		DynamicAlpha2 = initialalpha2;
+		DynamicTheta3 = initialtheta3;
+		DynamicAlpha3 = initialalpha3;
+
 		isStarted = false;
+		isThetha1Reached = false;
+		isThetha2Reached = false;
+		isThetha3Reached = false;
+		isAlpha2Reached = false;
+		isAlpha2Reached = false;
+		isAlpha3Reached = false;
 
 	}
 	
@@ -78,22 +100,159 @@ public class MoveMatlab : MonoBehaviour {
 		if(isStarted){
 			angle+=10*Time.deltaTime;
 
-			if((DynamicTheta1>=Thetha1) ){
+			/*Thetha1=0;
+			Alpha1=0;
+
+			Thetha2=0;
+			Alpha2=0;
+
+			Thetha3=0;
+			Alpha3=0;*/
+
+			if((DynamicTheta1>=Thetha1)&&(isThetha1Reached==false) ){
 				brazo1.transform.eulerAngles=new Vector3(0,angle,0);
-				float localAngle=brazo1.transform.eulerAngles.y;
-				DynamicTheta1=initialtheta1-localAngle;
-				Debug.Log("Theta1 dinamico: "+DynamicTheta1.ToString());
+				float localThetha1Angle=brazo1.transform.eulerAngles.y;
+				DynamicTheta1=initialtheta1-localThetha1Angle;
+				//Debug.Log("Theta1 dinamico: "+DynamicTheta1.ToString());
+				if(Mathf.Abs(DynamicTheta1-Thetha1)<=0.5){
+					isThetha1Reached=true;
+				}
 			}
 
-			if(DynamicTheta1<Thetha1 ){
+			if((DynamicTheta1<Thetha1) &&(isThetha1Reached==false)){
 				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
 				brazo1.transform.eulerAngles=new Vector3(0,-angle,0);
 				DynamicTheta1=brazo1.transform.eulerAngles.y;
 				DynamicTheta1=((-1*(DynamicTheta1-360))+initialtheta1);
 				//initialtheta1=+y;
 				//y=y/Mathf.PI*180;
-				Debug.Log("Angulo theta1: "+DynamicTheta1.ToString());
+				//Debug.Log("Angulo theta1: "+DynamicTheta1.ToString());
+				if(Mathf.Abs(DynamicTheta1-Thetha1)<=0.5){
+					isThetha1Reached=true;
+				}
 			}
+
+			if((DynamicTheta2>=Thetha2) &&(isThetha2Reached==false)){
+				brazo2.transform.eulerAngles=new Vector3(0,angle,0);
+				float localThetha2Angle=brazo2.transform.eulerAngles.y;
+				DynamicTheta2=initialtheta2-localThetha2Angle;
+				Debug.Log("Theta2 dinamico: "+DynamicTheta2.ToString());
+				if(Mathf.Abs(DynamicTheta2-Thetha2)<=0.5){
+					isThetha2Reached=true;
+				}
+			}
+			
+			if((DynamicTheta2<Thetha2) && (isThetha2Reached==false)){
+				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
+				brazo2.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicTheta2=brazo2.transform.eulerAngles.y;
+				DynamicTheta2=((-1*(DynamicTheta2-360))+initialtheta2);
+				//initialtheta1=+y;
+				//y=y/Mathf.PI*180;
+				Debug.Log("Angulo theta2: "+DynamicTheta2.ToString());
+				if(Mathf.Abs(DynamicTheta2-Thetha2)<=0.5){
+					isThetha2Reached=true;
+				}
+			}
+
+			if((DynamicTheta3>=Thetha3) &&(isThetha3Reached==false)){
+				brazo3.transform.eulerAngles=new Vector3(0,angle,0);
+				float localThetha3Angle=brazo3.transform.eulerAngles.y;
+				DynamicTheta3=initialtheta3-localThetha3Angle;
+				//Debug.Log("Theta3 dinamico: "+DynamicTheta3.ToString());
+				if(Mathf.Abs(DynamicTheta3-Thetha3)<=0.5){
+					isThetha3Reached=true;
+				}
+			}
+			
+			if((DynamicTheta3<Thetha3) && (isThetha3Reached==false)){
+				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
+				brazo3.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicTheta3=brazo3.transform.eulerAngles.y;
+				DynamicTheta3=((-1*(DynamicTheta3-360))+initialtheta3);
+				//initialtheta1=+y;
+				//y=y/Mathf.PI*180;
+				//Debug.Log("Angulo theta3: "+DynamicTheta3.ToString());
+				if(Mathf.Abs(DynamicTheta3-Thetha3)<=0.5){
+					isThetha3Reached=true;
+				}
+			}
+
+
+
+
+			if((DynamicAlpha1>=Alpha1)&&(isAlpha1Reached==false) ){
+				Antebrazo1.transform.eulerAngles=new Vector3(0,angle,0);
+				float localAlpha1Angle=Antebrazo1.transform.eulerAngles.y;
+				DynamicAlpha1=initialalpha1-localAlpha1Angle;
+				//Debug.Log("Alpha1 dinamico: "+DynamicAlpha1.ToString());
+				if(Mathf.Abs(DynamicAlpha1-Alpha1)<=0.5){
+					isAlpha1Reached=true;
+				}
+			}
+			
+			if((DynamicAlpha1<Alpha1) &&(isAlpha1Reached==false)){
+				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
+				Antebrazo1.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicAlpha1=Antebrazo1.transform.eulerAngles.y;
+				DynamicAlpha1=((-1*(DynamicAlpha1-360))+initialalpha1);
+				//initialtheta1=+y;
+				//y=y/Mathf.PI*180;
+				//Debug.Log("Angulo Alpha1: "+DynamicAlpha1.ToString());
+				if(Mathf.Abs(DynamicAlpha1-Alpha1)<=0.5){
+					isAlpha1Reached=true;
+				}
+			}
+
+			if((DynamicAlpha2>=Alpha2)&&(isAlpha2Reached==false) ){
+				Antebrazo2.transform.eulerAngles=new Vector3(0,angle,0);
+				float localAlpha2Angle=Antebrazo2.transform.eulerAngles.y;
+				DynamicAlpha2=initialalpha2-localAlpha2Angle;
+				//Debug.Log("Alpha2 dinamico: "+DynamicAlpha2.ToString());
+				if(Mathf.Abs(DynamicAlpha2-Alpha2)<=0.5){
+					isAlpha2Reached=true;
+				}
+			}
+			
+			if((DynamicAlpha2<Alpha2) &&(isAlpha1Reached==false)){
+				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
+				Antebrazo2.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicAlpha2=Antebrazo2.transform.eulerAngles.y;
+				DynamicAlpha2=((-1*(DynamicAlpha2-360))+initialalpha2);
+				//initialtheta1=+y;
+				//y=y/Mathf.PI*180;
+				//Debug.Log("Angulo Alpha2: "+DynamicAlpha2.ToString());
+				if(Mathf.Abs(DynamicAlpha2-Alpha2)<=0.5){
+					isAlpha2Reached=true;
+				}
+			}
+
+			if((DynamicAlpha3>=Alpha3)&&(isAlpha3Reached==false) ){
+				Antebrazo3.transform.eulerAngles=new Vector3(0,angle,0);
+				float localAlpha3Angle=Antebrazo3.transform.eulerAngles.y;
+				DynamicAlpha3=initialalpha3-localAlpha3Angle;
+				//Debug.Log("Alpha3 dinamico: "+DynamicAlpha3.ToString());
+				if(Mathf.Abs(DynamicAlpha3-Alpha3)<=0.5){
+					isAlpha3Reached=true;
+				}
+			}
+			
+			if((DynamicAlpha3<Alpha3) &&(isAlpha3Reached==false)){
+				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
+				Antebrazo3.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicAlpha3=Antebrazo3.transform.eulerAngles.y;
+				DynamicAlpha3=((-1*(DynamicAlpha3-360))+initialalpha3);
+				//initialtheta1=+y;
+				//y=y/Mathf.PI*180;
+				//Debug.Log("Angulo Alpha3: "+DynamicAlpha3.ToString());
+				if(Mathf.Abs(DynamicAlpha3-Alpha3)<=0.5){
+					isAlpha3Reached=true;
+				}
+			}
+
+
+
+
 
 
 		}
@@ -104,6 +263,7 @@ public class MoveMatlab : MonoBehaviour {
 		sphere=GameObject.Find ("sphere1");
 		spherePosition = sphere.transform.position;
 		spherePosition.y = 0;
+		Debug.Log (spherePosition.ToString());
 		Texto.text = spherePosition.ToString ();
 		SolveEquations ();
 
@@ -114,8 +274,8 @@ public class MoveMatlab : MonoBehaviour {
 
 	public void SolveEquations(){
 
-		float CoordenadaXCentro=spherePosition.x;
-		float CoordenadaYCentro=spherePosition.z;
+		float CoordenadaXCentro =spherePosition.x; //-4.5f;//
+		float CoordenadaYCentro = spherePosition.z;//4.1f;//
 
 		float UbicacionCentroBase  = (Mathf.Sqrt(3)/3)*LongitudLadoTriangulo;
 		float Xa = CoordenadaXCentro -UbicacionCentroBase* Mathf.Cos(Phi+(Mathf.PI/6));   
@@ -826,23 +986,23 @@ public class MoveMatlab : MonoBehaviour {
 	}
 
 	void CalculateTheta2 (float[] Xdb, float[] Ydb){
-		if (Ydb [0] >= CoordenadaYMotor2) {
-			Thetha2 = (Mathf.Acos ((Xdb [0] - CoordenadaXMotor2) / LongitudEslabon1))*180/(Mathf.PI) ;
+		if (Ydb [1] >= CoordenadaYMotor2) {
+			Thetha2 = (Mathf.Acos ((Xdb [1] - CoordenadaXMotor2) / LongitudEslabon1))*180/(Mathf.PI) ;
 		}
 		else
-			if (Ydb [0] < CoordenadaYMotor2) {
-				Thetha2 = (2 * Mathf.PI - Mathf.Acos ((Xdb [0] - CoordenadaXMotor2) / LongitudEslabon1))*180/(Mathf.PI);
+			if (Ydb [1] < CoordenadaYMotor2) {
+				Thetha2 = (2 * Mathf.PI - Mathf.Acos ((Xdb [1] - CoordenadaXMotor2) / LongitudEslabon1))*180/(Mathf.PI);
 			}
 		Debug.Log ("Thetha2= " + Thetha2.ToString ());
 	}
 
-	void CalculateAlpha2 (float Xb, float Yb, float[] Xdb, float[] Ydb){
-		if (Yb >= Ydb [0]) {
-			Alpha2 = (Mathf.Acos ((Xb - Xdb [0]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+	void CalculateAlpha2 (float Xb, float Yb, float[] Xdb, float[] Ydb){	//// YDb[1] para que quede codo abajo como en el ensamble de solid; al contrario de como viene por defecto matlab
+		if (Yb >= Ydb [1]) {
+			Alpha2 = (Mathf.Acos ((Xb - Xdb [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 		}
 		else
-			if (Yb < Ydb [0]) {
-				Alpha2 = (2 * Mathf.PI - Mathf.Acos ((Xb - Xdb [0]) / LongitudEslabon2)) * 180 / (Mathf.PI);
+			if (Yb < Ydb [1]) {
+				Alpha2 = (2 * Mathf.PI - Mathf.Acos ((Xb - Xdb [1]) / LongitudEslabon2)) * 180 / (Mathf.PI);
 			}
 		Debug.Log ("Alpha2= " + Alpha2.ToString ());
 	}
