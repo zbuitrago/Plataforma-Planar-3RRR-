@@ -16,7 +16,7 @@ public class Rotation : MonoBehaviour {
 		//rigidbody.velocity = movement * 10;
 		//rigidbody.rotation = Quaternion.Euler (0.0f,rigidbody.velocity.x,0.0f);
 		//transform.RotateAround (new Vector3 (-4.63f, 0 - 0f, 0.0f), new Vector3 (0.0f, 1.0f, 0.0f), 5.0f * Time.deltaTime);
-		transform.Rotate (new Vector3 (0, 30, 0) * Time.deltaTime);
+		transform.Rotate (new Vector3 (0, 0, 30) * Time.deltaTime);
 
 	}
 }

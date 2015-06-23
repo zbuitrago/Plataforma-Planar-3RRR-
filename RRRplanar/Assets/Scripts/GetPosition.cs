@@ -16,6 +16,7 @@ public class GetPosition : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+	// recordar que la base tiene un box coellider Phisycs
 	void Update () {
 		if (Input.GetMouseButtonDown (0) == true && Input.touchCount<2) {
 			sphereCounter=sphereCounter+1;
@@ -23,15 +24,21 @@ public class GetPosition : MonoBehaviour {
 			setPointToTextField(point);
 			CreateSphere(point);
 		}
+
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+					Application.Quit();
+		}
 	}
 	
 	private Vector3 CastRayToWorld(){
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition); // Objeto rayo
 		RaycastHit hit;
 		Vector3 worldPos=Vector3.zero;
-		if (Physics.Raycast (ray, out hit, 1000f)) {
-			worldPos = hit.point;
+		if (Physics.Raycast (ray, out hit, 1000f)) { 
+			worldPos = hit.point; // tomo posicion de donde pego rayo
+
 		} 
+
 		return worldPos;
 	}
 
@@ -50,7 +57,7 @@ public class GetPosition : MonoBehaviour {
 	}
 
 	private void SphereAppeareance(GameObject sphere){
-		sphere.transform.localScale = new Vector3 (0.1f,0.1f,0.1f);
+		sphere.transform.localScale = new Vector3 (0.06f,0.06f,0.06f);
 		sphere.renderer.material.mainTexture = sphereTexture;
 	}
 
@@ -60,7 +67,7 @@ public class GetPosition : MonoBehaviour {
 
 	public void ClearSphereCounter(){
 		for(int x=1; x<=sphereCounter; x++){
-			GameObject deletedSphere=GameObject.Find ("sphere"+x.ToString());
+			GameObject deletedSphere=GameObject.Find ("sphere"+x.ToString());// encuentra la espera y le va asignando un numero
 			Destroy(deletedSphere);
 		}
 		sphereCounter = 0;
