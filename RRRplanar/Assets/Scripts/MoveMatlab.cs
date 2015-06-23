@@ -21,14 +21,14 @@ public class MoveMatlab : MonoBehaviour {
 	private float CoordenadaXMotor3 = -6.6f;
 	private float CoordenadaYMotor3 = 2.1f;	*/
 
-	private float CoordenadaXMotor1 = -0.008756639f;
-	private float CoordenadaYMotor1 = -0.07333135f;
+	private float CoordenadaXMotor1 = -0.3107784f;
+	private float CoordenadaYMotor1 = -0.9029152f;
 	
-	private float CoordenadaXMotor2 = 0.567026f;
-	private float CoordenadaYMotor2 = 0.3671326f;
+	private float CoordenadaXMotor2 = 0.2318204f;
+	private float CoordenadaYMotor2 = -0.07912999f;
 	
-	private float CoordenadaXMotor3 = -0.6189469f;
-	private float CoordenadaYMotor3 = 0.2727953f;
+	private float CoordenadaXMotor3 = -0.9126391f;
+	private float CoordenadaYMotor3 = -0.08162373f;
 
 	
 	private float Thetha1;
@@ -126,8 +126,8 @@ public class MoveMatlab : MonoBehaviour {
 
 			Thetha3=0;
 			Alpha3=0;*/
-			brazo1.transform.Rotate (new Vector3 (0, 0, 30) * Time.deltaTime);//.transform.eulerAngles=new Vector3(0,0,angle);
-			/*if((DynamicTheta1>=Thetha1)&&(isThetha1Reached==false) ){
+			//brazo1.transform.Rotate (new Vector3 (0, 0, 30) * Time.deltaTime);//.transform.eulerAngles=new Vector3(0,0,angle);
+			if((DynamicTheta1>=Thetha1)&&(isThetha1Reached==false) ){
 				brazo1.transform.eulerAngles=new Vector3(0,0,angle);
 				float localThetha1Angle=brazo1.transform.eulerAngles.z;
 				DynamicTheta1=initialtheta1-localThetha1Angle;
@@ -293,7 +293,7 @@ public class MoveMatlab : MonoBehaviour {
 					DynamicAlpha3 = initialalpha3;
 				}
 			}
-*/
+
 
 
 
