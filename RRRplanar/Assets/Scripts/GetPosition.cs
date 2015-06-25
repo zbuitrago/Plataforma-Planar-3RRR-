@@ -9,6 +9,7 @@ public class GetPosition : MonoBehaviour {
 	public Texture sphereTexture;
 	private GameObject sphere;
 	public int sphereCounter;
+	public Text errorclear;
 
 	// Use this for initialization
 	void Start () {
@@ -51,13 +52,13 @@ public class GetPosition : MonoBehaviour {
 		if(point!=Vector3.zero){
 			sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 			sphere.name="sphere"+sphereCounter.ToString();
-			sphere.transform.position = new Vector3 (point.x,0.2f,point.z);
+			sphere.transform.position = new Vector3 (point.x,2.6f,point.z);
 			SphereAppeareance(sphere);
 		}
 	}
 
 	private void SphereAppeareance(GameObject sphere){
-		sphere.transform.localScale = new Vector3 (0.06f,0.06f,0.06f);
+		sphere.transform.localScale = new Vector3 (0.2f,0.2f,0.2f);
 		sphere.renderer.material.mainTexture = sphereTexture;
 	}
 
@@ -69,7 +70,8 @@ public class GetPosition : MonoBehaviour {
 		for(int x=1; x<=sphereCounter; x++){
 			GameObject deletedSphere=GameObject.Find ("sphere"+x.ToString());// encuentra la espera y le va asignando un numero
 			Destroy(deletedSphere);
-		}
+					}
 		sphereCounter = 0;
+		errorclear.text = "";
 	}
 }

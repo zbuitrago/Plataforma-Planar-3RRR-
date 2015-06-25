@@ -1,0 +1,136 @@
+fileFormatVersion: 2
+guid: dac62252195b8c141a9f71f41540de39
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Camera
+    100002: Ensamble Cero - Base Fija-2
+    100004: Ensamble Cero - basemovil-1
+    100006: Ensamble Cero - braso1-1
+    100008: Ensamble Cero - braso1-2
+    100010: Ensamble Cero - braso1-3
+    100012: Ensamble Cero - braso2-1
+    100014: Ensamble Cero - braso2-2
+    100016: Ensamble Cero - braso2-3
+    100018: Ensamble Cero - Motor-1 AX-12A-04-3
+    100020: Ensamble Cero - Motor-1 Motor Base-1
+    100022: Ensamble Cero - Motor-3 AX-12A-04-3
+    100024: Ensamble Cero - Motor-3 Motor Base-1
+    100026: Ensamble Cero - Motor-4 AX-12A-04-3
+    100028: Ensamble Cero - Motor-4 Motor Base-1
+    100030: //RootNode
+    100032: Lamp
+    400000: Camera
+    400002: Ensamble Cero - Base Fija-2
+    400004: Ensamble Cero - basemovil-1
+    400006: Ensamble Cero - braso1-1
+    400008: Ensamble Cero - braso1-2
+    400010: Ensamble Cero - braso1-3
+    400012: Ensamble Cero - braso2-1
+    400014: Ensamble Cero - braso2-2
+    400016: Ensamble Cero - braso2-3
+    400018: Ensamble Cero - Motor-1 AX-12A-04-3
+    400020: Ensamble Cero - Motor-1 Motor Base-1
+    400022: Ensamble Cero - Motor-3 AX-12A-04-3
+    400024: Ensamble Cero - Motor-3 Motor Base-1
+    400026: Ensamble Cero - Motor-4 AX-12A-04-3
+    400028: Ensamble Cero - Motor-4 Motor Base-1
+    400030: //RootNode
+    400032: Lamp
+    2300000: Ensamble Cero - Base Fija-2
+    2300002: Ensamble Cero - basemovil-1
+    2300004: Ensamble Cero - braso1-1
+    2300006: Ensamble Cero - braso1-2
+    2300008: Ensamble Cero - braso1-3
+    2300010: Ensamble Cero - braso2-1
+    2300012: Ensamble Cero - braso2-2
+    2300014: Ensamble Cero - braso2-3
+    2300016: Ensamble Cero - Motor-1 AX-12A-04-3
+    2300018: Ensamble Cero - Motor-1 Motor Base-1
+    2300020: Ensamble Cero - Motor-3 AX-12A-04-3
+    2300022: Ensamble Cero - Motor-3 Motor Base-1
+    2300024: Ensamble Cero - Motor-4 AX-12A-04-3
+    2300026: Ensamble Cero - Motor-4 Motor Base-1
+    3300000: Ensamble Cero - Base Fija-2
+    3300002: Ensamble Cero - basemovil-1
+    3300004: Ensamble Cero - braso1-1
+    3300006: Ensamble Cero - braso1-2
+    3300008: Ensamble Cero - braso1-3
+    3300010: Ensamble Cero - braso2-1
+    3300012: Ensamble Cero - braso2-2
+    3300014: Ensamble Cero - braso2-3
+    3300016: Ensamble Cero - Motor-1 AX-12A-04-3
+    3300018: Ensamble Cero - Motor-1 Motor Base-1
+    3300020: Ensamble Cero - Motor-3 AX-12A-04-3
+    3300022: Ensamble Cero - Motor-3 Motor Base-1
+    3300024: Ensamble Cero - Motor-4 AX-12A-04-3
+    3300026: Ensamble Cero - Motor-4 Motor Base-1
+    4300000: Ensamble Cero - Motor-4 Motor Base-1
+    4300002: Ensamble Cero - Motor-4 AX-12A-04-3
+    4300004: Ensamble Cero - Motor-3 Motor Base-1
+    4300006: Ensamble Cero - Motor-3 AX-12A-04-3
+    4300008: Ensamble Cero - Motor-1 Motor Base-1
+    4300010: Ensamble Cero - Motor-1 AX-12A-04-3
+    4300012: Ensamble Cero - braso2-3
+    4300014: Ensamble Cero - braso2-2
+    4300016: Ensamble Cero - braso2-1
+    4300018: Ensamble Cero - braso1-3
+    4300020: Ensamble Cero - braso1-2
+    4300022: Ensamble Cero - braso1-1
+    4300024: Ensamble Cero - basemovil-1
+    4300026: Ensamble Cero - Base Fija-2
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

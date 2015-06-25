@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class MoveMatlab : MonoBehaviour {
 
 	public Transmision transmisor;
-	private float LongitudLadoTriangulo=1.3856f;//3.0f; Matlab 
-	private float Phi = (63.21f*Mathf.PI)/180; //Mathf.PI / 4;
+	private float LongitudLadoTriangulo=1.3856f;//1.20490491f;//1.3856f;//3.0f; Matlab 
+	private float Phi = (-92.2223f*Mathf.PI)/180f; //Mathf.PI / 4; 63.21
 	private float LongitudEslabon1=1.15f;	//5.0f; Matlab
-	private float LongitudEslabon2=1.0f;//4.0f; Matlab
+	private float LongitudEslabon2=1f;//0.869565217f;//4.0f; Matlab
 	
 
 	/////MATLAB///////
@@ -21,14 +21,14 @@ public class MoveMatlab : MonoBehaviour {
 	private float CoordenadaXMotor3 = -6.6f;
 	private float CoordenadaYMotor3 = 2.1f;	*/
 
-	private float CoordenadaXMotor1 = -0.3107784f;
-	private float CoordenadaYMotor1 = -0.9029152f;
+	private float CoordenadaXMotor1 =-0.3743629f;//-1.5f;//-0.3743629f;//Brazo que sirve -3.492431f;//1.42641f;
+	private float CoordenadaYMotor1 = 5.198504f;//-8.4f;//5.198504f;//Brazo que sirve 2.388299f;//3.632579f;
 	
-	private float CoordenadaXMotor2 = 0.2318204f;
-	private float CoordenadaYMotor2 = -0.07912999f;
+	private float CoordenadaXMotor2 =-2.370654f;//6.9f; //-2.370654f;//Brazo que sirve -1.4949f;//-0.5698814f;
+	private float CoordenadaYMotor2 =2.038576f;//-1.2f;//2.038576f;//Brazo que sirve 5.539518f; //0.472651f;
 	
-	private float CoordenadaXMotor3 = -0.9126391f;
-	private float CoordenadaYMotor3 = -0.08162373f;
+	private float CoordenadaXMotor3 =1.647024f; //-6.6f;//1.647024f;//Brazo que sirve -5.498871f;//3.447796f;
+	private float CoordenadaYMotor3 =2.046705f;//2.1f;//2.046705f;//Brazo que sirve 5.544016f;//0.4807794f;
 
 	
 	private float Thetha1;
@@ -93,8 +93,31 @@ public class MoveMatlab : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		//Distancia M0tor 1 a tMotor 2
+		Vector2 p1bien = new Vector2(-3.492431f, 2.388299f);
+		Vector2 p2bien = new Vector2(-1.4949f, 5.539518f);
+		Vector2 p3bien = new Vector2 (-5.498871f,5.544016f);
+		Debug.Log ("Distancia de p1 a p2 Brazo que sirve: "+ Vector2.Distance(p1bien,p2bien));
+		Debug.Log ("Distancia de p2 a p3 Brazo que sirve: "+ Vector2.Distance(p2bien,p3bien));
+		Debug.Log ("Distancia de p1 a p3 Brazo que sirve: "+ Vector2.Distance(p1bien,p3bien));
+
+		Vector2 p1mal = new Vector2(-0.3743629f, 5.198504f);
+		Vector2 p2mal = new Vector2(-2.370654f, 2.038576f);
+		Vector2 p3mal = new Vector2 (1.647024f,2.046705f);
+		Debug.Log ("Distancia de p21 a p22 Brazo que no sirve: "+ Vector2.Distance(p1mal,p2mal));
+		Debug.Log ("Distancia de p2 a p3 Brazo que no sirve: "+ Vector2.Distance(p2mal,p3mal));
+		Debug.Log ("Distancia de p1 a p3 Brazo que no sirve: "+ Vector2.Distance(p1mal,p3mal));
+
+
+		//Distancia M0tor 2 a tMotor 3
+
+
+
+
+
 		S1 = 0;
-		S2 = 1;
+		S2 = 0;
 		S3 = 0;
 
 		DynamicTheta1 = initialtheta1;
@@ -128,8 +151,8 @@ public class MoveMatlab : MonoBehaviour {
 			Alpha3=0;*/
 			//brazo1.transform.Rotate (new Vector3 (0, 0, 30) * Time.deltaTime);//.transform.eulerAngles=new Vector3(0,0,angle);
 			if((DynamicTheta1>=Thetha1)&&(isThetha1Reached==false) ){
-				brazo1.transform.eulerAngles=new Vector3(0,0,angle);
-				float localThetha1Angle=brazo1.transform.eulerAngles.z;
+				brazo1.transform.eulerAngles=new Vector3(0,-angle,0);
+				float localThetha1Angle=brazo1.transform.eulerAngles.y;
 				DynamicTheta1=initialtheta1-localThetha1Angle;
 				//Debug.Log("Theta1 dinamico: "+DynamicTheta1.ToString());
 				if(Mathf.Abs(DynamicTheta1-Thetha1)<=0.5){
@@ -142,8 +165,8 @@ public class MoveMatlab : MonoBehaviour {
 
 			if((DynamicTheta1<Thetha1) &&(isThetha1Reached==false)){
 				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				brazo1.transform.eulerAngles=new Vector3(0,0,-angle);
-				DynamicTheta1=brazo1.transform.eulerAngles.z	;
+				brazo1.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicTheta1=brazo1.transform.eulerAngles.y;
 				DynamicTheta1=((-1*(DynamicTheta1-360))+initialtheta1);
 				//initialtheta1=+y;
 				//y=y/Mathf.PI*180;
@@ -157,8 +180,8 @@ public class MoveMatlab : MonoBehaviour {
 			}
 
 			if((DynamicTheta2>=Thetha2) &&(isThetha2Reached==false)){
-				brazo2.transform.eulerAngles=new Vector3(0,0,angle);
-				float localThetha2Angle=brazo2.transform.eulerAngles.z;
+				brazo2.transform.eulerAngles=new Vector3(0,angle,0);
+				float localThetha2Angle=brazo2.transform.eulerAngles.y;
 				DynamicTheta2=initialtheta2-localThetha2Angle;
 				//Debug.Log("Theta2 dinamico: "+DynamicTheta2.ToString());
 				if(Mathf.Abs(DynamicTheta2-Thetha2)<=0.5){
@@ -170,8 +193,8 @@ public class MoveMatlab : MonoBehaviour {
 			
 			if((DynamicTheta2<Thetha2) && (isThetha2Reached==false)){
 				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				brazo2.transform.eulerAngles=new Vector3(0,0,-angle);
-				DynamicTheta2=brazo2.transform.eulerAngles.z;
+				brazo2.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicTheta2=brazo2.transform.eulerAngles.y;
 				DynamicTheta2=((-1*(DynamicTheta2-360))+initialtheta2);
 				//initialtheta1=+y;
 				//y=y/Mathf.PI*180;
@@ -184,8 +207,8 @@ public class MoveMatlab : MonoBehaviour {
 			}
 
 			if((DynamicTheta3>=Thetha3) &&(isThetha3Reached==false)){
-				brazo3.transform.eulerAngles=new Vector3(0,0,angle);
-				float localThetha3Angle=brazo3.transform.eulerAngles.z;
+				brazo3.transform.eulerAngles=new Vector3(0,angle,0);
+				float localThetha3Angle=brazo3.transform.eulerAngles.y;
 				DynamicTheta3=initialtheta3-localThetha3Angle;
 				//Debug.Log("Theta3 dinamico: "+DynamicTheta3.ToString());
 				if(Mathf.Abs(DynamicTheta3-Thetha3)<=0.5){
@@ -197,8 +220,8 @@ public class MoveMatlab : MonoBehaviour {
 			
 			if((DynamicTheta3<Thetha3) && (isThetha3Reached==false)){
 				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				brazo3.transform.eulerAngles=new Vector3(0,0,-angle);
-				DynamicTheta3=brazo3.transform.eulerAngles.z;
+				brazo3.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicTheta3=brazo3.transform.eulerAngles.y;
 				DynamicTheta3=((-1*(DynamicTheta3-360))+initialtheta3);
 				//initialtheta1=+y;
 				//y=y/Mathf.PI*180;
@@ -214,8 +237,8 @@ public class MoveMatlab : MonoBehaviour {
 
 
 			if((DynamicAlpha1>=Alpha1)&&(isAlpha1Reached==false) ){
-				Antebrazo1.transform.eulerAngles=new Vector3(0,0,angle);
-				float localAlpha1Angle=Antebrazo1.transform.eulerAngles.z;
+				Antebrazo1.transform.eulerAngles=new Vector3(0,angle,0);
+				float localAlpha1Angle=Antebrazo1.transform.eulerAngles.y;
 				DynamicAlpha1=initialalpha1-localAlpha1Angle;
 				//Debug.Log("Alpha1 dinamico: "+DynamicAlpha1.ToString());
 				if(Mathf.Abs(DynamicAlpha1-Alpha1)<=0.5){
@@ -227,8 +250,8 @@ public class MoveMatlab : MonoBehaviour {
 			
 			if((DynamicAlpha1<Alpha1) &&(isAlpha1Reached==false)){
 				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				Antebrazo1.transform.eulerAngles=new Vector3(0,0,-angle);
-				DynamicAlpha1=Antebrazo1.transform.eulerAngles.z;
+				Antebrazo1.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicAlpha1=Antebrazo1.transform.eulerAngles.y;
 				DynamicAlpha1=((-1*(DynamicAlpha1-360))+initialalpha1);
 				//initialtheta1=+y;
 				//y=y/Mathf.PI*180;
@@ -241,8 +264,8 @@ public class MoveMatlab : MonoBehaviour {
 			}
 
 			if((DynamicAlpha2>=Alpha2)&&(isAlpha2Reached==false) ){
-				Antebrazo2.transform.eulerAngles=new Vector3(0,0,angle);
-				float localAlpha2Angle=Antebrazo2.transform.eulerAngles.z;
+				Antebrazo2.transform.eulerAngles=new Vector3(0,angle,0);
+				float localAlpha2Angle=Antebrazo2.transform.eulerAngles.y;
 				DynamicAlpha2=initialalpha2-localAlpha2Angle;
 				//Debug.Log("Alpha2 dinamico: "+DynamicAlpha2.ToString());
 				if(Mathf.Abs(DynamicAlpha2-Alpha2)<=0.5){
@@ -254,8 +277,8 @@ public class MoveMatlab : MonoBehaviour {
 			
 			if((DynamicAlpha2<Alpha2) &&(isAlpha1Reached==false)){
 				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				Antebrazo2.transform.eulerAngles=new Vector3(0,0,-angle);
-				DynamicAlpha2=Antebrazo2.transform.eulerAngles.z;
+				Antebrazo2.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicAlpha2=Antebrazo2.transform.eulerAngles.y;
 				DynamicAlpha2=((-1*(DynamicAlpha2-360))+initialalpha2);
 				//initialtheta1=+y;
 				//y=y/Mathf.PI*180;
@@ -268,8 +291,8 @@ public class MoveMatlab : MonoBehaviour {
 			}
 
 			if((DynamicAlpha3>=Alpha3)&&(isAlpha3Reached==false) ){
-				Antebrazo3.transform.eulerAngles=new Vector3(0,0,angle);
-				float localAlpha3Angle=Antebrazo3.transform.eulerAngles.z;
+				Antebrazo3.transform.eulerAngles=new Vector3(0,angle,0);
+				float localAlpha3Angle=Antebrazo3.transform.eulerAngles.y;
 				DynamicAlpha3=initialalpha3-localAlpha3Angle;
 				//Debug.Log("Alpha3 dinamico: "+DynamicAlpha3.ToString());
 				if(Mathf.Abs(DynamicAlpha3-Alpha3)<=0.5){
@@ -281,8 +304,8 @@ public class MoveMatlab : MonoBehaviour {
 			
 			if((DynamicAlpha3<Alpha3) &&(isAlpha3Reached==false)){
 				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				Antebrazo3.transform.eulerAngles=new Vector3(0,0,-angle);
-				DynamicAlpha3=Antebrazo3.transform.eulerAngles.z;
+				Antebrazo3.transform.eulerAngles=new Vector3(0,-angle,0);
+				DynamicAlpha3=Antebrazo3.transform.eulerAngles.y;
 				DynamicAlpha3=((-1*(DynamicAlpha3-360))+initialalpha3);
 				//initialtheta1=+y;
 				//y=y/Mathf.PI*180;
@@ -308,7 +331,7 @@ public class MoveMatlab : MonoBehaviour {
 		sphere=GameObject.Find ("sphere1");
 		spherePosition = sphere.transform.position;
 		spherePosition.y = 0;
-		Debug.Log ("La posicion es: "+spherePosition.ToString());
+		//Debug.Log ("La posicion es: "+spherePosition.ToString());
 		Texto.text = spherePosition.ToString ();
 		SolveEquations ();	
 	}
@@ -327,19 +350,25 @@ public class MoveMatlab : MonoBehaviour {
 		angle = 0;
 
 		S1 = 0;
-		S2 = 1;
+		S2 = 0;
 		S3 = 0;
 
 	}
 
 	public void SolveEquations(){
 
-		float CoordenadaXCentro = spherePosition.x;  //-3.6333f;// //-4.5f;//
-		float CoordenadaYCentro =spherePosition.z;  //5.1618f;// //4.1f;//
+		float CoordenadaXCentro = spherePosition.x;//-0.6074f;//-0.4923694f;///spherePosition.x;//6.514634f;//;  //-3.6333f;// //-4.5f;// Base fija ensamble bien -3.741648
+		float CoordenadaYCentro =spherePosition.z;//3.3007f;//3.359823f;//spherePosition.z;//-0.8925756f;//  //5.1618f;// //4.1f;// Base fija ensamble bien 0.4682827
+		//Debug.Log ("Xcentro: "+CoordenadaXCentro.ToString());
+		//Debug.Log ("Ycentro: "+CoordenadaYCentro.ToString());
+
 
 		float UbicacionCentroBase  = (Mathf.Sqrt(3)/3)*LongitudLadoTriangulo;
-		float Xa = CoordenadaXCentro -UbicacionCentroBase* Mathf.Cos(Phi+(Mathf.PI/6));   
+		//Debug.Log ("ubicacion centro base: " + UbicacionCentroBase.ToString ());  
+		float Xa = CoordenadaXCentro -UbicacionCentroBase* Mathf.Cos(Phi+(Mathf.PI/6)); 
+		//Debug.Log ("cordenada xa: " + Xa.ToString ());  
 		float Ya = CoordenadaYCentro -UbicacionCentroBase*Mathf.Sin(Phi+(Mathf.PI/6));   
+		//Debug.Log ("coordenada Ya: " + Ya.ToString ());  
 		
 		float[] Xd= new float[2];
 		float[] Yd= new float[2];
@@ -1012,7 +1041,7 @@ public class MoveMatlab : MonoBehaviour {
 		Debug.Log ("Ydc[1]: "+Ydc[1].ToString());*/
 
 		bool isSingularityReached=SolveElbowUpOrDown (Xa, Xd, Yd, Xb, Xdb, Ydb, Xc, Xdc, Ydc);
-		Debug.Log("XC es= "+Xc.ToString());
+		//Debug.Log("XC es= "+Xc.ToString());
 
 		if(isSingularityReached==false){
 			CalculateTheta1 (Xd, Yd);

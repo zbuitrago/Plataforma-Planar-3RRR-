@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<SimMechanicsImportXML version="1.0" xmlns="urn:mathworks:simmechanics:import" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Created by="" on="04/05/15||18:00:44" using="SimMechanics Link Version 4.2" from="SolidWorks 21.2.0"/>
+<ModelUnits mass="kilogram" length="millimeter"/>
+<DataUnits mass="kilogram" length="meter"/>
+<RootAssembly name="Motor" uid="Motor" version="132">
+<AssemblyFile name="Motor.SLDASM" type="SolidWorks Assembly"/>
+<InstanceTree>
+<Instance name="Motor_Base-1" uid="Motor_Base-1" grounded="true" entityUid="Motor_Base*:*Predeterminado">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>-0.11697 0.0543566 0.274141</Translation>
+</Transform>
+</Instance>
+<Instance name="AX-12A-04-3" uid="AX-12A-04-3" entityUid="AX-12A-04*:*Predeterminado">
+<Transform>
+<Rotation>-0.18442 -0.982847 0 0 0 1 -0.982847 0.18442 0</Rotation>
+<Translation>0.00186593 0.0220666 0.0635003</Translation>
+</Transform>
+</Instance>
+</InstanceTree>
+<Constraints>
+<Concentric name="Concéntrica3">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>Motor_Base-1</Uid>
+</InstancePath>
+<Position>0.118836 -0.03649 -0.21064</Position>
+<Axis>-2.90172e-016 -1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>AX-12A-04-3</Uid>
+</InstancePath>
+<Position>0 0 -0.003</Position>
+<Axis>0 0 -1</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Distance name="Distancia2">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>AX-12A-04-3</Uid>
+</InstancePath>
+<Position>0.002783 -0.002783 -0.003</Position>
+<Axis>0 0 -1</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>Motor_Base-1</Uid>
+</InstancePath>
+<Position>0.121847 -0.03629 -0.20763</Position>
+<Axis>2.90172e-016 1 0</Axis>
+</ConstraintGeometry>
+</Distance>
+</Constraints>
+</RootAssembly>
+<Assemblies>
+</Assemblies>
+<Parts>
+<Part name="AX-12A-04" uid="AX-12A-04*:*Predeterminado" version="103">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="AX-12A-04.sldprt" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.0016746</Mass>
+<CenterOfMass>0 0 -0.00242322</CenterOfMass>
+<Inertia>5.42121e-008 5.42121e-008 1.01303e-007 0 0 0</Inertia>
+</MassProperties>
+<GeometryFile name="AX-12A-04_Predeterminado_sldprt.STL" type="STL"/>
+<VisualProperties>
+<Ambient r="0.752941" g="0.752941" b="0.752941" a="1"/>
+<Diffuse r="0.752941" g="0.752941" b="0.752941" a="1"/>
+<Specular r="0.602353" g="0.602353" b="0.602353" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Part>
+<Part name="Motor_Base" uid="Motor_Base*:*Predeterminado" version="107">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="Motor_Base.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.0410957</Mass>
+<CenterOfMass>0.118836 -0.0537454 -0.22376</CenterOfMass>
+<Inertia>1.15e-005 9.92611e-006 6.2963e-006 -1.90262e-007 1.00124e-011 3.20553e-012</Inertia>
+</MassProperties>
+<GeometryFile name="Motor_Base_Predeterminado_sldprt.STL" type="STL"/>
+<VisualProperties>
+<Ambient r="0.792157" g="0.819608" b="0.933333" a="1"/>
+<Diffuse r="0.792157" g="0.819608" b="0.933333" a="1"/>
+<Specular r="0.396078" g="0.409804" b="0.466667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.4</Shininess>
+</VisualProperties>
+</Part>
+</Parts>
+</SimMechanicsImportXML>
