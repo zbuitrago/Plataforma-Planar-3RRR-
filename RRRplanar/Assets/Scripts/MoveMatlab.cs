@@ -54,21 +54,13 @@ public class MoveMatlab : MonoBehaviour {
 
 	private bool isStarted;
 
-	private bool isThetha1Reached;
+	private bool isTheta1BeenOnPositive;
+	private bool isTheta1BeenOnNegative;
 	private bool isThetha2Reached;
 	private bool isThetha3Reached;
 	private bool isAlpha1Reached;
 	private bool isAlpha2Reached;
 	private bool isAlpha3Reached;
-
-	private float angle;
-	private float DynamicTheta1;
-	private float DynamicAlpha1;
-	private float DynamicTheta2;
-	private float DynamicAlpha2;
-	private float DynamicTheta3;
-	private float DynamicAlpha3;
-
 
 	private GameObject sphere;
 	private Vector3 spherePosition;
@@ -95,7 +87,7 @@ public class MoveMatlab : MonoBehaviour {
 	void Start () {
 
 		//Distancia M0tor 1 a tMotor 2
-		Vector2 p1bien = new Vector2(-3.492431f, 2.388299f);
+		/*Vector2 p1bien = new Vector2(-3.492431f, 2.388299f);
 		Vector2 p2bien = new Vector2(-1.4949f, 5.539518f);
 		Vector2 p3bien = new Vector2 (-5.498871f,5.544016f);
 		Debug.Log ("Distancia de p1 a p2 Brazo que sirve: "+ Vector2.Distance(p1bien,p2bien));
@@ -108,7 +100,7 @@ public class MoveMatlab : MonoBehaviour {
 		Debug.Log ("Distancia de p21 a p22 Brazo que no sirve: "+ Vector2.Distance(p1mal,p2mal));
 		Debug.Log ("Distancia de p2 a p3 Brazo que no sirve: "+ Vector2.Distance(p2mal,p3mal));
 		Debug.Log ("Distancia de p1 a p3 Brazo que no sirve: "+ Vector2.Distance(p1mal,p3mal));
-
+*/
 
 		//Distancia M0tor 2 a tMotor 3
 
@@ -120,15 +112,8 @@ public class MoveMatlab : MonoBehaviour {
 		S2 = 0;
 		S3 = 0;
 
-		DynamicTheta1 = initialtheta1;
-		DynamicAlpha1 = initialalpha1;
-		DynamicTheta2 = initialtheta2;
-		DynamicAlpha2 = initialalpha2;
-		DynamicTheta3 = initialtheta3;
-		DynamicAlpha3 = initialalpha3;
-
 		isStarted = false;
-		isThetha1Reached = false;
+		isTheta1BeenOnPositive = false;
 		isThetha2Reached = false;
 		isThetha3Reached = false;
 		isAlpha2Reached = false;
@@ -139,7 +124,36 @@ public class MoveMatlab : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(isStarted){
-			angle+=10*Time.deltaTime;
+
+			if(brazo1.transform.eulerAngles.y==0){
+				brazo1.transform.Rotate(new Vector3(0,-10*Time.deltaTime,0) );
+
+			}
+
+			float resta=(Thetha1-(360-(brazo1.transform.eulerAngles.y)));
+			//isThetha1Reached=false;
+			if((resta<=0.5f)&&(isTheta1BeenOnPositive==false))
+			{
+				isTheta1BeenOnNegative=true;
+				brazo1.transform.Rotate(new Vector3(0,10*Time.deltaTime,0) );
+				Debug.Log("angulo real-: "+(360-(brazo1.transform.eulerAngles.y)).ToString());
+				Debug.Log("La resta esta dando-: "+resta.ToString());
+			}
+
+			if((resta>=0.5f)&&(isTheta1BeenOnNegative==false)){
+				isTheta1BeenOnPositive=true;
+				brazo1.transform.Rotate(new Vector3(0,-10*Time.deltaTime,0) );
+				Debug.Log("angulo real+: "+(360-(brazo1.transform.eulerAngles.y)).ToString());
+				Debug.Log("La resta esta dando+: "+resta.ToString());
+			}
+
+
+
+
+
+
+
+			//angle+=10*Time.deltaTime;
 
 			/*Thetha1=0;
 			Alpha1=0;
@@ -150,7 +164,7 @@ public class MoveMatlab : MonoBehaviour {
 			Thetha3=0;
 			Alpha3=0;*/
 			//brazo1.transform.Rotate (new Vector3 (0, 0, 30) * Time.deltaTime);//.transform.eulerAngles=new Vector3(0,0,angle);
-			if((DynamicTheta1>=Thetha1)&&(isThetha1Reached==false) ){
+			/*if((DynamicTheta1>=Thetha1)&&(isThetha1Reached==false) ){
 				brazo1.transform.eulerAngles=new Vector3(0,-angle,0);
 				float localThetha1Angle=brazo1.transform.eulerAngles.y;
 				DynamicTheta1=initialtheta1-localThetha1Angle;
@@ -317,7 +331,7 @@ public class MoveMatlab : MonoBehaviour {
 				}
 			}
 
-
+*/
 
 
 
@@ -344,10 +358,11 @@ public class MoveMatlab : MonoBehaviour {
 		isAlpha2Reached = false;
 		isAlpha3Reached = false;
 
-		isThetha1Reached = false;
+		isTheta1BeenOnPositive = false;
+		isTheta1BeenOnNegative = false;
 		isThetha2Reached = false;
 		isThetha3Reached = false;
-		angle = 0;
+
 
 		S1 = 0;
 		S2 = 0;
