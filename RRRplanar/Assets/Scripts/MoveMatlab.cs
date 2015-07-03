@@ -21,14 +21,14 @@ public class MoveMatlab : MonoBehaviour {
 	private float CoordenadaXMotor3 = -6.6f;
 	private float CoordenadaYMotor3 = 2.1f;	*/
 
-	private float CoordenadaXMotor1 =-0.3743629f;//-1.5f;//-0.3743629f;//Brazo que sirve -3.492431f;//1.42641f;
-	private float CoordenadaYMotor1 = 5.198504f;//-8.4f;//5.198504f;//Brazo que sirve 2.388299f;//3.632579f;
+	private float CoordenadaXMotor1; //=-0.3743629f;//-1.5f;//-0.3743629f;//Brazo que sirve -3.492431f;//1.42641f;
+	private float CoordenadaYMotor1 ;//= 5.198504f;//-8.4f;//5.198504f;//Brazo que sirve 2.388299f;//3.632579f;
 	
-	private float CoordenadaXMotor2 =-2.370654f;//6.9f; //-2.370654f;//Brazo que sirve -1.4949f;//-0.5698814f;
-	private float CoordenadaYMotor2 =2.038576f;//-1.2f;//2.038576f;//Brazo que sirve 5.539518f; //0.472651f;
+	private float CoordenadaXMotor2 ;//=-2.370654f;//6.9f; //-2.370654f;//Brazo que sirve -1.4949f;//-0.5698814f;
+	private float CoordenadaYMotor2 ;//=2.038576f;//-1.2f;//2.038576f;//Brazo que sirve 5.539518f; //0.472651f;
 	
-	private float CoordenadaXMotor3 =1.647024f; //-6.6f;//1.647024f;//Brazo que sirve -5.498871f;//3.447796f;
-	private float CoordenadaYMotor3 =2.046705f;//2.1f;//2.046705f;//Brazo que sirve 5.544016f;//0.4807794f;
+	private float CoordenadaXMotor3 ;//=1.647024f; //-6.6f;//1.647024f;//Brazo que sirve -5.498871f;//3.447796f;
+	private float CoordenadaYMotor3 ;//=2.046705f;//2.1f;//2.046705f;//Brazo que sirve 5.544016f;//0.4807794f;
 
 	
 	private float Thetha1;
@@ -40,13 +40,6 @@ public class MoveMatlab : MonoBehaviour {
 	private float Thetha3;
 	private float Alpha3;
 
-	private float initialtheta1=0f;
-	private float initialalpha1=0f;
-	private float initialtheta2=0f;//174.51f;
-	private float initialalpha2=0f;//260.53f;
-	private float initialtheta3=0f;
-	private float initialalpha3=0f;//8.68f;
-
 	//Sx Codo Arriba o codo abajo; puede tomar valor de 1 o 0, por defecto empiezan en 0. Igual que matlab.//
 	private int S1;
 	private int S2;
@@ -56,11 +49,17 @@ public class MoveMatlab : MonoBehaviour {
 
 	private bool isTheta1BeenOnPositive;
 	private bool isTheta1BeenOnNegative;
-	private bool isThetha2Reached;
-	private bool isThetha3Reached;
-	private bool isAlpha1Reached;
-	private bool isAlpha2Reached;
-	private bool isAlpha3Reached;
+	private bool isTheta2BeenOnPositive;
+	private bool isTheta2BeenOnNegative;
+	private bool isTheta3BeenOnPositive;
+	private bool isTheta3BeenOnNegative;
+
+	private bool isAlpha1BeenOnPositive;
+	private bool isAlpha1BeenOnNegative;
+	private bool isAlpha2BeenOnPositive;
+	private bool isAlpha2BeenOnNegative;
+	private bool isAlpha3BeenOnPositive;
+	private bool isAlpha3BeenOnNegative;
 
 	private GameObject sphere;
 	private Vector3 spherePosition;
@@ -105,6 +104,14 @@ public class MoveMatlab : MonoBehaviour {
 		//Distancia M0tor 2 a tMotor 3
 
 
+		CoordenadaXMotor1 = brazo1.transform.position.x;
+		CoordenadaYMotor1 = brazo1.transform.position.z;
+
+		CoordenadaXMotor2 = brazo2.transform.position.x;
+		CoordenadaYMotor2 = brazo2.transform.position.z;
+
+		CoordenadaXMotor3 = brazo3.transform.position.x;
+		CoordenadaYMotor3 = brazo3.transform.position.z;
 
 
 
@@ -114,229 +121,69 @@ public class MoveMatlab : MonoBehaviour {
 
 		isStarted = false;
 		isTheta1BeenOnPositive = false;
-		isThetha2Reached = false;
-		isThetha3Reached = false;
-		isAlpha2Reached = false;
-		isAlpha2Reached = false;
-		isAlpha3Reached = false;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(isStarted){
 
-			if(brazo1.transform.eulerAngles.y==0){
-				brazo1.transform.Rotate(new Vector3(0,-10*Time.deltaTime,0) );
+			MoveAngles (brazo1,Thetha1,isTheta1BeenOnPositive, isTheta1BeenOnNegative, "Thetha1");
+			MoveAngles (brazo2,Thetha2,isTheta2BeenOnPositive, isTheta2BeenOnNegative, "Thetha2");
+			MoveAngles (brazo3,Thetha3,isTheta3BeenOnPositive, isTheta3BeenOnNegative, "Thetha3");
 
-			}
-
-			float resta=(Thetha1-(360-(brazo1.transform.eulerAngles.y)));
-			//isThetha1Reached=false;
-			if((resta<=0.5f)&&(isTheta1BeenOnPositive==false))
-			{
-				isTheta1BeenOnNegative=true;
-				brazo1.transform.Rotate(new Vector3(0,10*Time.deltaTime,0) );
-				Debug.Log("angulo real-: "+(360-(brazo1.transform.eulerAngles.y)).ToString());
-				Debug.Log("La resta esta dando-: "+resta.ToString());
-			}
-
-			if((resta>=0.5f)&&(isTheta1BeenOnNegative==false)){
-				isTheta1BeenOnPositive=true;
-				brazo1.transform.Rotate(new Vector3(0,-10*Time.deltaTime,0) );
-				Debug.Log("angulo real+: "+(360-(brazo1.transform.eulerAngles.y)).ToString());
-				Debug.Log("La resta esta dando+: "+resta.ToString());
-			}
-
-
-
-
-
-
-
-			//angle+=10*Time.deltaTime;
-
-			/*Thetha1=0;
-			Alpha1=0;
-
-			Thetha2=0;
-			Alpha2=0;
-
-			Thetha3=0;
-			Alpha3=0;*/
-			//brazo1.transform.Rotate (new Vector3 (0, 0, 30) * Time.deltaTime);//.transform.eulerAngles=new Vector3(0,0,angle);
-			/*if((DynamicTheta1>=Thetha1)&&(isThetha1Reached==false) ){
-				brazo1.transform.eulerAngles=new Vector3(0,-angle,0);
-				float localThetha1Angle=brazo1.transform.eulerAngles.y;
-				DynamicTheta1=initialtheta1-localThetha1Angle;
-				//Debug.Log("Theta1 dinamico: "+DynamicTheta1.ToString());
-				if(Mathf.Abs(DynamicTheta1-Thetha1)<=0.5){
-					isThetha1Reached=true;
-					initialtheta1=Thetha1;
-					DynamicTheta1 = initialtheta1;
-					//Debug.Log("Theta denamico final: "+DynamicTheta1.ToString());
-				}
-			}
-
-			if((DynamicTheta1<Thetha1) &&(isThetha1Reached==false)){
-				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				brazo1.transform.eulerAngles=new Vector3(0,-angle,0);
-				DynamicTheta1=brazo1.transform.eulerAngles.y;
-				DynamicTheta1=((-1*(DynamicTheta1-360))+initialtheta1);
-				//initialtheta1=+y;
-				//y=y/Mathf.PI*180;
-				//Debug.Log("Angulo theta1: "+DynamicTheta1.ToString());
-				if(Mathf.Abs(DynamicTheta1-Thetha1)<=0.5){
-					isThetha1Reached=true;
-					initialtheta1=Thetha1;
-					DynamicTheta1 = initialtheta1;
-					//Debug.Log("Theta denamico final: "+DynamicTheta1.ToString());
-				}
-			}
-
-			if((DynamicTheta2>=Thetha2) &&(isThetha2Reached==false)){
-				brazo2.transform.eulerAngles=new Vector3(0,angle,0);
-				float localThetha2Angle=brazo2.transform.eulerAngles.y;
-				DynamicTheta2=initialtheta2-localThetha2Angle;
-				//Debug.Log("Theta2 dinamico: "+DynamicTheta2.ToString());
-				if(Mathf.Abs(DynamicTheta2-Thetha2)<=0.5){
-					isThetha2Reached=true;
-					initialtheta2=Thetha2;
-					DynamicTheta2 = initialtheta2;
-				}
-			}
-			
-			if((DynamicTheta2<Thetha2) && (isThetha2Reached==false)){
-				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				brazo2.transform.eulerAngles=new Vector3(0,-angle,0);
-				DynamicTheta2=brazo2.transform.eulerAngles.y;
-				DynamicTheta2=((-1*(DynamicTheta2-360))+initialtheta2);
-				//initialtheta1=+y;
-				//y=y/Mathf.PI*180;
-				//Debug.Log("Angulo theta2: "+DynamicTheta2.ToString());
-				if(Mathf.Abs(DynamicTheta2-Thetha2)<=0.5){
-					isThetha2Reached=true;
-					initialtheta2=Thetha2;
-					DynamicTheta2 = initialtheta2;
-				}
-			}
-
-			if((DynamicTheta3>=Thetha3) &&(isThetha3Reached==false)){
-				brazo3.transform.eulerAngles=new Vector3(0,angle,0);
-				float localThetha3Angle=brazo3.transform.eulerAngles.y;
-				DynamicTheta3=initialtheta3-localThetha3Angle;
-				//Debug.Log("Theta3 dinamico: "+DynamicTheta3.ToString());
-				if(Mathf.Abs(DynamicTheta3-Thetha3)<=0.5){
-					isThetha3Reached=true;
-					initialtheta3=Thetha3;
-					DynamicTheta3 = initialtheta3;
-				}
-			}
-			
-			if((DynamicTheta3<Thetha3) && (isThetha3Reached==false)){
-				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				brazo3.transform.eulerAngles=new Vector3(0,-angle,0);
-				DynamicTheta3=brazo3.transform.eulerAngles.y;
-				DynamicTheta3=((-1*(DynamicTheta3-360))+initialtheta3);
-				//initialtheta1=+y;
-				//y=y/Mathf.PI*180;
-				//Debug.Log("Angulo theta3: "+DynamicTheta3.ToString());
-				if(Mathf.Abs(DynamicTheta3-Thetha3)<=0.5){
-					isThetha3Reached=true;
-					initialtheta3=Thetha3;
-					DynamicTheta3 = initialtheta3;
-				}
-			}
-
-
-
-
-			if((DynamicAlpha1>=Alpha1)&&(isAlpha1Reached==false) ){
-				Antebrazo1.transform.eulerAngles=new Vector3(0,angle,0);
-				float localAlpha1Angle=Antebrazo1.transform.eulerAngles.y;
-				DynamicAlpha1=initialalpha1-localAlpha1Angle;
-				//Debug.Log("Alpha1 dinamico: "+DynamicAlpha1.ToString());
-				if(Mathf.Abs(DynamicAlpha1-Alpha1)<=0.5){
-					isAlpha1Reached=true;
-					initialalpha1=Alpha1;
-					DynamicAlpha1 = initialalpha1;
-				}
-			}
-			
-			if((DynamicAlpha1<Alpha1) &&(isAlpha1Reached==false)){
-				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				Antebrazo1.transform.eulerAngles=new Vector3(0,-angle,0);
-				DynamicAlpha1=Antebrazo1.transform.eulerAngles.y;
-				DynamicAlpha1=((-1*(DynamicAlpha1-360))+initialalpha1);
-				//initialtheta1=+y;
-				//y=y/Mathf.PI*180;
-				//Debug.Log("Angulo Alpha1: "+DynamicAlpha1.ToString());
-				if(Mathf.Abs(DynamicAlpha1-Alpha1)<=0.5){
-					isAlpha1Reached=true;
-					initialalpha1=Alpha1;
-					DynamicAlpha1 = initialalpha1;
-				}
-			}
-
-			if((DynamicAlpha2>=Alpha2)&&(isAlpha2Reached==false) ){
-				Antebrazo2.transform.eulerAngles=new Vector3(0,angle,0);
-				float localAlpha2Angle=Antebrazo2.transform.eulerAngles.y;
-				DynamicAlpha2=initialalpha2-localAlpha2Angle;
-				//Debug.Log("Alpha2 dinamico: "+DynamicAlpha2.ToString());
-				if(Mathf.Abs(DynamicAlpha2-Alpha2)<=0.5){
-					isAlpha2Reached=true;
-					initialalpha2=Alpha2;
-					DynamicAlpha2 = initialalpha2;
-				}
-			}
-			
-			if((DynamicAlpha2<Alpha2) &&(isAlpha1Reached==false)){
-				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				Antebrazo2.transform.eulerAngles=new Vector3(0,-angle,0);
-				DynamicAlpha2=Antebrazo2.transform.eulerAngles.y;
-				DynamicAlpha2=((-1*(DynamicAlpha2-360))+initialalpha2);
-				//initialtheta1=+y;
-				//y=y/Mathf.PI*180;
-				//Debug.Log("Angulo Alpha2: "+DynamicAlpha2.ToString());
-				if(Mathf.Abs(DynamicAlpha2-Alpha2)<=0.5){
-					isAlpha2Reached=true;
-					initialalpha2=Alpha2;
-					DynamicAlpha2 = initialalpha2;
-				}
-			}
-
-			if((DynamicAlpha3>=Alpha3)&&(isAlpha3Reached==false) ){
-				Antebrazo3.transform.eulerAngles=new Vector3(0,angle,0);
-				float localAlpha3Angle=Antebrazo3.transform.eulerAngles.y;
-				DynamicAlpha3=initialalpha3-localAlpha3Angle;
-				//Debug.Log("Alpha3 dinamico: "+DynamicAlpha3.ToString());
-				if(Mathf.Abs(DynamicAlpha3-Alpha3)<=0.5){
-					isAlpha3Reached=true;
-					initialalpha3=Alpha3;
-					DynamicAlpha3 = initialalpha3;
-				}
-			}
-			
-			if((DynamicAlpha3<Alpha3) &&(isAlpha3Reached==false)){
-				//brazo1.transform.Rotate (new Vector3 (0, 10, 0) * Time.deltaTime);
-				Antebrazo3.transform.eulerAngles=new Vector3(0,-angle,0);
-				DynamicAlpha3=Antebrazo3.transform.eulerAngles.y;
-				DynamicAlpha3=((-1*(DynamicAlpha3-360))+initialalpha3);
-				//initialtheta1=+y;
-				//y=y/Mathf.PI*180;
-				//Debug.Log("Angulo Alpha3: "+DynamicAlpha3.ToString());
-				if(Mathf.Abs(DynamicAlpha3-Alpha3)<=0.5){
-					isAlpha3Reached=true;
-					initialalpha3=Alpha3;
-					DynamicAlpha3 = initialalpha3;
-				}
-			}
-
-*/
-
-
-
+			MoveAngles (Antebrazo1,Alpha1,isAlpha1BeenOnPositive, isAlpha1BeenOnNegative, "Alpha1");
+			MoveAngles (Antebrazo2,Alpha2,isAlpha2BeenOnPositive, isAlpha2BeenOnNegative, "Alpha2");
+			MoveAngles (Antebrazo3,Alpha3,isAlpha3BeenOnPositive, isAlpha3BeenOnNegative, "Alpha3");
 
 		}
+	}
+
+	void MoveAngles (GameObject chain, float Angle, bool isFlagPositive, bool isFlagNegative, string StringAngle)
+	{
+		string AngleToDisplay;
+		if (chain.transform.eulerAngles.y == 0) {
+			chain.transform.Rotate (new Vector3 (0, -20 * Time.deltaTime, 0));
+		}
+		float resta = (Angle - (360 - (chain.transform.eulerAngles.y)));
+
+
+		if ((resta <= 0.5f) && (isFlagPositive == false)) {
+			switch(StringAngle){
+			case "Thetha1":
+				isTheta1BeenOnNegative=true;
+				break;
+
+			case "Thetha2":
+				isTheta2BeenOnNegative=true;
+				break;
+
+			case "Thetha3":
+				isTheta3BeenOnNegative=true;
+				break;
+
+			case "Alpha1":
+				isAlpha1BeenOnNegative=true;
+				break;
+
+			case "Alpha2":
+				isAlpha2BeenOnNegative=true;
+				break;
+
+			case "Alpha3":
+				isAlpha3BeenOnNegative=true;
+				break;
+			}
+
+
+			chain.transform.Rotate (new Vector3 (0, 20 * Time.deltaTime, 0));
+		}
+
+		if ((resta >= 0.5f) && (isFlagNegative == false)) {
+			isFlagPositive = true;
+			chain.transform.Rotate (new Vector3 (0, -20 * Time.deltaTime, 0));
+		}
+		Debug.Log ("angulo "+StringAngle+ " real: " + (360 - (chain.transform.eulerAngles.y)).ToString ());
 	}
 
 	public void GetSpherePosition(){
@@ -354,14 +201,24 @@ public class MoveMatlab : MonoBehaviour {
 	{
 		Debug.Log ("S1: " + S1.ToString () + "S2: " + S2.ToString () + "S3: " + S3.ToString ());
 		isStarted = false;
-		isAlpha1Reached = false;
-		isAlpha2Reached = false;
-		isAlpha3Reached = false;
 
 		isTheta1BeenOnPositive = false;
 		isTheta1BeenOnNegative = false;
-		isThetha2Reached = false;
-		isThetha3Reached = false;
+
+		isTheta2BeenOnPositive = false;
+		isTheta2BeenOnNegative = false;
+
+		isTheta3BeenOnPositive = false;
+		isTheta3BeenOnNegative = false;
+
+		isAlpha1BeenOnPositive = false;
+		isAlpha1BeenOnNegative = false;
+
+		isAlpha2BeenOnPositive = false;
+		isAlpha2BeenOnNegative = false;
+
+		isAlpha3BeenOnPositive = false;
+		isAlpha3BeenOnNegative = false;
 
 
 		S1 = 0;
@@ -372,8 +229,8 @@ public class MoveMatlab : MonoBehaviour {
 
 	public void SolveEquations(){
 
-		float CoordenadaXCentro = spherePosition.x;//-0.6074f;//-0.4923694f;///spherePosition.x;//6.514634f;//;  //-3.6333f;// //-4.5f;// Base fija ensamble bien -3.741648
-		float CoordenadaYCentro =spherePosition.z;//3.3007f;//3.359823f;//spherePosition.z;//-0.8925756f;//  //5.1618f;// //4.1f;// Base fija ensamble bien 0.4682827
+		float CoordenadaXCentro = -0.4923694f;//spherePosition.x;//-0.6074f;//-0.4923694f;///spherePosition.x;//6.514634f;//;  //-3.6333f;// //-4.5f;// Base fija ensamble bien -3.741648
+		float CoordenadaYCentro =3.359823f;//spherePosition.z;//3.3007f;//3.359823f;//spherePosition.z;//-0.8925756f;//  //5.1618f;// //4.1f;// Base fija ensamble bien 0.4682827
 		//Debug.Log ("Xcentro: "+CoordenadaXCentro.ToString());
 		//Debug.Log ("Ycentro: "+CoordenadaYCentro.ToString());
 
