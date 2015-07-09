@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class MoveMatlab : MonoBehaviour {
 
 	public Transmision transmisor;
-	private float LongitudLadoTriangulo=1.3856f;//1.20490491f;//1.3856f;//3.0f; Matlab 
-	private float Phi = (-92.2223f*Mathf.PI)/180f; //Mathf.PI / 4; 63.21
-	private float LongitudEslabon1=1.15f;	//5.0f; Matlab
-	private float LongitudEslabon2=1f;//0.869565217f;//4.0f; Matlab
+	private float LongitudLadoTriangulo=0.4f;//1.20490491f;//1.3856f;//3.0f; Matlab 
+	private float Phi = (0*Mathf.PI)/180f; //Mathf.PI / 4; 63.21//-92.2223f
+	private float LongitudEslabon1=1.6f;	//5.0f; Matlab
+	private float LongitudEslabon2=1.6f;//0.869565217f;//4.0f; Matlab
 	
 
 	/////MATLAB///////
@@ -23,6 +23,7 @@ public class MoveMatlab : MonoBehaviour {
 
 	private float CoordenadaXMotor1; //=-0.3743629f;//-1.5f;//-0.3743629f;//Brazo que sirve -3.492431f;//1.42641f;
 	private float CoordenadaYMotor1 ;//= 5.198504f;//-8.4f;//5.198504f;//Brazo que sirve 2.388299f;//3.632579f;
+	private float CoordenadaZMotor1;
 	
 	private float CoordenadaXMotor2 ;//=-2.370654f;//6.9f; //-2.370654f;//Brazo que sirve -1.4949f;//-0.5698814f;
 	private float CoordenadaYMotor2 ;//=2.038576f;//-1.2f;//2.038576f;//Brazo que sirve 5.539518f; //0.472651f;
@@ -105,7 +106,11 @@ public class MoveMatlab : MonoBehaviour {
 
 
 		CoordenadaXMotor1 = brazo1.transform.position.x;
-		CoordenadaYMotor1 = brazo1.transform.position.z;
+		CoordenadaYMotor1 = brazo1.transform.position.y;
+		CoordenadaZMotor1 = brazo1.transform.position.z;
+		Debug.Log ("CoordenadaXMotor1: "+CoordenadaXMotor1.ToString());
+		Debug.Log ("CoordenadaYMotor1: "+CoordenadaYMotor1.ToString());
+		Debug.Log ("CoordenadaZMotor1: "+CoordenadaZMotor1.ToString());
 
 		CoordenadaXMotor2 = brazo2.transform.position.x;
 		CoordenadaYMotor2 = brazo2.transform.position.z;
