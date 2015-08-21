@@ -9,7 +9,7 @@ public class Transmision : MonoBehaviour {
 	}
 
 	public void Enviarvalores(float Thetha1, float Thetha2, float Thetha3){
-		Debug.Log ("Thetas" + Thetha1.ToString() + Thetha2.ToString() + Thetha3.ToString());
+//		Debug.Log ("Thetas" + Thetha1.ToString() + Thetha2.ToString() + Thetha3.ToString());
 	}
 	
 	// Update is called once per frame

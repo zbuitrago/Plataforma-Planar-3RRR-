@@ -52,13 +52,13 @@ public class GetPosition : MonoBehaviour {
 		if(point!=Vector3.zero){
 			sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 			sphere.name="sphere"+sphereCounter.ToString();
-			sphere.transform.position = new Vector3 (point.x,2.6f,point.z);
+			sphere.transform.position = new Vector3 (point.x,0.6f,point.z);
 			SphereAppeareance(sphere);
 		}
 	}
 
 	private void SphereAppeareance(GameObject sphere){
-		sphere.transform.localScale = new Vector3 (0.2f,0.2f,0.2f);
+		sphere.transform.localScale = new Vector3 (0.15f,0.15f,0.15f);
 		sphere.renderer.material.mainTexture = sphereTexture;
 	}
 
